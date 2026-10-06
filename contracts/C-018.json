@@ -1,0 +1,15 @@
+{
+  "id": "C-018",
+  "file": "src/lib/qrgf.mjs",
+  "role": "coder",
+  "title": "Galoisovo těleso GF(256) a Reed–Solomon (převod qr/gf.php)",
+  "interface": "export function gfTabulky() -> [exp, log]   (pole čísel; spočítej jednou a pamatuj si)\nexport function gfExp(i)\nexport function gfLog(x)\nexport function gfMul(a, b)\nexport function rsGenerator(stupen) -> number[]\nexport function rsKody(data, pocetEc) -> number[]\nVýjimky (throw) při neplatném vstupu tam, kde je hází PHP.",
+  "uses": {
+    "reference/bypalda/qr/gf.php": "původní PHP – vzor převodu (čti ho celý)"
+  },
+  "acceptance": "tests/test_qrgf.py",
+  "notes": "Věrný převod PHP knihovny z CRM byPalda do JavaScriptu. Akceptační test volá stejné funkce v PHP (reference/bypalda/…) i v JS se stejnými argumenty a výsledky musí být PŘESNĚ stejné (porovnává se JSON). Názvy funkcí a pořadí parametrů ponech jako v PHP. Pasti PHP→JS: round() v PHP zaokrouhluje polovinu OD NULY (round(-2.5) = -3, round(2.5) = 3) – v JS použij Math.sign(x) * Math.round(Math.abs(x)); intdiv() a přetypování (int) ořezávají k nule – Math.trunc; number_format(n, d, ',', '\\u00a0') = desetinná čárka a nezlomitelná mezera mezi tisíci; str_pad = padStart/padEnd; asociativní pole PHP = objekt JS, seznam = pole JS; strlen/substr v PHP počítají BAJTY UTF-8 (kde na tom záleží, použij TextEncoder). ESM modul, exportuj všechny veřejné funkce z PHP souboru (pomocné funkce začínající podtržítkem exportovat nemusíš). Žádné Node API (fs, process), žádné DOM API, musí běžet v Node 24 i v prohlížeči. Vstupy se nemutují.",
+  "budget": {
+    "iterations": 12
+  }
+}

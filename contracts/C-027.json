@@ -1,0 +1,13 @@
+{
+  "id": "C-027",
+  "file": "src/lib/opravneni.mjs",
+  "role": "coder",
+  "title": "Role a oprávnění v interním systému (podle opravneni.php z byPalda CRM)",
+  "interface": "Jedno místo, kde se rozhoduje „smí to?“ (stejná myšlenka jako reference/bypalda/opravneni.php, ale role a úkony pro správu budov).\nexport const ROLE = { spravce: \"Správce\", dispecer: \"Dispečer\", ucetni: \"Účetní\", technik: \"Technik\" }\nexport const AKCE = [\"klienti.cist\",\"klienti.psat\",\"klienti.mazat\",\"objekty.cist\",\"objekty.psat\",\"zakazky.cist\",\"zakazky.psat\",\"zavady.cist\",\"zavady.psat\",\"smlouvy.cist\",\"smlouvy.psat\",\"doklady.cist\",\"doklady.psat\",\"doklady.mazat\",\"dodavatele.cist\",\"dodavatele.psat\",\"vyuctovani.cist\",\"vyuctovani.psat\",\"ukoly.psat\",\"statistiky\",\"uzivatele\",\"nastaveni\"]\nexport const PRAVA_ROLI = {\n  dispecer: [\"klienti.cist\",\"klienti.psat\",\"objekty.cist\",\"objekty.psat\",\"zakazky.cist\",\"zakazky.psat\",\"zavady.cist\",\"zavady.psat\",\"smlouvy.cist\",\"doklady.cist\",\"dodavatele.cist\",\"dodavatele.psat\",\"ukoly.psat\",\"statistiky\"],\n  ucetni: [\"klienti.cist\",\"objekty.cist\",\"zakazky.cist\",\"smlouvy.cist\",\"smlouvy.psat\",\"doklady.cist\",\"doklady.psat\",\"vyuctovani.cist\",\"vyuctovani.psat\",\"statistiky\"],\n  technik: [\"objekty.cist\",\"zavady.cist\",\"zavady.psat\",\"ukoly.psat\"]\n}\nexport const JEN_SPRAVCE = [\"uzivatele\", \"nastaveni\"]\nexport function muze(uzivatel, akce, pravaZapnuta = true) -> boolean\n  1. uzivatel null/undefined -> false.  2. akce v JEN_SPRAVCE -> uzivatel.role === \"spravce\" (platí i při vypnutých právech).\n  3. akce není v AKCE -> false.  4. !pravaZapnuta -> true.  5. role \"spravce\" -> true.  6. jinak PRAVA_ROLI[role] obsahuje akce (neznámá role -> false).\nexport function pravaUzivatele(uzivatel, pravaZapnuta = true) -> string[]   (AKCE v pořadí AKCE, pro které muze() vrací true)",
+  "uses": {},
+  "acceptance": "tests/test_opravneni.py",
+  "notes": "ESM modul BEZ importů, běží v Node 24 i v prohlížeči, žádné Node ani DOM API. Vstupy se nemutují.",
+  "budget": {
+    "iterations": 8
+  }
+}

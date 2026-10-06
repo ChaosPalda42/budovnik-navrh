@@ -1,0 +1,13 @@
+{
+  "id": "C-028",
+  "file": "src/lib/obchod.mjs",
+  "role": "coder",
+  "title": "Statistiky byznysu z dokladů (jako statistiky v byPalda CRM)",
+  "interface": "Čísla se počítají z dokladů, ne z ručně zadaných hodnot. Peníze v haléřích (celá čísla). Data 'RRRR-MM-DD' (porovnávej jako řetězce).\ndoklad = { cislo, druh: \"faktura\" | \"proforma\" | \"nabidka\", klientId, vystaveno, splatnost, uhrazeno (datum nebo null), celkem }\nklient = { id, nazev, vytvoreno, stav: \"aktivni\" | \"potencialni\" | \"byvaly\", pausal: boolean }\n\nexport function mesiceObdobi(od, do_) -> string[]   ('RRRR-MM' od měsíce `od` do měsíce `do_` včetně; do_ < od -> [])\nexport function statistiky(doklady, klienti, od, do_, dnes) -> {\n  vystaveno: { pocet, castka }   – faktury s od <= vystaveno <= do_\n  uhrazeno: { pocet, castka }    – faktury s uhrazeno neprázdným a od <= uhrazeno <= do_\n  kUhrade: { pocet, castka }     – všechny faktury bez uhrazeno (bez ohledu na období)\n  poSplatnosti: { pocet, castka } – faktury bez uhrazeno se splatnost < dnes (bez ohledu na období)\n  nabidky: { pocet, castka }     – nabídky s od <= vystaveno <= do_\n  stali: počet klientů se stav \"aktivni\" a pausal === true\n  novi: počet klientů s od <= vytvoreno <= do_\n  mesice: pro každý měsíc z mesiceObdobi(od, do_) objekt { mesic, vystaveno, uhrazeno } – součty castka faktur vystavených / uhrazených v tom měsíci (jen dny v rámci od..do_)\n  nejvetsi: nejvýš 5 položek { klientId, nazev, castka } – součet castka faktur vystavených v období po klientech, sestupně podle castka, při shodě podle klientId vzestupně (porovnání řetězců String(id)); nazev z klienti (neznámý klient -> \"\"); klienti s nulou se nevypisují\n}\nProformy se do vystaveno/uhrazeno/kUhrade/poSplatnosti NEpočítají (jen faktury).",
+  "uses": {},
+  "acceptance": "tests/test_obchod.py",
+  "notes": "ESM modul BEZ importů, běží v Node 24 i v prohlížeči, žádné Node ani DOM API. Vstupy se nemutují.",
+  "budget": {
+    "iterations": 10
+  }
+}

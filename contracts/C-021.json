@@ -1,0 +1,16 @@
+{
+  "id": "C-021",
+  "file": "src/lib/qrmatice.mjs",
+  "role": "coder",
+  "title": "Matice QR kódu a maskování (převod qr/matice.php)",
+  "interface": "import { qrVelikost, qrZarovnani, qrFormatBity, qrVerzeBity } from \"./qrtabulky.mjs\";  (jen tento import)\nMatice = pole řádků, řádek = pole 0/1 (m[radek][sloupec]).\nexport function qrMaskaPlati(maska, r, s) -> boolean\nexport function qrPevneVzory(verze) -> [matice, rezervace]\nexport function qrZapisFormat(m, rez, verze, maska)  / qrZapisVerzi(m, rez, verze) / qrZapisData(m, rez, kodovaSlova, verze) / qrPouzijMasku(m, rez, maska) – v PHP jdou pole odkazem (&$m), v JS je MĚŇ NA MÍSTĚ (předané pole se upraví)\nexport function qrTrestneSkore(m) -> number\nexport function qrMaticeSMaskou(kodovaSlova, verze, maska) -> matice\nexport function qrNejlepsiMaska(kodovaSlova, verze) -> number\nexport function qrMatice(kodovaSlova, verze, maska = null) -> matice\nPořadí kroků je závazné (viz hlavička PHP souboru). Rezervace v PHP je pole boolů/0-1 – ve výstupu qrPevneVzory musí mít stejné hodnoty jako PHP (true/false, nebo 0/1 – jak to dělá PHP).",
+  "uses": {
+    "reference/bypalda/qr/matice.php": "původní PHP – vzor převodu (čti ho celý)",
+    "src/lib/qrtabulky.mjs": "export qrVelikost, qrZarovnani, qrFormatBity, qrVerzeBity a další z tabulky.php"
+  },
+  "acceptance": "tests/test_qrmatice.py",
+  "notes": "Věrný převod PHP knihovny z CRM byPalda do JavaScriptu. Akceptační test volá stejné funkce v PHP (reference/bypalda/…) i v JS se stejnými argumenty a výsledky musí být PŘESNĚ stejné (porovnává se JSON). Názvy funkcí a pořadí parametrů ponech jako v PHP. Pasti PHP→JS: round() v PHP zaokrouhluje polovinu OD NULY (round(-2.5) = -3, round(2.5) = 3) – v JS použij Math.sign(x) * Math.round(Math.abs(x)); intdiv() a přetypování (int) ořezávají k nule – Math.trunc; number_format(n, d, ',', '\\u00a0') = desetinná čárka a nezlomitelná mezera mezi tisíci; str_pad = padStart/padEnd; asociativní pole PHP = objekt JS, seznam = pole JS; strlen/substr v PHP počítají BAJTY UTF-8 (kde na tom záleží, použij TextEncoder). ESM modul, exportuj všechny veřejné funkce z PHP souboru (pomocné funkce začínající podtržítkem exportovat nemusíš). Žádné Node API (fs, process), žádné DOM API, musí běžet v Node 24 i v prohlížeči. Vstupy se nemutují.",
+  "budget": {
+    "iterations": 16
+  }
+}
