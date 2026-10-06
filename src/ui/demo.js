@@ -111,11 +111,32 @@
     ["prehled", "dum", "Můj dům"], ["zavady", "vystraha", "Závady"], ["nahlasit", "plus", "Nahlásit závadu"], ["revize", "kalendar", "Revize"],
     ["dokumenty", "dokument", "Dokumenty"], ["vyuctovani", "kalkulacka", "Vyúčtování"], ["smlouva", "smlouva", "Smlouva"],
   ] : [
-    ["prehled", "mriz", "Přehled"], ["zavady", "vystraha", "Závady"], ["revize", "kalendar", "Revize"], ["objekty", "dum", "Objekty"],
-    ["dodavatele", "parta", "Dodavatelé"], ["smlouvy", "smlouva", "Smlouvy"], ["fakturace", "dokument", "Fakturace"],
-    ["vyuctovani", "kalkulacka", "Vyúčtování"], ["automatizace", "automat", "Automatizace"],
+    // [id, ikona, název, potřebné oprávnění, sekce] – rozsah jako CRM byPalda + provoz správy budov
+    ["prehled", "mriz", "Přehled", null, ""],
+    ["poptavky", "obalka", "Poptávky", "klienti.cist", "Obchod"], ["klienti", "parta", "Klienti", "klienti.cist", "Obchod"],
+    ["zakazky", "seznam", "Zakázky", "zakazky.cist", "Obchod"], ["smlouvy", "smlouva", "Smlouvy", "smlouvy.cist", "Obchod"],
+    ["vzory", "dokument", "Vzory smluv", "smlouvy.cist", "Obchod"], ["doklady", "kalkulacka", "Doklady", "doklady.cist", "Obchod"],
+    ["statistiky", "graf", "Statistiky", "statistiky", "Obchod"],
+    ["zavady", "vystraha", "Závady", "zavady.cist", "Provoz"], ["revize", "kalendar", "Revize", "objekty.cist", "Provoz"],
+    ["objekty", "dum", "Objekty", "objekty.cist", "Provoz"], ["dodavatele", "klic", "Dodavatelé", "dodavatele.cist", "Provoz"],
+    ["ukoly", "fajfka", "Úkoly", null, "Provoz"], ["vyuctovani", "kalkulacka", "Vyúčtování", "vyuctovani.cist", "Provoz"],
+    ["automatizace", "automat", "Automatizace", "zakazky.cist", "Systém"], ["navstevnost", "oko", "Návštěvnost webu", "statistiky", "Systém"],
+    ["tym", "osoba", "Tým a role", "uzivatele", "Systém"], ["nastaveni", "ozubeni", "Nastavení", "nastaveni", "Systém"],
   ];
   var uzivatel = null;
+  var CRM = null;
+  // Smí přihlášený člen týmu tenhle úkon? (BV.opravneni – stejná logika jako opravneni.php v CRM byPalda)
+  function muze(akce) {
+    if (DRUH !== "dispecink" || !akce) return true;
+    if (!BV.opravneni) return true;
+    return BV.opravneni.muze(uzivatel, akce, CRM ? CRM.nastaveni().pravaZapnuta : true);
+  }
+  function clenTymu() {
+    var tym = CRM ? CRM.sada("tym") : D.tym;
+    var t = tym.filter(function (x) { return x.id === (S.jako || 1); })[0] || tym[0];
+    var inicialy = t.jmeno.split(" ").map(function (c) { return c.charAt(0); }).join("").slice(0, 2);
+    return Object.assign({}, t, { inicialy: inicialy, popisRole: (BV.opravneni ? BV.opravneni.ROLE[t.role] : t.role) + " · Budovník" });
+  }
 
   function ram(obsahHtml, aktivni) {
     var odznaky = {};
@@ -124,17 +145,28 @@
       odznaky.zavady = zs.filter(function (z) { return z.stav === "nova"; }).length;
       odznaky.automatizace = ukoly().filter(function (u) { return S.hotove.indexOf(u.klic) < 0; }).length;
     }
-    var navigace = VIEWS.map(function (v) {
+    if (DRUH === "dispecink" && CRM) {
+      odznaky.poptavky = CRM.poptavky().filter(function (p) { return p.stav !== "prevedena"; }).length;
+    }
+    var sekce = "";
+    var tlacitko = function (v) {
       var o = odznaky[v[0]];
       return '<button type="button" data-view="' + v[0] + '"' + (v[0] === aktivni ? ' aria-current="page"' : "") + ">" + ik(v[1]) + "<span>" + esc(v[2]) + "</span>" + (o ? "<b>" + o + "</b>" : "") + "</button>";
+    };
+    var povolene = VIEWS.filter(function (v) { return muze(v[3]); });
+    var navigace = povolene.map(function (v) {
+      var nadpis = v[4] && v[4] !== sekce ? '<div class="apl__nav-nadpis">' + esc(v[4]) + "</div>" : "";
+      sekce = v[4] || sekce;
+      return nadpis + tlacitko(v);
     }).join("");
+    var mobilni = povolene.map(tlacitko).join("");
     KOREN.innerHTML = '<div class="apl">' +
-      '<aside class="apl__bok"><div class="apl__kdo"><span class="apl__avatar">' + esc(uzivatel.inicialy) + "</span><div><strong>" + esc(uzivatel.jmeno) + "</strong><small>" + esc(uzivatel.role) + "</small></div></div>" +
+      '<aside class="apl__bok"><div class="apl__kdo"><span class="apl__avatar">' + esc(uzivatel.inicialy) + "</span><div><strong>" + esc(uzivatel.jmeno) + "</strong><small>" + esc(uzivatel.popisRole || uzivatel.role) + "</small></div></div>" +
       '<nav class="apl__nav">' + navigace + "</nav>" +
       '<div class="apl__spodek"><span>Demo · dnes je ' + datum(DNES) + ', ' + TED.slice(11) + "</span>" +
       (DRUH === "portal" ? '<a href="dispecink.html">' + ik("mriz") + " Jak to vidí dispečink →</a>" : '<a href="portal.html">' + ik("zamek") + " Klientský portál →</a>") +
       '<button type="button" class="tl tl--obrys tl--maly" data-odhlasit>' + ik("odchod") + " " + (DRUH === "portal" ? "Odhlásit" : "Obnovit demo") + "</button></div></aside>" +
-      '<div><nav class="apl__mobilnav">' + navigace + '</nav><section class="apl__obsah">' + obsahHtml + "</section></div></div>";
+      '<div><nav class="apl__mobilnav">' + mobilni + '</nav><section class="apl__obsah">' + obsahHtml + "</section></div></div>";
   }
 
   /* ---------- Router ---------- */
@@ -143,7 +175,13 @@
     if (!BV.revize || !BV.zavady || !BV.dodavatele) { KOREN.innerHTML = '<div class="obal" style="padding:40px 0">Moduly systému se nenačetly.</div>'; return; }
     if (DRUH === "portal" && !uzivatel) { prihlaseni(); return; }
     var v = aktualni();
+    if (DRUH === "dispecink") uzivatel = clenTymu();
     var fn = (DRUH === "portal" ? PORTAL : DISPECINK)[v];
+    var popis = VIEWS.filter(function (x) { return x[0] === v; })[0];
+    if (popis && !muze(popis[3])) {
+      ram(hlava("Oprávnění", "Sem nemáte přístup") + '<div class="prazdne">Role „' + esc(uzivatel.popisRole) + '“ tuhle část nevidí. Přepnout se dá v Týmu a rolích (jako správce), nebo vypnutím hlídání oprávnění.</div>', v);
+      return;
+    }
     ram(fn(), v);
     if (POVYKRESLENI[v]) POVYKRESLENI[v]();
     window.scrollTo({ top: 0 });
@@ -154,7 +192,7 @@
     if (b) { location.hash = b.getAttribute("data-view"); return; }
     if (e.target.closest("[data-odhlasit]")) {
       if (DRUH === "portal") { try { sessionStorage.removeItem("bv-portal-role"); } catch (x) { /* nic */ } uzivatel = null; location.hash = ""; vykresli(); }
-      else { if (confirm("Obnovit demo do výchozího stavu? Smaže se, co jste v demu změnili.")) { S = { zavady: {}, hotove: [], pravidla: {} }; uloz(); vykresli(); toast("Demo obnoveno."); } }
+      else { if (confirm("Obnovit demo do výchozího stavu? Smaže se, co jste v demu změnili.")) { S = { zavady: {}, hotove: [], pravidla: {} }; try { localStorage.setItem(KLIC, "{}"); } catch (x) { /* nic */ } uloz(); vykresli(); toast("Demo obnoveno."); } }
     }
   });
 
@@ -274,7 +312,9 @@
       var poTerminu = pl.filter(function (p) { return p.stav === "po-terminu" || p.stav === "bez-terminu"; });
       var blizi = pl.filter(function (p) { return p.stav === "blizi-se"; });
       var cekajici = uk.filter(function (u) { return S.hotove.indexOf(u.klic) < 0; });
-      return hlava("Dispečink · " + datum(DNES), "Dobré ráno, " + esc(uzivatel.jmeno.split(" ")[0]) + ".", '<a class="tl tl--maly" href="#zavady">' + ik("vystraha") + " Závady</a>") +
+      var dnes = CRM ? CRM.dnesResit() : null;
+      return hlava("Interní systém · " + datum(DNES), "Dobré ráno, " + esc(uzivatel.jmeno.split(" ")[0]) + ".", '<a class="tl tl--maly" href="#zavady">' + ik("vystraha") + " Závady</a>") +
+        (dnes ? '<div class="apl-mrizka" style="margin-bottom:16px"><div class="s-12">' + panel("Co dnes řešit (" + dnes.pocet + ")", dnes.html) + "</div></div>" : "") +
         '<div class="kpi">' + kpi(otevrene.length, "otevřených závad", "vystraha") + kpi(porusene.length, "závad s porušenou lhůtou", "hodiny", porusene.length ? "kpi__dlazdice--chyba" : "") +
         kpi(blizi.length, "revizí do 30 dní", "kalendar", "kpi__dlazdice--pozor") + kpi(poTerminu.length + dk.length, "revizí a dokladů k nápravě", "stit", "kpi__dlazdice--chyba") + "</div>" +
         '<div class="apl-mrizka">' +
@@ -608,12 +648,22 @@
     vykresli();
   });
 
+  if (DRUH === "dispecink" && window.BVCRM) {
+    CRM = window.BVCRM({
+      D: D, S: function () { return S; }, uloz: uloz, esc: esc, ik: ik, datum: datum, stav: stav, hlava: hlava, panel: panel, kpi: kpi, tabulka: tabulka, toast: toast,
+      DNES: DNES, TED: TED, koren: KOREN, vykresli: vykresli, uzivatel: function () { return uzivatel || clenTymu(); }, muze: muze,
+      zavady: zavady, objekt: objekt, akceZavady: function (id, akce) { akceZavady(id, akce); if (dialog.open) dialog.close(); },
+    });
+    Object.keys(CRM.views).forEach(function (k) { DISPECINK[k] = CRM.views[k]; });
+    Object.keys(CRM.po).forEach(function (k) { POVYKRESLENI[k] = CRM.po[k]; });
+    if (location.hash === "#fakturace") location.hash = "doklady";
+  }
   if (DRUH === "portal") {
     var ulozenaRole = null;
     try { ulozenaRole = sessionStorage.getItem("bv-portal-role"); } catch (x) { /* nic */ }
     uzivatel = D.uzivatele.portal.filter(function (u) { return u.id === ulozenaRole; })[0] || null;
   } else {
-    uzivatel = D.uzivatele.dispecink[0];
+    uzivatel = clenTymu();
   }
   vykresli();
 })();

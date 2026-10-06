@@ -326,6 +326,7 @@
       });
       if (r.chyba) return;
       animujCenu(r.celkem);
+      if (vystup("lista")) vystup("lista").textContent = cislo(r.celkem) + "\u00a0Kč";
       vystup("pod").textContent = "rozpětí " + cislo(r.rozpeti.od) + "–" + cislo(r.rozpeti.do) + " Kč · s DPH " + cislo(r.sDph) + " Kč" + (r.naJednotku ? " · " + cislo(r.naJednotku) + " Kč na byt" : "");
       var radky = r.polozky.map(function (p) { return "<div><span>" + p.nazev + "</span><span>" + cislo(p.castka) + " Kč</span></div>"; });
       if (r.sleva) radky.push('<div class="je-sleva"><span>Množstevní sleva ' + r.slevaProcent + " %</span><span>−" + cislo(r.sleva) + " Kč</span></div>");
@@ -335,6 +336,10 @@
     form.addEventListener("input", prepocti);
     form.addEventListener("change", prepocti);
     prepocti();
+    var lista = $(".kalk__lista", k), panelVysledku = $(".kalk__vysledek", k);
+    if (lista && "IntersectionObserver" in window) {
+      new IntersectionObserver(function (z) { lista.classList.toggle("je-skryta", z[0].isIntersecting); }, { threshold: 0.2 }).observe(panelVysledku);
+    }
   });
 
   /* ---------- Formuláře (ukázka: nic se neodesílá) ---------- */
@@ -343,6 +348,23 @@
     dodavatel: { firma: ["required"], ico: ["ico"], email: ["required", "email"], telefon: ["required", "telefon"], obory: [{ typ: "min", hodnota: 1 }], souhlas: ["souhlas"] },
   };
   var HLASKY = { required: "Vyplňte prosím.", email: "Zkontrolujte e-mail.", telefon: "Zkontrolujte telefon.", ico: "IČO nesedí (8 číslic s kontrolním součtem).", souhlas: "Bez souhlasu to nepůjde.", min: "Vyberte aspoň jednu možnost." };
+  // Demo: poptávka z webu se objeví v interním systému (Poptávky) – jen v localStorage tohoto prohlížeče.
+  function ulozPoptavkuDoDema(f) {
+    try {
+      var st = JSON.parse(localStorage.getItem("bv-demo-v1") || "{}");
+      st.poptavkyWeb = st.poptavkyWeb || [];
+      var t = new Date();
+      var dva = function (n) { return String(n).padStart(2, "0"); };
+      var seg = $("input[name=segment]:checked", f);
+      st.poptavkyWeb.unshift({
+        id: "P-2026-" + String(32 + st.poptavkyWeb.length).padStart(3, "0"), stav: "nova",
+        prijato: t.getFullYear() + "-" + dva(t.getMonth() + 1) + "-" + dva(t.getDate()) + " " + dva(t.getHours()) + ":" + dva(t.getMinutes()),
+        segment: seg ? seg.value : "jine", jmeno: f.jmeno.value.trim(), role: f.role.value, email: f.email.value.trim(), telefon: f.telefon.value.trim(),
+        firma: "", adresa: f.adresa.value.trim(), velikost: f.velikost.value.trim(), rozpocet: f.rozpocet.value.trim(), zprava: f.zprava.value.trim(), stranka: location.pathname.split("/").pop() || "/",
+      });
+      localStorage.setItem("bv-demo-v1", JSON.stringify(st));
+    } catch (e) { /* bez localStorage se nic neuloží */ }
+  }
   $$("[data-formular]").forEach(function (f) {
     var druh = f.getAttribute("data-formular");
     f.addEventListener("submit", function (e) {
@@ -372,7 +394,8 @@
         if (!prvni) prvni = el;
       });
       if (prvni) { prvni.focus(); return; }
-      $("[data-formular-vysledek]", f).innerHTML = '<div class="hlaseni"><svg class="ik" width="20" height="20" viewBox="0 0 20 20"><path d="m4 10.4 4 4L16 5.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><div><strong>Děkujeme, máme to.</strong><br>V ukázce se nic neodesílá. Ve skutečném provozu se ozveme do jednoho pracovního dne' + (druh === "poptavka" ? " a domluvíme prohlídku objektu." : " a domluvíme si schůzku.") + "</div></div>";
+      if (druh === "poptavka") ulozPoptavkuDoDema(f);
+      $("[data-formular-vysledek]", f).innerHTML = '<div class="hlaseni"><svg class="ik" width="20" height="20" viewBox="0 0 20 20"><path d="m4 10.4 4 4L16 5.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><div><strong>Děkujeme, máme to.</strong><br>V ukázce se nic neodesílá. Ve skutečném provozu se ozveme do jednoho pracovního dne' + (druh === "poptavka" ? " a domluvíme prohlídku objektu. <a href=\"dispecink.html#poptavky\">Podívejte se, jak poptávku vidí interní systém →</a>" : " a domluvíme si schůzku.") + "</div></div>";
       f.reset();
     });
   });

@@ -375,7 +375,7 @@ export function kalkulacka(ctx) {
         <div class="volby">${sluzby.map(([v, n, z]) => `<label class="volba"><input type="checkbox" name="sluzby" value="${v}"${z ? " checked" : ""}><span>${esc(n)}</span></label>`).join("")}
         <label class="volba"><input type="checkbox" name="havarijni" value="1" checked><span>Havarijní služba 24/7</span></label></div></div>
     </form>
-    <aside class="kalk__vysledek" aria-live="polite">
+    <aside class="kalk__vysledek" id="kalk-vysledek" aria-live="polite">
       <span class="stitek" style="color:var(--akcent)">Orientační cena / měsíc bez DPH</span>
       <div class="kalk__cena" data-k="celkem">—</div>
       <div class="kalk__pod" data-k="pod">—</div>
@@ -383,6 +383,7 @@ export function kalkulacka(ctx) {
       <a class="tl tl--plne" href="${odkaz("kontakt")}#poptavka" data-k="odkaz">Chci přesnou nabídku ${ikona("sipka", { trida: "ik--posun" })}</a>
       <p class="kalk__pozn">Výpočet je orientační a nezávazný. Ceny v návrhu webu jsou ilustrativní, skutečný ceník doplní Budovník.</p>
     </aside>
+    <a class="kalk__lista" href="#kalk-vysledek" aria-hidden="true" tabindex="-1"><span>Orientačně / měsíc</span><strong data-k="lista">—</strong><span>Detail ↓</span></a>
   </div></section>
   ${ctaPas({ nadpis: "Cena je jedna věc. Stav domu druhá.", text: "Po prohlídce víme, co dům opravdu potřebuje. Pak teprve dává smysl mluvit o přesné ceně." })}`;
 }
@@ -491,6 +492,7 @@ export function kontakt(ctx) {
         <div class="pole"><label for="p-adresa">Adresa objektu</label><input type="text" id="p-adresa" name="adresa"></div>
         <div class="pole"><label for="p-velikost">Velikost</label><input type="text" id="p-velikost" name="velikost" placeholder="např. 48 bytů / 4 000 m²"></div>
       </div>
+      <div class="pole"><label for="p-rozpocet">Představa o rozpočtu <small>(nepovinné)</small></label><input type="text" id="p-rozpocet" name="rozpocet" placeholder="např. do 15 tis. měsíčně"></div>
       <div class="pole"><label for="p-zprava">Co potřebujete?</label><textarea id="p-zprava" name="zprava" placeholder="Např. převzetí kompletní správy od ledna, nebo jen revize a technická správa."></textarea></div>
       <label class="souhlas"><input type="checkbox" name="souhlas"> Souhlasím se zpracováním osobních údajů za účelem vyřízení poptávky.</label>
       <button class="tl" type="submit">Odeslat poptávku ${ikona("sipka", { trida: "ik--posun" })}</button>

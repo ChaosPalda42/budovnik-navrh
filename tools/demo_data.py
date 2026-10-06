@@ -247,12 +247,160 @@ SPOTREBA_O1 = [{"mesic": m, "teplo": t, "voda": v} for m, t, v in [
     ("05/26", 6.1, 412), ("06/26", 2.4, 430), ("07/26", 2.1, 388), ("08/26", 2.3, 376), ("09/26", 5.9, 404), ("10/26", 12.8, 236)]]
 
 
+# ---------------------------------------------------------------------------
+# Obchod a administrativa – stejný rozsah jako CRM byPalda (klienti, zakázky,
+# doklady, poptávky, úkoly, tým, nastavení, vzory smluv).
+# ---------------------------------------------------------------------------
+KLIENTI = [
+    {"id": 1, "nazev": "SVJ Lipová 1287", "typ": "firma", "ico": "12345678", "dic": "", "ulice": "Lipová 1287", "mesto": "Kladno", "psc": "272 01",
+     "email": "vybor@lipova-kladno.cz", "telefon": "+420 777 000 001", "kontakt": "Jana Dvořáková", "stav": "aktivni", "pausal": True, "vytvoreno": "2023-11-20", "objekty": ["O1"]},
+    {"id": 2, "nazev": "SVJ Na Výsluní 14", "typ": "firma", "ico": "24681357", "dic": "", "ulice": "Na Výsluní 14", "mesto": "Praha 4", "psc": "140 00",
+     "email": "vybor@navysluni.cz", "telefon": "+420 777 000 002", "kontakt": "Ing. Martin Kříž", "stav": "aktivni", "pausal": True, "vytvoreno": "2025-01-10", "objekty": ["O2"]},
+    {"id": 3, "nazev": "Bytové družstvo Jasmínová", "typ": "firma", "ico": "87654321", "dic": "CZ87654321", "ulice": "Jasmínová 2850", "mesto": "Praha 10", "psc": "106 00",
+     "email": "info@bd-jasminova.cz", "telefon": "+420 777 000 003", "kontakt": "Pavel Horák", "stav": "aktivni", "pausal": True, "vytvoreno": "2022-12-01", "objekty": ["O3"]},
+    {"id": 4, "nazev": "Karlín Point Property s.r.o.", "typ": "firma", "ico": "11223344", "dic": "CZ11223344", "ulice": "Pernerova 0", "mesto": "Praha 8", "psc": "186 00",
+     "email": "lucie.benesova@karlinpoint.cz", "telefon": "+420 777 000 004", "kontakt": "Lucie Benešová", "stav": "aktivni", "pausal": True, "vytvoreno": "2024-11-15", "objekty": ["O4"]},
+    {"id": 5, "nazev": "Obec Ke Hřišti (ZŠ Ke Hřišti)", "typ": "firma", "ico": "00000027", "dic": "", "ulice": "Ke Hřišti 0", "mesto": "Obec", "psc": "000 00",
+     "email": "reditelka@zs-kehristi.cz", "telefon": "+420 777 000 005", "kontakt": "Mgr. Hana Svobodová", "stav": "aktivni", "pausal": True, "vytvoreno": "2025-11-20", "objekty": ["O5"]},
+    {"id": 6, "nazev": "D3 Logistics Park a.s.", "typ": "firma", "ico": "55667788", "dic": "CZ55667788", "ulice": "Průmyslová 0", "mesto": "Plzeň", "psc": "301 00",
+     "email": "provoz@d3park.cz", "telefon": "+420 777 000 006", "kontakt": "Tomáš Veselý", "stav": "aktivni", "pausal": True, "vytvoreno": "2024-10-01", "objekty": ["O6"]},
+    {"id": 7, "nazev": "SVJ Korunní 88", "typ": "firma", "ico": "", "dic": "", "ulice": "Korunní 88", "mesto": "Praha 2", "psc": "120 00",
+     "email": "korunni88@email.cz", "telefon": "", "kontakt": "Alena Marková", "stav": "potencialni", "pausal": False, "vytvoreno": "2026-09-28", "objekty": []},
+    {"id": 8, "nazev": "Městská knihovna Rakovník", "typ": "firma", "ico": "", "dic": "", "ulice": "", "mesto": "Rakovník", "psc": "",
+     "email": "reditel@knihovna-rakovnik.cz", "telefon": "+420 777 000 008", "kontakt": "PhDr. Jan Kos", "stav": "potencialni", "pausal": False, "vytvoreno": "2026-10-02", "objekty": []},
+]
+
+DENIK = [
+    {"klient": 7, "datum": "2026-09-28 10:15", "kdo": "Eva Nováková", "typ": "telefon", "text": "Volala paní Marková: chtějí změnit správce od ledna, 36 bytů, starý činžák. Domluvena prohlídka."},
+    {"klient": 7, "datum": "2026-10-03 16:00", "kdo": "Eva Nováková", "typ": "schuzka", "text": "Prohlídka domu: kotelna na plyn, výtah po termínu odborné zkoušky, chybí revize hromosvodu. Poslat nabídku do pátku."},
+    {"klient": 8, "datum": "2026-10-02 09:40", "kdo": "Eva Nováková", "typ": "email", "text": "Poptávka přes web: revize a údržba budovy knihovny, rozpočet do 15 tis. měsíčně."},
+    {"klient": 1, "datum": "2026-09-15 18:00", "kdo": "Eva Nováková", "typ": "schuzka", "text": "Shromáždění vlastníků: schválen plán oprav na 2027 (výměna stoupaček ve dvou sekcích)."},
+    {"klient": 4, "datum": "2026-10-01 11:00", "kdo": "Eva Nováková", "typ": "schuzka", "text": "Měsíční report SLA za září předán, 98 % splněno. Požadavek na nabídku čištění fasády."},
+    {"klient": 3, "datum": "2026-09-30 08:30", "kdo": "Eva Nováková", "typ": "poznamka", "text": "Před topnou sezónou zkontrolována expanzní nádoba, vyměněna membrána (Z-2026-0404)."},
+]
+
+ZAKAZKY = [
+    {"id": 101, "klient": 1, "nazev": "Kompletní správa domu", "druh": "pausal", "stav": "bezi", "hodnota": 1644000, "od": "2024-01-01"},
+    {"id": 102, "klient": 2, "nazev": "Kompletní správa domu", "druh": "pausal", "stav": "bezi", "hodnota": 1120000, "od": "2025-02-01"},
+    {"id": 103, "klient": 3, "nazev": "Správa a energetický management", "druh": "pausal", "stav": "bezi", "hodnota": 3450500, "od": "2023-01-01"},
+    {"id": 104, "klient": 4, "nazev": "Facility management budovy", "druh": "pausal", "stav": "bezi", "hodnota": 11040900, "od": "2025-01-01"},
+    {"id": 105, "klient": 5, "nazev": "Technická správa školy", "druh": "pausal", "stav": "bezi", "hodnota": 1317200, "od": "2026-01-01"},
+    {"id": 106, "klient": 6, "nazev": "Správa areálu", "druh": "pausal", "stav": "bezi", "hodnota": 5820000, "od": "2024-12-01"},
+    {"id": 107, "klient": 1, "nazev": "Výměna stoupaček, sekce A a B", "druh": "jednorazova", "stav": "nabidka", "hodnota": 48600000, "od": "2027-03-01"},
+    {"id": 108, "klient": 4, "nazev": "Čištění fasády a oken", "druh": "jednorazova", "stav": "nabidka", "hodnota": 18900000, "od": "2026-11-01"},
+    {"id": 109, "klient": 5, "nazev": "Letní údržba 2026 (malování, podlahy)", "druh": "jednorazova", "stav": "hotovo", "hodnota": 31250000, "od": "2026-07-01"},
+    {"id": 110, "klient": 7, "nazev": "Správa SVJ – Korunní 88", "druh": "pausal", "stav": "poptavka", "hodnota": 0, "od": ""},
+]
+
+
+def _dokl(druh, cislo, klient, vystaveno, splatnost, uhrazeno, polozky, zakazka=None, stav=None):
+    return {"druh": druh, "cislo": cislo, "klientId": klient, "zakazka": zakazka, "vystaveno": vystaveno, "splatnost": splatnost,
+            "uhrazeno": uhrazeno, "polozky": polozky, "stav": stav}
+
+
+def _doklady():
+    d = []
+    pausaly = [(1, 101, 1644000), (2, 102, 1120000), (3, 103, 3450500), (4, 104, 11040900), (5, 105, 1317200), (6, 106, 5820000)]
+    poradi = 0
+    mesice = ["2026-%02d" % m for m in range(1, 11)]
+    for mi, mes in enumerate(mesice):
+        for k, z, castka in pausaly:
+            if k == 5 and mi < 0:
+                continue
+            poradi += 1
+            vyst = mes + "-01"
+            spl = mes + "-15"
+            # platby: většina včas, pár pozdě, říjen zatím nezaplacený, září jeden dlužník
+            if mes == "2026-10":
+                uhr = "2026-10-05" if k in (1, 3) else None
+            elif mes == "2026-09" and k == 6:
+                uhr = None
+            elif k == 4:
+                uhr = mes + "-20"
+            else:
+                uhr = mes + "-%02d" % (8 + k)
+            d.append(_dokl("faktura", "FA2026%04d" % poradi, k, vyst, spl, uhr,
+                           [{"popis": "Správa objektu – paušál " + mes[5:] + "/" + mes[:4], "mnozstvi": 1, "cena": castka, "dph": 21}], z))
+    poradi += 1
+    d.append(_dokl("faktura", "FA2026%04d" % poradi, 5, "2026-08-31", "2026-09-14", "2026-09-10",
+                   [{"popis": "Malování tříd a chodeb", "mnozstvi": 1240, "cena": 9500, "dph": 21}, {"popis": "Broušení a lakování parket", "mnozstvi": 310, "cena": 42000, "dph": 21},
+                    {"popis": "Drobné opravy a úklid po řemeslnících", "mnozstvi": 1, "cena": 3850000, "dph": 21}], 109))
+    d.append(_dokl("nabidka", "NAB2026014", 1, "2026-09-20", "2026-10-20", None,
+                   [{"popis": "Výměna stoupaček vody a kanalizace, sekce A", "mnozstvi": 1, "cena": 24300000, "dph": 12},
+                    {"popis": "Výměna stoupaček vody a kanalizace, sekce B", "mnozstvi": 1, "cena": 24300000, "dph": 12}], 107, "odeslana"))
+    d.append(_dokl("nabidka", "NAB2026015", 4, "2026-10-02", "2026-11-02", None,
+                   [{"popis": "Čištění fasády (horolezecky)", "mnozstvi": 4200, "cena": 3500, "dph": 21}, {"popis": "Mytí oken z vnější strany", "mnozstvi": 1, "cena": 4200000, "dph": 21}], 108, "odeslana"))
+    d.append(_dokl("nabidka", "NAB2026016", 7, "2026-10-06", "2026-11-06", None,
+                   [{"popis": "Kompletní správa domu (36 bytů) – měsíčně", "mnozstvi": 12, "cena": 1290000, "dph": 21}], 110, "koncept"))
+    d.append(_dokl("proforma", "PF2026003", 5, "2026-06-15", "2026-06-30", "2026-06-25",
+                   [{"popis": "Záloha na letní údržbu", "mnozstvi": 1, "cena": 10000000, "dph": 21}], 109))
+    return d
+
+
+DOKLADY = _doklady()
+
+POPTAVKY = [
+    {"id": "P-2026-031", "prijato": "2026-10-06 21:14", "stav": "nova", "segment": "svj", "jmeno": "Alena Marková", "role": "Předseda / člen výboru SVJ",
+     "email": "korunni88@email.cz", "telefon": "", "firma": "", "adresa": "Korunní 88, Praha 2", "velikost": "36 bytů", "rozpocet": "do 15 tis. měsíčně",
+     "zprava": "Dobrý den, náš současný správce končí k 31. 12. Hledáme někoho, kdo převezme technickou i ekonomickou správu.", "stranka": "/kontakt.html"},
+    {"id": "P-2026-030", "prijato": "2026-10-02 09:31", "stav": "nova", "segment": "verejne", "jmeno": "PhDr. Jan Kos", "role": "Starosta / ředitel / zřizovatel",
+     "email": "reditel@knihovna-rakovnik.cz", "telefon": "+420 777 000 008", "firma": "Městská knihovna Rakovník", "adresa": "Rakovník", "velikost": "1 800 m²", "rozpocet": "cca 12–15 tis. Kč",
+     "zprava": "Potřebujeme zajistit revize a pravidelnou údržbu budovy, nejlépe od nového roku.", "stranka": "/verejne-budovy.html"},
+    {"id": "P-2026-029", "prijato": "2026-09-24 13:02", "stav": "prevedena", "segment": "komercni", "jmeno": "Lucie Benešová", "role": "Majitel / investor",
+     "email": "lucie.benesova@karlinpoint.cz", "telefon": "+420 777 000 004", "firma": "Karlín Point Property s.r.o.", "adresa": "Pernerova 0, Praha 8", "velikost": "9 200 m²", "rozpocet": "kolem 200 tis.",
+     "zprava": "Prosím o nabídku na čištění fasády a mytí oken.", "stranka": "/komercni-objekty.html"},
+]
+
+UKOLY = [
+    {"id": 1, "text": "Poslat nabídku SVJ Korunní 88", "kdo": "Eva Nováková", "termin": "2026-10-09", "hotovo": False, "klient": 7},
+    {"id": 2, "text": "Upomínka: faktura za září – Areál D3", "kdo": "Petra Šindelářová", "termin": "2026-10-07", "hotovo": False, "klient": 6},
+    {"id": 3, "text": "Připravit podklady na shromáždění BD Jasmínová", "kdo": "Eva Nováková", "termin": "2026-10-20", "hotovo": False, "klient": 3},
+    {"id": 4, "text": "Objednat inspekční prohlídku výtahu Lipová", "kdo": "Martin Dušek", "termin": "2026-10-05", "hotovo": False, "klient": 1},
+    {"id": 5, "text": "Roční vyúčtování 2025 – odeslat vlastníkům", "kdo": "Petra Šindelářová", "termin": "2026-04-30", "hotovo": True, "klient": 1},
+]
+
+TYM = [
+    {"id": 1, "jmeno": "Michal Novotný", "email": "michal@budovnik.cz", "role": "spravce", "aktivni": True},
+    {"id": 2, "jmeno": "Eva Nováková", "email": "eva@budovnik.cz", "role": "dispecer", "aktivni": True},
+    {"id": 3, "jmeno": "Petra Šindelářová", "email": "ucetni@budovnik.cz", "role": "ucetni", "aktivni": True},
+    {"id": 4, "jmeno": "Martin Dušek", "email": "martin@budovnik.cz", "role": "technik", "aktivni": True},
+]
+
+NASTAVENI = {
+    "firma": "Budovník s.r.o.", "ico": "00000019", "dic": "CZ00000019", "adresa": "Ulice 000/00, 000 00 Město",
+    "ucet": "2000145399/0800", "platceDph": True, "splatnostDni": 14, "pravaZapnuta": True,
+    "rady": {"faktura": "FA{rok}{poradi4}", "proforma": "PF{rok}{poradi3}", "nabidka": "NAB{rok}{poradi3}"},
+}
+
+VZORY = [
+    {"id": "sprava", "nazev": "Smlouva o správě nemovitosti", "text":
+     "SMLOUVA O SPRÁVĚ NEMOVITOSTI č. {cislo_smlouvy}\n\nObjednatel: {klient_nazev}, IČO {klient_ico}, {klient_adresa}, zastoupený {klient_zastoupeni}\n"
+     "Správce: {spravce_nazev}, IČO {spravce_ico}, {spravce_adresa}\n\n1. Správce zajistí pro objekt {objekt_adresa} technickou, provozní a ekonomickou správu v rozsahu přílohy č. 1.\n"
+     "2. Cena činí {cena_mesicne} Kč měsíčně bez DPH, splatnost {splatnost} dní.\n3. Smlouva se uzavírá od {zacatek} na dobu {doba}.\n"
+     "4. Správce je oprávněn k plnění využít třetí osoby; za jejich plnění odpovídá, jako by plnil sám.\n\nV {misto} dne {datum}"},
+    {"id": "objednavka", "nazev": "Objednávka jednorázové zakázky", "text":
+     "OBJEDNÁVKA č. {cislo_smlouvy}\n\nObjednatel {klient_nazev} (IČO {klient_ico}) objednává u {spravce_nazev}: {predmet}.\n"
+     "Cena dle nabídky {cislo_nabidky}: {cena_celkem} Kč bez DPH. Termín provedení: {termin}.\n\nV {misto} dne {datum}"},
+]
+
+NAVSTEVNOST = {
+    "zdroje": [{"id": "Vyhledávání (Google, Seznam)", "podil": 46}, {"id": "Přímé návštěvy", "podil": 24}, {"id": "Doporučení a odkazy", "podil": 14},
+               {"id": "Sociální sítě", "podil": 9}, {"id": "Firmy.cz a katalogy", "podil": 7}],
+    "zarizeni": [{"id": "Mobil", "podil": 58}, {"id": "Počítač", "podil": 36}, {"id": "Tablet", "podil": 6}],
+    "stranky": [{"nazev": "Úvod", "cesta": "/", "vaha": 100}, {"nazev": "Kalkulačka ceny", "cesta": "/kalkulacka.html", "vaha": 46},
+                {"nazev": "Bytové domy", "cesta": "/bytove-domy.html", "vaha": 38}, {"nazev": "Průvodce revizemi", "cesta": "/revize.html", "vaha": 31},
+                {"nazev": "Kontakt", "cesta": "/kontakt.html", "vaha": 27}, {"nazev": "Technická správa", "cesta": "/technicka-sprava.html", "vaha": 19}],
+}
+
+
 def main() -> None:
     data = {
         "dnes": DNES, "ted": TED, "objekty": OBJEKTY, "dodavatele": DODAVATELE, "obory": OBORY, "dokumenty": DOKUMENTY,
         "zavady": ZAVADY, "smlouvy": SMLOUVY, "sablona": SABLONA, "pravidla": PRAVIDLA,
         "vyuctovani": {"objekt": "O1", "obdobi": "2025", "jednotky": JEDNOTKY_O1, "naklady": NAKLADY_O1},
         "uzivatele": UZIVATELE, "spotreba": SPOTREBA_O1, "marze": 15,
+        "klienti": KLIENTI, "denik": DENIK, "zakazky": ZAKAZKY, "doklady": DOKLADY, "poptavky": POPTAVKY, "ukoly": UKOLY,
+        "tym": TYM, "nastaveni": NASTAVENI, "vzory": VZORY, "navstevnost": NAVSTEVNOST,
     }
     cil = ROOT / "data" / "demo.json"
     cil.write_text(json.dumps(data, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")

@@ -22,14 +22,24 @@ function nazvyExportu(zdroj) {
 /** Moduly z src/lib se sesypou do jednoho klasického skriptu pod globální BV.<modul>. Importy mezi moduly se nahradí odkazem na BV. */
 async function svazekKnihoven() {
   const dir = path.join(KOREN, "src", "lib");
-  const soubory = (await readdir(dir)).filter((f) => f.endsWith(".mjs")).sort();
-  // pracovnidny musí být dřív než moduly, které ho importují
-  soubory.sort((a, b) => (a === "pracovnidny.mjs" ? -1 : b === "pracovnidny.mjs" ? 1 : a.localeCompare(b)));
+  const vsechny = (await readdir(dir)).filter((f) => f.endsWith(".mjs")).sort();
+  const zdroje = {};
+  for (const f of vsechny) zdroje[f] = await readFile(path.join(dir, f), "utf8");
+  // Moduly se řadí podle závislostí: kdo importuje, jde až po tom, koho importuje.
+  const soubory = [];
+  const navstiveno = new Set();
+  const pridej = (f) => {
+    if (navstiveno.has(f)) return;
+    navstiveno.add(f);
+    for (const m of zdroje[f].matchAll(/from\s*["']\.\/([\w-]+\.mjs)["']/g)) if (zdroje[m[1]]) pridej(m[1]);
+    soubory.push(f);
+  };
+  vsechny.forEach(pridej);
   const kusy = [];
   for (const soubor of soubory) {
-    let zdroj = await readFile(path.join(dir, soubor), "utf8");
+    let zdroj = zdroje[soubor];
     const jmena = nazvyExportu(zdroj);
-    zdroj = zdroj.replace(/^\s*import\s*\{([^}]*)\}\s*from\s*["']\.\/([\w-]+)\.mjs["'];?\s*$/gm,
+    zdroj = zdroj.replace(/^\s*import\s*\{([^}]*)\}\s*from\s*["']\.\/([\w-]+)\.mjs["'];?[ \t]*$/gm,
       (_, co, mod) => `const {${co}} = BV.${mod.replace(/-/g, "_")};`);
     const telo = zdroj.replace(/^\s*export\s+(?=(?:async\s+)?(?:function|const|let|var|class)\s)/gm, "");
     kusy.push(`BV.${soubor.replace(/\.mjs$/, "").replace(/-/g, "_")} = (function () {\n${telo}\nreturn { ${jmena.join(", ")} };\n})();`);
@@ -53,7 +63,7 @@ async function main() {
   const knihovny = await svazekKnihoven();
   const web = await readFile(path.join(KOREN, "src/ui/web.js"), "utf8");
   const appJs = [knihovny, web].join("\n");
-  const demoJs = await readFile(path.join(KOREN, "src/ui/demo.js"), "utf8");
+  const demoJs = [await readFile(path.join(KOREN, "src/ui/crm.js"), "utf8"), await readFile(path.join(KOREN, "src/ui/demo.js"), "utf8")].join("\n");
   const css = await readFile(path.join(KOREN, "src/assets/style.css"), "utf8");
   const fonty = await readFile(path.join(KOREN, "src/assets/fonts.css"), "utf8");
   const otisk = (s) => createHash("sha1").update(s).digest("hex").slice(0, 8);

@@ -1453,5 +1453,1706 @@
    "voda": 236
   }
  ],
- "marze": 15
+ "marze": 15,
+ "klienti": [
+  {
+   "id": 1,
+   "nazev": "SVJ Lipová 1287",
+   "typ": "firma",
+   "ico": "12345678",
+   "dic": "",
+   "ulice": "Lipová 1287",
+   "mesto": "Kladno",
+   "psc": "272 01",
+   "email": "vybor@lipova-kladno.cz",
+   "telefon": "+420 777 000 001",
+   "kontakt": "Jana Dvořáková",
+   "stav": "aktivni",
+   "pausal": true,
+   "vytvoreno": "2023-11-20",
+   "objekty": [
+    "O1"
+   ]
+  },
+  {
+   "id": 2,
+   "nazev": "SVJ Na Výsluní 14",
+   "typ": "firma",
+   "ico": "24681357",
+   "dic": "",
+   "ulice": "Na Výsluní 14",
+   "mesto": "Praha 4",
+   "psc": "140 00",
+   "email": "vybor@navysluni.cz",
+   "telefon": "+420 777 000 002",
+   "kontakt": "Ing. Martin Kříž",
+   "stav": "aktivni",
+   "pausal": true,
+   "vytvoreno": "2025-01-10",
+   "objekty": [
+    "O2"
+   ]
+  },
+  {
+   "id": 3,
+   "nazev": "Bytové družstvo Jasmínová",
+   "typ": "firma",
+   "ico": "87654321",
+   "dic": "CZ87654321",
+   "ulice": "Jasmínová 2850",
+   "mesto": "Praha 10",
+   "psc": "106 00",
+   "email": "info@bd-jasminova.cz",
+   "telefon": "+420 777 000 003",
+   "kontakt": "Pavel Horák",
+   "stav": "aktivni",
+   "pausal": true,
+   "vytvoreno": "2022-12-01",
+   "objekty": [
+    "O3"
+   ]
+  },
+  {
+   "id": 4,
+   "nazev": "Karlín Point Property s.r.o.",
+   "typ": "firma",
+   "ico": "11223344",
+   "dic": "CZ11223344",
+   "ulice": "Pernerova 0",
+   "mesto": "Praha 8",
+   "psc": "186 00",
+   "email": "lucie.benesova@karlinpoint.cz",
+   "telefon": "+420 777 000 004",
+   "kontakt": "Lucie Benešová",
+   "stav": "aktivni",
+   "pausal": true,
+   "vytvoreno": "2024-11-15",
+   "objekty": [
+    "O4"
+   ]
+  },
+  {
+   "id": 5,
+   "nazev": "Obec Ke Hřišti (ZŠ Ke Hřišti)",
+   "typ": "firma",
+   "ico": "00000027",
+   "dic": "",
+   "ulice": "Ke Hřišti 0",
+   "mesto": "Obec",
+   "psc": "000 00",
+   "email": "reditelka@zs-kehristi.cz",
+   "telefon": "+420 777 000 005",
+   "kontakt": "Mgr. Hana Svobodová",
+   "stav": "aktivni",
+   "pausal": true,
+   "vytvoreno": "2025-11-20",
+   "objekty": [
+    "O5"
+   ]
+  },
+  {
+   "id": 6,
+   "nazev": "D3 Logistics Park a.s.",
+   "typ": "firma",
+   "ico": "55667788",
+   "dic": "CZ55667788",
+   "ulice": "Průmyslová 0",
+   "mesto": "Plzeň",
+   "psc": "301 00",
+   "email": "provoz@d3park.cz",
+   "telefon": "+420 777 000 006",
+   "kontakt": "Tomáš Veselý",
+   "stav": "aktivni",
+   "pausal": true,
+   "vytvoreno": "2024-10-01",
+   "objekty": [
+    "O6"
+   ]
+  },
+  {
+   "id": 7,
+   "nazev": "SVJ Korunní 88",
+   "typ": "firma",
+   "ico": "",
+   "dic": "",
+   "ulice": "Korunní 88",
+   "mesto": "Praha 2",
+   "psc": "120 00",
+   "email": "korunni88@email.cz",
+   "telefon": "",
+   "kontakt": "Alena Marková",
+   "stav": "potencialni",
+   "pausal": false,
+   "vytvoreno": "2026-09-28",
+   "objekty": []
+  },
+  {
+   "id": 8,
+   "nazev": "Městská knihovna Rakovník",
+   "typ": "firma",
+   "ico": "",
+   "dic": "",
+   "ulice": "",
+   "mesto": "Rakovník",
+   "psc": "",
+   "email": "reditel@knihovna-rakovnik.cz",
+   "telefon": "+420 777 000 008",
+   "kontakt": "PhDr. Jan Kos",
+   "stav": "potencialni",
+   "pausal": false,
+   "vytvoreno": "2026-10-02",
+   "objekty": []
+  }
+ ],
+ "denik": [
+  {
+   "klient": 7,
+   "datum": "2026-09-28 10:15",
+   "kdo": "Eva Nováková",
+   "typ": "telefon",
+   "text": "Volala paní Marková: chtějí změnit správce od ledna, 36 bytů, starý činžák. Domluvena prohlídka."
+  },
+  {
+   "klient": 7,
+   "datum": "2026-10-03 16:00",
+   "kdo": "Eva Nováková",
+   "typ": "schuzka",
+   "text": "Prohlídka domu: kotelna na plyn, výtah po termínu odborné zkoušky, chybí revize hromosvodu. Poslat nabídku do pátku."
+  },
+  {
+   "klient": 8,
+   "datum": "2026-10-02 09:40",
+   "kdo": "Eva Nováková",
+   "typ": "email",
+   "text": "Poptávka přes web: revize a údržba budovy knihovny, rozpočet do 15 tis. měsíčně."
+  },
+  {
+   "klient": 1,
+   "datum": "2026-09-15 18:00",
+   "kdo": "Eva Nováková",
+   "typ": "schuzka",
+   "text": "Shromáždění vlastníků: schválen plán oprav na 2027 (výměna stoupaček ve dvou sekcích)."
+  },
+  {
+   "klient": 4,
+   "datum": "2026-10-01 11:00",
+   "kdo": "Eva Nováková",
+   "typ": "schuzka",
+   "text": "Měsíční report SLA za září předán, 98 % splněno. Požadavek na nabídku čištění fasády."
+  },
+  {
+   "klient": 3,
+   "datum": "2026-09-30 08:30",
+   "kdo": "Eva Nováková",
+   "typ": "poznamka",
+   "text": "Před topnou sezónou zkontrolována expanzní nádoba, vyměněna membrána (Z-2026-0404)."
+  }
+ ],
+ "zakazky": [
+  {
+   "id": 101,
+   "klient": 1,
+   "nazev": "Kompletní správa domu",
+   "druh": "pausal",
+   "stav": "bezi",
+   "hodnota": 1644000,
+   "od": "2024-01-01"
+  },
+  {
+   "id": 102,
+   "klient": 2,
+   "nazev": "Kompletní správa domu",
+   "druh": "pausal",
+   "stav": "bezi",
+   "hodnota": 1120000,
+   "od": "2025-02-01"
+  },
+  {
+   "id": 103,
+   "klient": 3,
+   "nazev": "Správa a energetický management",
+   "druh": "pausal",
+   "stav": "bezi",
+   "hodnota": 3450500,
+   "od": "2023-01-01"
+  },
+  {
+   "id": 104,
+   "klient": 4,
+   "nazev": "Facility management budovy",
+   "druh": "pausal",
+   "stav": "bezi",
+   "hodnota": 11040900,
+   "od": "2025-01-01"
+  },
+  {
+   "id": 105,
+   "klient": 5,
+   "nazev": "Technická správa školy",
+   "druh": "pausal",
+   "stav": "bezi",
+   "hodnota": 1317200,
+   "od": "2026-01-01"
+  },
+  {
+   "id": 106,
+   "klient": 6,
+   "nazev": "Správa areálu",
+   "druh": "pausal",
+   "stav": "bezi",
+   "hodnota": 5820000,
+   "od": "2024-12-01"
+  },
+  {
+   "id": 107,
+   "klient": 1,
+   "nazev": "Výměna stoupaček, sekce A a B",
+   "druh": "jednorazova",
+   "stav": "nabidka",
+   "hodnota": 48600000,
+   "od": "2027-03-01"
+  },
+  {
+   "id": 108,
+   "klient": 4,
+   "nazev": "Čištění fasády a oken",
+   "druh": "jednorazova",
+   "stav": "nabidka",
+   "hodnota": 18900000,
+   "od": "2026-11-01"
+  },
+  {
+   "id": 109,
+   "klient": 5,
+   "nazev": "Letní údržba 2026 (malování, podlahy)",
+   "druh": "jednorazova",
+   "stav": "hotovo",
+   "hodnota": 31250000,
+   "od": "2026-07-01"
+  },
+  {
+   "id": 110,
+   "klient": 7,
+   "nazev": "Správa SVJ – Korunní 88",
+   "druh": "pausal",
+   "stav": "poptavka",
+   "hodnota": 0,
+   "od": ""
+  }
+ ],
+ "doklady": [
+  {
+   "druh": "faktura",
+   "cislo": "FA20260001",
+   "klientId": 1,
+   "zakazka": 101,
+   "vystaveno": "2026-01-01",
+   "splatnost": "2026-01-15",
+   "uhrazeno": "2026-01-09",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 01/2026",
+     "mnozstvi": 1,
+     "cena": 1644000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260002",
+   "klientId": 2,
+   "zakazka": 102,
+   "vystaveno": "2026-01-01",
+   "splatnost": "2026-01-15",
+   "uhrazeno": "2026-01-10",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 01/2026",
+     "mnozstvi": 1,
+     "cena": 1120000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260003",
+   "klientId": 3,
+   "zakazka": 103,
+   "vystaveno": "2026-01-01",
+   "splatnost": "2026-01-15",
+   "uhrazeno": "2026-01-11",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 01/2026",
+     "mnozstvi": 1,
+     "cena": 3450500,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260004",
+   "klientId": 4,
+   "zakazka": 104,
+   "vystaveno": "2026-01-01",
+   "splatnost": "2026-01-15",
+   "uhrazeno": "2026-01-20",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 01/2026",
+     "mnozstvi": 1,
+     "cena": 11040900,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260005",
+   "klientId": 5,
+   "zakazka": 105,
+   "vystaveno": "2026-01-01",
+   "splatnost": "2026-01-15",
+   "uhrazeno": "2026-01-13",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 01/2026",
+     "mnozstvi": 1,
+     "cena": 1317200,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260006",
+   "klientId": 6,
+   "zakazka": 106,
+   "vystaveno": "2026-01-01",
+   "splatnost": "2026-01-15",
+   "uhrazeno": "2026-01-14",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 01/2026",
+     "mnozstvi": 1,
+     "cena": 5820000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260007",
+   "klientId": 1,
+   "zakazka": 101,
+   "vystaveno": "2026-02-01",
+   "splatnost": "2026-02-15",
+   "uhrazeno": "2026-02-09",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 02/2026",
+     "mnozstvi": 1,
+     "cena": 1644000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260008",
+   "klientId": 2,
+   "zakazka": 102,
+   "vystaveno": "2026-02-01",
+   "splatnost": "2026-02-15",
+   "uhrazeno": "2026-02-10",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 02/2026",
+     "mnozstvi": 1,
+     "cena": 1120000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260009",
+   "klientId": 3,
+   "zakazka": 103,
+   "vystaveno": "2026-02-01",
+   "splatnost": "2026-02-15",
+   "uhrazeno": "2026-02-11",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 02/2026",
+     "mnozstvi": 1,
+     "cena": 3450500,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260010",
+   "klientId": 4,
+   "zakazka": 104,
+   "vystaveno": "2026-02-01",
+   "splatnost": "2026-02-15",
+   "uhrazeno": "2026-02-20",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 02/2026",
+     "mnozstvi": 1,
+     "cena": 11040900,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260011",
+   "klientId": 5,
+   "zakazka": 105,
+   "vystaveno": "2026-02-01",
+   "splatnost": "2026-02-15",
+   "uhrazeno": "2026-02-13",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 02/2026",
+     "mnozstvi": 1,
+     "cena": 1317200,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260012",
+   "klientId": 6,
+   "zakazka": 106,
+   "vystaveno": "2026-02-01",
+   "splatnost": "2026-02-15",
+   "uhrazeno": "2026-02-14",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 02/2026",
+     "mnozstvi": 1,
+     "cena": 5820000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260013",
+   "klientId": 1,
+   "zakazka": 101,
+   "vystaveno": "2026-03-01",
+   "splatnost": "2026-03-15",
+   "uhrazeno": "2026-03-09",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 03/2026",
+     "mnozstvi": 1,
+     "cena": 1644000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260014",
+   "klientId": 2,
+   "zakazka": 102,
+   "vystaveno": "2026-03-01",
+   "splatnost": "2026-03-15",
+   "uhrazeno": "2026-03-10",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 03/2026",
+     "mnozstvi": 1,
+     "cena": 1120000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260015",
+   "klientId": 3,
+   "zakazka": 103,
+   "vystaveno": "2026-03-01",
+   "splatnost": "2026-03-15",
+   "uhrazeno": "2026-03-11",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 03/2026",
+     "mnozstvi": 1,
+     "cena": 3450500,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260016",
+   "klientId": 4,
+   "zakazka": 104,
+   "vystaveno": "2026-03-01",
+   "splatnost": "2026-03-15",
+   "uhrazeno": "2026-03-20",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 03/2026",
+     "mnozstvi": 1,
+     "cena": 11040900,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260017",
+   "klientId": 5,
+   "zakazka": 105,
+   "vystaveno": "2026-03-01",
+   "splatnost": "2026-03-15",
+   "uhrazeno": "2026-03-13",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 03/2026",
+     "mnozstvi": 1,
+     "cena": 1317200,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260018",
+   "klientId": 6,
+   "zakazka": 106,
+   "vystaveno": "2026-03-01",
+   "splatnost": "2026-03-15",
+   "uhrazeno": "2026-03-14",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 03/2026",
+     "mnozstvi": 1,
+     "cena": 5820000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260019",
+   "klientId": 1,
+   "zakazka": 101,
+   "vystaveno": "2026-04-01",
+   "splatnost": "2026-04-15",
+   "uhrazeno": "2026-04-09",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 04/2026",
+     "mnozstvi": 1,
+     "cena": 1644000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260020",
+   "klientId": 2,
+   "zakazka": 102,
+   "vystaveno": "2026-04-01",
+   "splatnost": "2026-04-15",
+   "uhrazeno": "2026-04-10",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 04/2026",
+     "mnozstvi": 1,
+     "cena": 1120000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260021",
+   "klientId": 3,
+   "zakazka": 103,
+   "vystaveno": "2026-04-01",
+   "splatnost": "2026-04-15",
+   "uhrazeno": "2026-04-11",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 04/2026",
+     "mnozstvi": 1,
+     "cena": 3450500,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260022",
+   "klientId": 4,
+   "zakazka": 104,
+   "vystaveno": "2026-04-01",
+   "splatnost": "2026-04-15",
+   "uhrazeno": "2026-04-20",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 04/2026",
+     "mnozstvi": 1,
+     "cena": 11040900,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260023",
+   "klientId": 5,
+   "zakazka": 105,
+   "vystaveno": "2026-04-01",
+   "splatnost": "2026-04-15",
+   "uhrazeno": "2026-04-13",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 04/2026",
+     "mnozstvi": 1,
+     "cena": 1317200,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260024",
+   "klientId": 6,
+   "zakazka": 106,
+   "vystaveno": "2026-04-01",
+   "splatnost": "2026-04-15",
+   "uhrazeno": "2026-04-14",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 04/2026",
+     "mnozstvi": 1,
+     "cena": 5820000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260025",
+   "klientId": 1,
+   "zakazka": 101,
+   "vystaveno": "2026-05-01",
+   "splatnost": "2026-05-15",
+   "uhrazeno": "2026-05-09",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 05/2026",
+     "mnozstvi": 1,
+     "cena": 1644000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260026",
+   "klientId": 2,
+   "zakazka": 102,
+   "vystaveno": "2026-05-01",
+   "splatnost": "2026-05-15",
+   "uhrazeno": "2026-05-10",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 05/2026",
+     "mnozstvi": 1,
+     "cena": 1120000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260027",
+   "klientId": 3,
+   "zakazka": 103,
+   "vystaveno": "2026-05-01",
+   "splatnost": "2026-05-15",
+   "uhrazeno": "2026-05-11",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 05/2026",
+     "mnozstvi": 1,
+     "cena": 3450500,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260028",
+   "klientId": 4,
+   "zakazka": 104,
+   "vystaveno": "2026-05-01",
+   "splatnost": "2026-05-15",
+   "uhrazeno": "2026-05-20",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 05/2026",
+     "mnozstvi": 1,
+     "cena": 11040900,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260029",
+   "klientId": 5,
+   "zakazka": 105,
+   "vystaveno": "2026-05-01",
+   "splatnost": "2026-05-15",
+   "uhrazeno": "2026-05-13",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 05/2026",
+     "mnozstvi": 1,
+     "cena": 1317200,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260030",
+   "klientId": 6,
+   "zakazka": 106,
+   "vystaveno": "2026-05-01",
+   "splatnost": "2026-05-15",
+   "uhrazeno": "2026-05-14",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 05/2026",
+     "mnozstvi": 1,
+     "cena": 5820000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260031",
+   "klientId": 1,
+   "zakazka": 101,
+   "vystaveno": "2026-06-01",
+   "splatnost": "2026-06-15",
+   "uhrazeno": "2026-06-09",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 06/2026",
+     "mnozstvi": 1,
+     "cena": 1644000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260032",
+   "klientId": 2,
+   "zakazka": 102,
+   "vystaveno": "2026-06-01",
+   "splatnost": "2026-06-15",
+   "uhrazeno": "2026-06-10",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 06/2026",
+     "mnozstvi": 1,
+     "cena": 1120000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260033",
+   "klientId": 3,
+   "zakazka": 103,
+   "vystaveno": "2026-06-01",
+   "splatnost": "2026-06-15",
+   "uhrazeno": "2026-06-11",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 06/2026",
+     "mnozstvi": 1,
+     "cena": 3450500,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260034",
+   "klientId": 4,
+   "zakazka": 104,
+   "vystaveno": "2026-06-01",
+   "splatnost": "2026-06-15",
+   "uhrazeno": "2026-06-20",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 06/2026",
+     "mnozstvi": 1,
+     "cena": 11040900,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260035",
+   "klientId": 5,
+   "zakazka": 105,
+   "vystaveno": "2026-06-01",
+   "splatnost": "2026-06-15",
+   "uhrazeno": "2026-06-13",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 06/2026",
+     "mnozstvi": 1,
+     "cena": 1317200,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260036",
+   "klientId": 6,
+   "zakazka": 106,
+   "vystaveno": "2026-06-01",
+   "splatnost": "2026-06-15",
+   "uhrazeno": "2026-06-14",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 06/2026",
+     "mnozstvi": 1,
+     "cena": 5820000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260037",
+   "klientId": 1,
+   "zakazka": 101,
+   "vystaveno": "2026-07-01",
+   "splatnost": "2026-07-15",
+   "uhrazeno": "2026-07-09",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 07/2026",
+     "mnozstvi": 1,
+     "cena": 1644000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260038",
+   "klientId": 2,
+   "zakazka": 102,
+   "vystaveno": "2026-07-01",
+   "splatnost": "2026-07-15",
+   "uhrazeno": "2026-07-10",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 07/2026",
+     "mnozstvi": 1,
+     "cena": 1120000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260039",
+   "klientId": 3,
+   "zakazka": 103,
+   "vystaveno": "2026-07-01",
+   "splatnost": "2026-07-15",
+   "uhrazeno": "2026-07-11",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 07/2026",
+     "mnozstvi": 1,
+     "cena": 3450500,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260040",
+   "klientId": 4,
+   "zakazka": 104,
+   "vystaveno": "2026-07-01",
+   "splatnost": "2026-07-15",
+   "uhrazeno": "2026-07-20",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 07/2026",
+     "mnozstvi": 1,
+     "cena": 11040900,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260041",
+   "klientId": 5,
+   "zakazka": 105,
+   "vystaveno": "2026-07-01",
+   "splatnost": "2026-07-15",
+   "uhrazeno": "2026-07-13",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 07/2026",
+     "mnozstvi": 1,
+     "cena": 1317200,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260042",
+   "klientId": 6,
+   "zakazka": 106,
+   "vystaveno": "2026-07-01",
+   "splatnost": "2026-07-15",
+   "uhrazeno": "2026-07-14",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 07/2026",
+     "mnozstvi": 1,
+     "cena": 5820000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260043",
+   "klientId": 1,
+   "zakazka": 101,
+   "vystaveno": "2026-08-01",
+   "splatnost": "2026-08-15",
+   "uhrazeno": "2026-08-09",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 08/2026",
+     "mnozstvi": 1,
+     "cena": 1644000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260044",
+   "klientId": 2,
+   "zakazka": 102,
+   "vystaveno": "2026-08-01",
+   "splatnost": "2026-08-15",
+   "uhrazeno": "2026-08-10",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 08/2026",
+     "mnozstvi": 1,
+     "cena": 1120000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260045",
+   "klientId": 3,
+   "zakazka": 103,
+   "vystaveno": "2026-08-01",
+   "splatnost": "2026-08-15",
+   "uhrazeno": "2026-08-11",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 08/2026",
+     "mnozstvi": 1,
+     "cena": 3450500,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260046",
+   "klientId": 4,
+   "zakazka": 104,
+   "vystaveno": "2026-08-01",
+   "splatnost": "2026-08-15",
+   "uhrazeno": "2026-08-20",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 08/2026",
+     "mnozstvi": 1,
+     "cena": 11040900,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260047",
+   "klientId": 5,
+   "zakazka": 105,
+   "vystaveno": "2026-08-01",
+   "splatnost": "2026-08-15",
+   "uhrazeno": "2026-08-13",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 08/2026",
+     "mnozstvi": 1,
+     "cena": 1317200,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260048",
+   "klientId": 6,
+   "zakazka": 106,
+   "vystaveno": "2026-08-01",
+   "splatnost": "2026-08-15",
+   "uhrazeno": "2026-08-14",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 08/2026",
+     "mnozstvi": 1,
+     "cena": 5820000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260049",
+   "klientId": 1,
+   "zakazka": 101,
+   "vystaveno": "2026-09-01",
+   "splatnost": "2026-09-15",
+   "uhrazeno": "2026-09-09",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 09/2026",
+     "mnozstvi": 1,
+     "cena": 1644000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260050",
+   "klientId": 2,
+   "zakazka": 102,
+   "vystaveno": "2026-09-01",
+   "splatnost": "2026-09-15",
+   "uhrazeno": "2026-09-10",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 09/2026",
+     "mnozstvi": 1,
+     "cena": 1120000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260051",
+   "klientId": 3,
+   "zakazka": 103,
+   "vystaveno": "2026-09-01",
+   "splatnost": "2026-09-15",
+   "uhrazeno": "2026-09-11",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 09/2026",
+     "mnozstvi": 1,
+     "cena": 3450500,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260052",
+   "klientId": 4,
+   "zakazka": 104,
+   "vystaveno": "2026-09-01",
+   "splatnost": "2026-09-15",
+   "uhrazeno": "2026-09-20",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 09/2026",
+     "mnozstvi": 1,
+     "cena": 11040900,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260053",
+   "klientId": 5,
+   "zakazka": 105,
+   "vystaveno": "2026-09-01",
+   "splatnost": "2026-09-15",
+   "uhrazeno": "2026-09-13",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 09/2026",
+     "mnozstvi": 1,
+     "cena": 1317200,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260054",
+   "klientId": 6,
+   "zakazka": 106,
+   "vystaveno": "2026-09-01",
+   "splatnost": "2026-09-15",
+   "uhrazeno": null,
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 09/2026",
+     "mnozstvi": 1,
+     "cena": 5820000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260055",
+   "klientId": 1,
+   "zakazka": 101,
+   "vystaveno": "2026-10-01",
+   "splatnost": "2026-10-15",
+   "uhrazeno": "2026-10-05",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 10/2026",
+     "mnozstvi": 1,
+     "cena": 1644000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260056",
+   "klientId": 2,
+   "zakazka": 102,
+   "vystaveno": "2026-10-01",
+   "splatnost": "2026-10-15",
+   "uhrazeno": null,
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 10/2026",
+     "mnozstvi": 1,
+     "cena": 1120000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260057",
+   "klientId": 3,
+   "zakazka": 103,
+   "vystaveno": "2026-10-01",
+   "splatnost": "2026-10-15",
+   "uhrazeno": "2026-10-05",
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 10/2026",
+     "mnozstvi": 1,
+     "cena": 3450500,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260058",
+   "klientId": 4,
+   "zakazka": 104,
+   "vystaveno": "2026-10-01",
+   "splatnost": "2026-10-15",
+   "uhrazeno": null,
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 10/2026",
+     "mnozstvi": 1,
+     "cena": 11040900,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260059",
+   "klientId": 5,
+   "zakazka": 105,
+   "vystaveno": "2026-10-01",
+   "splatnost": "2026-10-15",
+   "uhrazeno": null,
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 10/2026",
+     "mnozstvi": 1,
+     "cena": 1317200,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260060",
+   "klientId": 6,
+   "zakazka": 106,
+   "vystaveno": "2026-10-01",
+   "splatnost": "2026-10-15",
+   "uhrazeno": null,
+   "polozky": [
+    {
+     "popis": "Správa objektu – paušál 10/2026",
+     "mnozstvi": 1,
+     "cena": 5820000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "faktura",
+   "cislo": "FA20260061",
+   "klientId": 5,
+   "zakazka": 109,
+   "vystaveno": "2026-08-31",
+   "splatnost": "2026-09-14",
+   "uhrazeno": "2026-09-10",
+   "polozky": [
+    {
+     "popis": "Malování tříd a chodeb",
+     "mnozstvi": 1240,
+     "cena": 9500,
+     "dph": 21
+    },
+    {
+     "popis": "Broušení a lakování parket",
+     "mnozstvi": 310,
+     "cena": 42000,
+     "dph": 21
+    },
+    {
+     "popis": "Drobné opravy a úklid po řemeslnících",
+     "mnozstvi": 1,
+     "cena": 3850000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  },
+  {
+   "druh": "nabidka",
+   "cislo": "NAB2026014",
+   "klientId": 1,
+   "zakazka": 107,
+   "vystaveno": "2026-09-20",
+   "splatnost": "2026-10-20",
+   "uhrazeno": null,
+   "polozky": [
+    {
+     "popis": "Výměna stoupaček vody a kanalizace, sekce A",
+     "mnozstvi": 1,
+     "cena": 24300000,
+     "dph": 12
+    },
+    {
+     "popis": "Výměna stoupaček vody a kanalizace, sekce B",
+     "mnozstvi": 1,
+     "cena": 24300000,
+     "dph": 12
+    }
+   ],
+   "stav": "odeslana"
+  },
+  {
+   "druh": "nabidka",
+   "cislo": "NAB2026015",
+   "klientId": 4,
+   "zakazka": 108,
+   "vystaveno": "2026-10-02",
+   "splatnost": "2026-11-02",
+   "uhrazeno": null,
+   "polozky": [
+    {
+     "popis": "Čištění fasády (horolezecky)",
+     "mnozstvi": 4200,
+     "cena": 3500,
+     "dph": 21
+    },
+    {
+     "popis": "Mytí oken z vnější strany",
+     "mnozstvi": 1,
+     "cena": 4200000,
+     "dph": 21
+    }
+   ],
+   "stav": "odeslana"
+  },
+  {
+   "druh": "nabidka",
+   "cislo": "NAB2026016",
+   "klientId": 7,
+   "zakazka": 110,
+   "vystaveno": "2026-10-06",
+   "splatnost": "2026-11-06",
+   "uhrazeno": null,
+   "polozky": [
+    {
+     "popis": "Kompletní správa domu (36 bytů) – měsíčně",
+     "mnozstvi": 12,
+     "cena": 1290000,
+     "dph": 21
+    }
+   ],
+   "stav": "koncept"
+  },
+  {
+   "druh": "proforma",
+   "cislo": "PF2026003",
+   "klientId": 5,
+   "zakazka": 109,
+   "vystaveno": "2026-06-15",
+   "splatnost": "2026-06-30",
+   "uhrazeno": "2026-06-25",
+   "polozky": [
+    {
+     "popis": "Záloha na letní údržbu",
+     "mnozstvi": 1,
+     "cena": 10000000,
+     "dph": 21
+    }
+   ],
+   "stav": null
+  }
+ ],
+ "poptavky": [
+  {
+   "id": "P-2026-031",
+   "prijato": "2026-10-06 21:14",
+   "stav": "nova",
+   "segment": "svj",
+   "jmeno": "Alena Marková",
+   "role": "Předseda / člen výboru SVJ",
+   "email": "korunni88@email.cz",
+   "telefon": "",
+   "firma": "",
+   "adresa": "Korunní 88, Praha 2",
+   "velikost": "36 bytů",
+   "rozpocet": "do 15 tis. měsíčně",
+   "zprava": "Dobrý den, náš současný správce končí k 31. 12. Hledáme někoho, kdo převezme technickou i ekonomickou správu.",
+   "stranka": "/kontakt.html"
+  },
+  {
+   "id": "P-2026-030",
+   "prijato": "2026-10-02 09:31",
+   "stav": "nova",
+   "segment": "verejne",
+   "jmeno": "PhDr. Jan Kos",
+   "role": "Starosta / ředitel / zřizovatel",
+   "email": "reditel@knihovna-rakovnik.cz",
+   "telefon": "+420 777 000 008",
+   "firma": "Městská knihovna Rakovník",
+   "adresa": "Rakovník",
+   "velikost": "1 800 m²",
+   "rozpocet": "cca 12–15 tis. Kč",
+   "zprava": "Potřebujeme zajistit revize a pravidelnou údržbu budovy, nejlépe od nového roku.",
+   "stranka": "/verejne-budovy.html"
+  },
+  {
+   "id": "P-2026-029",
+   "prijato": "2026-09-24 13:02",
+   "stav": "prevedena",
+   "segment": "komercni",
+   "jmeno": "Lucie Benešová",
+   "role": "Majitel / investor",
+   "email": "lucie.benesova@karlinpoint.cz",
+   "telefon": "+420 777 000 004",
+   "firma": "Karlín Point Property s.r.o.",
+   "adresa": "Pernerova 0, Praha 8",
+   "velikost": "9 200 m²",
+   "rozpocet": "kolem 200 tis.",
+   "zprava": "Prosím o nabídku na čištění fasády a mytí oken.",
+   "stranka": "/komercni-objekty.html"
+  }
+ ],
+ "ukoly": [
+  {
+   "id": 1,
+   "text": "Poslat nabídku SVJ Korunní 88",
+   "kdo": "Eva Nováková",
+   "termin": "2026-10-09",
+   "hotovo": false,
+   "klient": 7
+  },
+  {
+   "id": 2,
+   "text": "Upomínka: faktura za září – Areál D3",
+   "kdo": "Petra Šindelářová",
+   "termin": "2026-10-07",
+   "hotovo": false,
+   "klient": 6
+  },
+  {
+   "id": 3,
+   "text": "Připravit podklady na shromáždění BD Jasmínová",
+   "kdo": "Eva Nováková",
+   "termin": "2026-10-20",
+   "hotovo": false,
+   "klient": 3
+  },
+  {
+   "id": 4,
+   "text": "Objednat inspekční prohlídku výtahu Lipová",
+   "kdo": "Martin Dušek",
+   "termin": "2026-10-05",
+   "hotovo": false,
+   "klient": 1
+  },
+  {
+   "id": 5,
+   "text": "Roční vyúčtování 2025 – odeslat vlastníkům",
+   "kdo": "Petra Šindelářová",
+   "termin": "2026-04-30",
+   "hotovo": true,
+   "klient": 1
+  }
+ ],
+ "tym": [
+  {
+   "id": 1,
+   "jmeno": "Michal Novotný",
+   "email": "michal@budovnik.cz",
+   "role": "spravce",
+   "aktivni": true
+  },
+  {
+   "id": 2,
+   "jmeno": "Eva Nováková",
+   "email": "eva@budovnik.cz",
+   "role": "dispecer",
+   "aktivni": true
+  },
+  {
+   "id": 3,
+   "jmeno": "Petra Šindelářová",
+   "email": "ucetni@budovnik.cz",
+   "role": "ucetni",
+   "aktivni": true
+  },
+  {
+   "id": 4,
+   "jmeno": "Martin Dušek",
+   "email": "martin@budovnik.cz",
+   "role": "technik",
+   "aktivni": true
+  }
+ ],
+ "nastaveni": {
+  "firma": "Budovník s.r.o.",
+  "ico": "00000019",
+  "dic": "CZ00000019",
+  "adresa": "Ulice 000/00, 000 00 Město",
+  "ucet": "2000145399/0800",
+  "platceDph": true,
+  "splatnostDni": 14,
+  "pravaZapnuta": true,
+  "rady": {
+   "faktura": "FA{rok}{poradi4}",
+   "proforma": "PF{rok}{poradi3}",
+   "nabidka": "NAB{rok}{poradi3}"
+  }
+ },
+ "vzory": [
+  {
+   "id": "sprava",
+   "nazev": "Smlouva o správě nemovitosti",
+   "text": "SMLOUVA O SPRÁVĚ NEMOVITOSTI č. {cislo_smlouvy}\n\nObjednatel: {klient_nazev}, IČO {klient_ico}, {klient_adresa}, zastoupený {klient_zastoupeni}\nSprávce: {spravce_nazev}, IČO {spravce_ico}, {spravce_adresa}\n\n1. Správce zajistí pro objekt {objekt_adresa} technickou, provozní a ekonomickou správu v rozsahu přílohy č. 1.\n2. Cena činí {cena_mesicne} Kč měsíčně bez DPH, splatnost {splatnost} dní.\n3. Smlouva se uzavírá od {zacatek} na dobu {doba}.\n4. Správce je oprávněn k plnění využít třetí osoby; za jejich plnění odpovídá, jako by plnil sám.\n\nV {misto} dne {datum}"
+  },
+  {
+   "id": "objednavka",
+   "nazev": "Objednávka jednorázové zakázky",
+   "text": "OBJEDNÁVKA č. {cislo_smlouvy}\n\nObjednatel {klient_nazev} (IČO {klient_ico}) objednává u {spravce_nazev}: {predmet}.\nCena dle nabídky {cislo_nabidky}: {cena_celkem} Kč bez DPH. Termín provedení: {termin}.\n\nV {misto} dne {datum}"
+  }
+ ],
+ "navstevnost": {
+  "zdroje": [
+   {
+    "id": "Vyhledávání (Google, Seznam)",
+    "podil": 46
+   },
+   {
+    "id": "Přímé návštěvy",
+    "podil": 24
+   },
+   {
+    "id": "Doporučení a odkazy",
+    "podil": 14
+   },
+   {
+    "id": "Sociální sítě",
+    "podil": 9
+   },
+   {
+    "id": "Firmy.cz a katalogy",
+    "podil": 7
+   }
+  ],
+  "zarizeni": [
+   {
+    "id": "Mobil",
+    "podil": 58
+   },
+   {
+    "id": "Počítač",
+    "podil": 36
+   },
+   {
+    "id": "Tablet",
+    "podil": 6
+   }
+  ],
+  "stranky": [
+   {
+    "nazev": "Úvod",
+    "cesta": "/",
+    "vaha": 100
+   },
+   {
+    "nazev": "Kalkulačka ceny",
+    "cesta": "/kalkulacka.html",
+    "vaha": 46
+   },
+   {
+    "nazev": "Bytové domy",
+    "cesta": "/bytove-domy.html",
+    "vaha": 38
+   },
+   {
+    "nazev": "Průvodce revizemi",
+    "cesta": "/revize.html",
+    "vaha": 31
+   },
+   {
+    "nazev": "Kontakt",
+    "cesta": "/kontakt.html",
+    "vaha": 27
+   },
+   {
+    "nazev": "Technická správa",
+    "cesta": "/technicka-sprava.html",
+    "vaha": 19
+   }
+  ]
+ }
 }

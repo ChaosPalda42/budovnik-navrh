@@ -140,12 +140,12 @@ export function stranka(ctx, { titulek, popis, aktivni, obsah, aplikace = false,
         <button class="tema" type="button" data-tema aria-label="Přepnout světlý a tmavý režim" title="Světlý / tmavý režim">
           <span class="slunce">${ikona("slunce", { velikost: 18 })}</span><span class="mesic">${ikona("mesic", { velikost: 18 })}</span>
         </button>
-        <button class="hamburger" type="button" aria-label="Menu" aria-controls="navigace" aria-expanded="false">${ikona("hamburger")}</button>
+        <button class="hamburger" type="button" aria-label="Menu" aria-controls="navigace" aria-expanded="false"><span class="hamburger__otevrit">${ikona("hamburger")}</span><span class="hamburger__zavrit">${ikona("krizek")}</span></button>
       </div>
     </div>
   </div>
 </header>
-<div class="ukazka" data-stavba><div class="ukazka__obal"><span>Návrh webu – údaje firmy, reference a čísla jsou zatím vzorové.</span><a href="${odkaz("ukazka")}">Co je v ukázce smyšlené</a></div></div>
+<div class="ukazka" data-stavba><div class="ukazka__obal"><span class="ukazka__dlouze">Návrh webu – údaje firmy, reference a čísla jsou zatím vzorové.</span><span class="ukazka__kratce">Návrh webu, údaje jsou vzorové.</span><a href="${odkaz("ukazka")}">Co je v ukázce smyšlené</a></div></div>
 <main id="obsah">
 ${obsah}
 </main>
