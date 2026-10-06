@@ -9,8 +9,10 @@ Co v ukázce je
   kalkulačka ceny, stránka pro dodavatele, o nás, kontakt.
 - Klientský portál (portal.html): přihlášení jako výbor SVJ, vlastník bytu nebo ředitelka školy.
 - Interní systém (dispecink.html): závady s lhůtami SLA, kalendář revizí, objekty,
-  registr dodavatelů s hlídáním dokladů, smlouvy s generátorem, fakturace, vyúčtování,
-  automatizační pravidla.
+  registr dodavatelů s hlídáním dokladů, smlouvy s generátorem, vyúčtování, automatizační
+  pravidla – a obchodní část v rozsahu CRM byPalda: poptávky z webu, klienti s deníkem
+  a dohledáním v ARES, zakázky, vzory smluv, doklady (nabídky, zálohy, faktury s QR
+  platbou), statistiky, úkoly, návštěvnost webu, tým s rolemi a nastavení.
 - Světlý i tmavý režim, úvodní animace „web se postaví“ (jednou za návštěvu).
 
 Co je smyšlené

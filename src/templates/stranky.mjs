@@ -531,7 +531,7 @@ export function oUkazce(ctx) {
         <li><strong>Pojištění a certifikace</strong><span>Částka pojištění a ISO certifikáty jsou vzor; doplní se podle skutečnosti.</span></li>
         <li><strong>Reference a čísla</strong><span>Všechny čtyři případové studie, loga klientů a čísla v nich jsou vymyšlené.</span></li>
         <li><strong>Ceny v kalkulačce</strong><span>Ceník je ilustrativní, skutečné sazby doplní Budovník.</span></li>
-        <li><strong>Demo portálu a interního systému</strong><span>Objekty, lidé, dodavatelé, závady a smlouvy jsou vymyšlené. Demo běží jen v prohlížeči a nic nikam neodesílá.</span></li>
+        <li><strong>Demo portálu a interního systému</strong><span>Objekty, klienti, lidé, dodavatelé, závady, doklady, smlouvy a poptávky jsou vymyšlené. Demo běží jen v prohlížeči a nic nikam neodesílá. Jediné, co jde ven, je dohledání IČO ve veřejném rejstříku ARES, když ho v systému sami spustíte.</span></li>
       </ul>
     </div>
     <aside class="bok"><div class="panel">

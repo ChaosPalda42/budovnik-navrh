@@ -46,6 +46,7 @@
   var PRIORITA = { havarie: "Havárie", urgentni: "Urgentní", bezna: "Běžná", planovana: "Plánovaná" };
   var OBOR_REVIZE = { elektro: "elektro", hromosvod: "elektro", "nouzove-osvetleni": "elektro", plyn: "plyn", spaliny: "plyn", kotelna: "topeni", vytah: "vytahy", po: "po", eps: "po", vzt: "vzt", chlazeni: "chlazeni", hriste: "stavebni" };
 
+  function tvar(n, a, b, c) { return n === 1 ? a : n >= 2 && n <= 4 ? b : c; }
   function toast(text) {
     var t = $(".toast") || doc.body.appendChild(Object.assign(doc.createElement("div"), { className: "toast" }));
     t.innerHTML = ik("fajfka") + "<span>" + esc(text) + "</span>";
@@ -160,10 +161,14 @@
       return nadpis + tlacitko(v);
     }).join("");
     var mobilni = povolene.map(tlacitko).join("");
+    var jako = DRUH === "dispecink" && CRM ? '<select class="vstup" data-demo-jako aria-label="Demo: přihlášen jako" style="min-height:36px;padding:6px 8px">' +
+      CRM.sada("tym").map(function (t) { return '<option value="' + t.id + '"' + (t.id === uzivatel.id ? " selected" : "") + ">" + esc(t.jmeno) + " (" + esc(BV.opravneni ? BV.opravneni.ROLE[t.role] : t.role) + ")</option>"; }).join("") + "</select>" : "";
+    if (jako) mobilni = '<span class="apl__mobilnav-jako">' + jako + "</span>" + mobilni;
     KOREN.innerHTML = '<div class="apl">' +
       '<aside class="apl__bok"><div class="apl__kdo"><span class="apl__avatar">' + esc(uzivatel.inicialy) + "</span><div><strong>" + esc(uzivatel.jmeno) + "</strong><small>" + esc(uzivatel.popisRole || uzivatel.role) + "</small></div></div>" +
       '<nav class="apl__nav">' + navigace + "</nav>" +
       '<div class="apl__spodek"><span>Demo · dnes je ' + datum(DNES) + ', ' + TED.slice(11) + "</span>" +
+      (jako ? '<label class="pole" style="gap:4px"><span style="font-size:.74rem">Demo: přihlášen jako</span>' + jako + "</label>" : "") +
       (DRUH === "portal" ? '<a href="dispecink.html">' + ik("mriz") + " Jak to vidí dispečink →</a>" : '<a href="portal.html">' + ik("zamek") + " Klientský portál →</a>") +
       '<button type="button" class="tl tl--obrys tl--maly" data-odhlasit>' + ik("odchod") + " " + (DRUH === "portal" ? "Odhlásit" : "Obnovit demo") + "</button></div></aside>" +
       '<div><nav class="apl__mobilnav">' + mobilni + '</nav><section class="apl__obsah">' + obsahHtml + "</section></div></div>";
@@ -186,7 +191,7 @@
     if (POVYKRESLENI[v]) POVYKRESLENI[v]();
     window.scrollTo({ top: 0 });
   }
-  window.addEventListener("hashchange", vykresli);
+  window.addEventListener("hashchange", function () { if (dialog.open) dialog.close(); vykresli(); });
   KOREN.addEventListener("click", function (e) {
     var b = e.target.closest("[data-view]");
     if (b) { location.hash = b.getAttribute("data-view"); return; }
@@ -313,10 +318,10 @@
       var blizi = pl.filter(function (p) { return p.stav === "blizi-se"; });
       var cekajici = uk.filter(function (u) { return S.hotove.indexOf(u.klic) < 0; });
       var dnes = CRM ? CRM.dnesResit() : null;
-      return hlava("Interní systém · " + datum(DNES), "Dobré ráno, " + esc(uzivatel.jmeno.split(" ")[0]) + ".", '<a class="tl tl--maly" href="#zavady">' + ik("vystraha") + " Závady</a>") +
+      return hlava("Interní systém · " + datum(DNES) + " · " + esc(uzivatel.jmeno), "Dnešní přehled", '<a class="tl tl--maly" href="#zavady">' + ik("vystraha") + " Závady</a>") +
         (dnes ? '<div class="apl-mrizka" style="margin-bottom:16px"><div class="s-12">' + panel("Co dnes řešit (" + dnes.pocet + ")", dnes.html) + "</div></div>" : "") +
-        '<div class="kpi">' + kpi(otevrene.length, "otevřených závad", "vystraha") + kpi(porusene.length, "závad s porušenou lhůtou", "hodiny", porusene.length ? "kpi__dlazdice--chyba" : "") +
-        kpi(blizi.length, "revizí do 30 dní", "kalendar", "kpi__dlazdice--pozor") + kpi(poTerminu.length + dk.length, "revizí a dokladů k nápravě", "stit", "kpi__dlazdice--chyba") + "</div>" +
+        '<div class="kpi">' + kpi(otevrene.length, tvar(otevrene.length, "otevřená závada", "otevřené závady", "otevřených závad"), "vystraha") + kpi(porusene.length, tvar(porusene.length, "závada s porušenou lhůtou", "závady s porušenou lhůtou", "závad s porušenou lhůtou"), "hodiny", porusene.length ? "kpi__dlazdice--chyba" : "") +
+        kpi(blizi.length, tvar(blizi.length, "revize do 30 dní", "revize do 30 dní", "revizí do 30 dní"), "kalendar", "kpi__dlazdice--pozor") + kpi(poTerminu.length + dk.length, "k nápravě: revize a doklady", "stit", "kpi__dlazdice--chyba") + "</div>" +
         '<div class="apl-mrizka">' +
         '<div class="s-7">' + panel("Úkoly od automatizace", cekajici.length ? '<div class="ukoly">' + cekajici.slice(0, 7).map(ukolHtml).join("") + "</div>" : '<div class="prazdne">Všechno hotovo.</div>', '<a class="tl tl--maly tl--obrys" href="#automatizace">Všechny (' + cekajici.length + ")</a>") + "</div>" +
         '<div class="s-5">' + panel("Hoří: lhůty závad", tabulka(["Závada", "Stav", "SLA"], otevrene.sort(function (a, b) { return HORSI.indexOf(b.slaHorsi) - HORSI.indexOf(a.slaHorsi); }).slice(0, 6).map(function (z) {
@@ -335,7 +340,7 @@
       var sloupce = [["Nové", ["nova"]], ["Přiřazené", ["prirazena"]], ["V řešení", ["v-reseni", "ceka-na-dil"]], ["Hotové", ["hotova"]], ["Uzavřené", ["prevzata", "vyfakturovana", "zrusena"]]];
       var p = BV.zavady.prehled(zavady(), TED);
       var porusene = zs.filter(function (z) { return z.slaHorsi === "poruseno"; }).length;
-      return hlava("Helpdesk a dispečink", "Závady", '<span class="stav stav--info">' + p.otevrene + ' otevřených</span><span class="stav stav--chyba">' + porusene + " s porušenou lhůtou</span>") +
+      return hlava("Helpdesk a dispečink", "Závady", '<span class="stav stav--info">' + p.otevrene + tvar(p.otevrene, ' otevřená', ' otevřené', ' otevřených') + '</span><span class="stav stav--chyba">' + porusene + " s porušenou lhůtou</span>") +
         '<p class="tlumene" style="margin-top:-8px">Lhůty se počítají podle priority: havárie reakce do 2 h, urgentní do 24 h, běžná do 2 pracovních dnů (víkendy a svátky se nepočítají). Klikněte na kartu pro detail a přiřazení dodavatele.</p>' +
         '<div class="kanban">' + sloupce.map(function (s) {
           var v = zs.filter(function (z) { return s[1].indexOf(z.stav) >= 0; });
@@ -506,6 +511,8 @@
     if (v) { toast("Žádost o nový doklad odeslána: " + v.getAttribute("data-vyzadat") + "."); }
   });
   KOREN.addEventListener("change", function (e) {
+    var j = e.target.closest("[data-demo-jako]");
+    if (j) { S.jako = Number(j.value); uloz(); vykresli(); toast("Přihlášen jako " + clenTymu().jmeno + "."); return; }
     var p = e.target.closest("[data-pravidlo]");
     if (p) { S.pravidla[p.getAttribute("data-pravidlo")] = p.checked; uloz(); vykresli(); }
   });
@@ -547,7 +554,7 @@
       var otevrene = mz.filter(function (z) { return ["nova", "prirazena", "v-reseni", "ceka-na-dil"].indexOf(z.stav) >= 0; });
       var spotreba = o.id === "O1" ? panel("Spotřeba tepla (MWh) za 12 měsíců", '<div class="sloupcovy" style="margin-bottom:22px">' + D.spotreba.map(function (s, i) { return '<div style="--i:' + i + ";height:" + Math.max(3, s.teplo / 34 * 100) + '%" title="' + s.mesic + ": " + String(s.teplo).replace(".", ",") + ' MWh"><span>' + s.mesic.slice(0, 2) + "</span></div>"; }).join("") + "</div>") : "";
       return hlava(esc(uzivatel.role), esc(o.nazev), '<a class="tl tl--maly" href="#nahlasit">' + ik("plus") + " Nahlásit závadu</a>") +
-        '<div class="kpi">' + kpi(su.vPoradku, "revizí v pořádku", "fajfka") + kpi(su.bliziSe, "revizí do 30 dní", "kalendar", su.bliziSe ? "kpi__dlazdice--pozor" : "") + kpi(otevrene.length, "závad v řešení", "vystraha") + kpi(o.jednotek ? o.jednotek : o.plocha.toLocaleString("cs-CZ"), o.jednotek ? "bytových jednotek" : "m² ploch", "dum") + "</div>" +
+        '<div class="kpi">' + kpi(su.vPoradku, tvar(su.vPoradku, "revize v pořádku", "revize v pořádku", "revizí v pořádku"), "fajfka") + kpi(su.bliziSe, tvar(su.bliziSe, "revize do 30 dní", "revize do 30 dní", "revizí do 30 dní"), "kalendar", su.bliziSe ? "kpi__dlazdice--pozor" : "") + kpi(otevrene.length, tvar(otevrene.length, "závada v řešení", "závady v řešení", "závad v řešení"), "vystraha") + kpi(o.jednotek ? o.jednotek : o.plocha.toLocaleString("cs-CZ"), o.jednotek ? "bytových jednotek" : "m² ploch", "dum") + "</div>" +
         '<div class="apl-mrizka"><div class="s-7">' + panel("Pasport domu", '<div class="pasport"><div><span>Adresa</span><strong>' + esc(o.adresa) + "</strong></div><div><span>Rok výstavby</span><strong>" + o.rok + "</strong></div><div><span>Podlaží</span><strong>" + o.podlazi + "</strong></div><div><span>Výtahy</span><strong>" + o.vytahu + "</strong></div><div><span>Technologie</span><strong>" + o.technologie.length + "</strong></div><div><span>Správce</span><strong>Eva Nováková</strong></div></div>") + '<div style="height:16px"></div>' +
         panel("Závady v domě", tabulka(["Závada", "Stav"], mz.slice(0, 5).map(function (z) { return '<tr data-tiket="' + esc(z.id) + '" style="cursor:pointer"><td>' + esc(z.nazev) + "<small>" + cas(z.nahlaseno) + " · " + esc(z.misto || "") + "</small></td><td>" + stav(ZAV_TRIDA[z.stav], ZAV_STAV[z.stav]) + "</td></tr>"; }), "Žádné závady."), '<a class="tl tl--maly tl--obrys" href="#zavady">Všechny</a>') + "</div>" +
         '<div class="s-5">' + panel("Nejbližší revize", tabulka(["Revize", "Termín"], pl.filter(function (p) { return p.termin; }).sort(function (a, b) { return a.termin < b.termin ? -1 : 1; }).slice(0, 5).map(function (p) { return "<tr><td>" + esc(p.nazev) + "</td><td>" + datum(p.termin) + " " + revStav(p) + "</td></tr>"; })), '<a class="tl tl--maly tl--obrys" href="#revize">Kalendář</a>') + (spotreba ? '<div style="height:16px"></div>' + spotreba : "") + "</div></div>";

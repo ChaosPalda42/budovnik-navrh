@@ -1030,3 +1030,21 @@ pre.dokument-nahled { margin: 0; }
 @media (max-width: 560px) { .kpi { gap: 8px; } .kpi__dlazdice { padding: 12px 14px; } .kpi__dlazdice .ik { display: none; } .kpi__dlazdice strong { font-size: 1.3rem; } }
 .ukazka__kratce { display: none; }
 @media (max-width: 560px) { .ukazka__dlouze { display: none; } .ukazka__kratce { display: inline; } }
+.doklad__soucty .tab { width: auto; min-width: 320px; }
+.doklad__soucty .tab td { white-space: nowrap; }
+@media (max-width: 600px) { .doklad__soucty .tab { min-width: 0; width: 100%; } .doklad__soucty { flex-direction: column; align-items: stretch; } }
+.apl__mobilnav-jako { flex: none; display: flex; }
+.apl__mobilnav-jako select { width: auto; max-width: 220px; border-radius: 99px; font-size: .84rem; }
+/* okna: obsah se nesmí roztáhnout přes šířku okna */
+.dialog__telo { grid-template-columns: minmax(0, 1fr); }
+.dialog__telo > *, .doklad > * { min-width: 0; }
+.doklad { grid-template-columns: minmax(0, 1fr); }
+.qr-platba small { overflow-wrap: anywhere; }
+@media (max-width: 600px) {
+  .dialog { width: calc(100vw - 16px); }
+  .dialog__hlava, .dialog__telo { padding-left: 16px; padding-right: 16px; }
+  .qr-platba { flex-direction: column; align-items: flex-start; width: 100%; }
+  .qr-platba svg { width: 150px; height: 150px; }
+  .doklad__soucty .tab td { white-space: normal; }
+}
+.doklad__soucty .tab td:first-child { white-space: nowrap; }

@@ -32,3 +32,18 @@ Viz STATE.md (generuje harness). Poslední shrnutí operátora: —
 - Šablony, CSS, řez budovou, web.js a demo.js (portál + dispečink) psal operátor.
 - Build `node build.mjs`, testy `uv run pytest -q`, demo data `uv run python -m tools.demo_data`,
   balíček `./tools/pack.sh`, náhled `.claude/launch.json` v ~/Weby → `budovnik` (port 4390).
+
+## 2026-10-07 (noc): rozsah systému jako CRM byPalda
+- Michael: „rozsah systému stejně jak z byPalda.cz“ + texty bez zmínek o subdodávkách
+  (subdodávky jen nenápadně ve smlouvě – bod o plnění třetími osobami, § 1935 OZ).
+- C-012 až C-025: věrné převody PHP knihoven CRM byPalda do JS; akceptační testy volají
+  stejné funkce v PHP (reference/bypalda) i JS a porovnávají výsledek (tests/phpref.py).
+  Očekávané hodnoty tedy nepíšu ručně – pravdu drží PHP. C-026 poptávky, C-027 role,
+  C-028 statistiky byznysu, C-029 návštěvnost (převzato z Fofrmontu).
+- **29/29 zelených**, 109 testů. Pozor: background `factory run` má výchozí limit 30 min,
+  druhý běh byl zabit uprostřed – pouštět s `timeout` 7200000 (pokračuje od zelených).
+- QR kódy ověřeny nezávisle (OpenCV dekóduje přesně, vč. diakritiky a značky uprostřed).
+- Kontrola před nasazením: tools nejsou v repu, skripty ve scratchpadu (Playwright +
+  nainstalovaný Chrome, `channel="chrome"`): 245 kombinací stránka×šířka×téma bez nálezu,
+  okna (dialogy) zvlášť – moje dřívější kontrola je vynechávala a přetékání dokladu na mobilu
+  našly až snímky.

@@ -9,6 +9,7 @@
     var $ = function (s, k) { return (k || document).querySelector(s); };
     var $$ = function (s, k) { return Array.prototype.slice.call((k || document).querySelectorAll(s)); };
     var S = function () { return c.S(); };
+    function tvar(n, a, b, c) { return n === 1 ? a : n >= 2 && n <= 4 ? b : c; }
 
     /* ---------- peníze a data (logika z byPalda) ---------- */
     function kc(hal) { return BV.penize ? BV.penize.kc(Math.round(hal)).replace(/ Kč$/, " Kč") : (hal / 100) + " Kč"; }
@@ -73,6 +74,7 @@
       if (!dlg.open) dlg.showModal();
     }
     dlg.addEventListener("click", function (e) { if (e.target === dlg || e.target.closest("[data-zavrit]")) dlg.close(); });
+    window.addEventListener("hashchange", function () { if (dlg.open) dlg.close(); });
 
     /* =================== POPTÁVKY =================== */
     function poptavky() {
@@ -102,7 +104,7 @@
         '<pre class="dokument-nahled" style="max-height:260px">' + esc(zadani) + "</pre>" +
         '<div class="mala-pole"><div class="pole"><label>IČO pro dohledání v ARES</label><input type="text" data-ares-ico inputmode="numeric" placeholder="např. 02911973"></div><div class="pole" style="align-self:end"><button type="button" class="tl tl--maly tl--obrys" data-ares-nacti>' + ik("lupa") + ' Načíst z ARES</button></div></div>' +
         '<div data-ares-vysledek></div>' +
-        '<div data-shoda>' + (k ? '<div class="hlaseni">' + ik("odkaz") + "<div><strong>Shoda s existujícím klientem: " + esc(k.nazev) + "</strong><br><small>Podle e-mailu nebo názvu. Zakázka se založí pod něj.</small></div></div>" : "") + "</div>" +
+        '<div data-shoda>' + (k ? '<div class="hlaseni">' + ik("odkaz") + "<div><strong>Shoda s existujícím klientem: " + esc(k.nazev) + "</strong><br><small>Podle IČO, e-mailu nebo názvu. Zakázka se založí pod něj.</small></div></div>" : "") + "</div>" +
         (p.stav === "prevedena" ? stav("ok", "Poptávka už je převedená") : '<div class="akce-radek"><button type="button" class="tl" data-prevest="' + esc(p.id) + '">' + ik("plus") + " " + (k ? "Založit zakázku u klienta" : "Založit klienta a zakázku") + "</button></div>"));
       dlg.dataset.ares = "";
     }
@@ -129,7 +131,7 @@
           if (p && BV.poptavky) {
             var sh = BV.poptavky.poptavkaShodaKlienta(p, sada("klienti"), a);
             var k = sh !== null ? klient(sh) : null;
-            $("[data-shoda]", dlg).innerHTML = k ? '<div class="hlaseni">' + ik("odkaz") + "<div><strong>Shoda s existujícím klientem: " + esc(k.nazev) + "</strong><br><small>Podle IČO z ARES.</small></div></div>" : "";
+            $("[data-shoda]", dlg).innerHTML = k ? '<div class="hlaseni">' + ik("odkaz") + "<div><strong>Shoda s existujícím klientem: " + esc(k.nazev) + "</strong><br><small>Podle IČO, e-mailu nebo názvu. Zakázka se založí pod něj.</small></div></div>" : "";
           }
         });
         return;
@@ -146,14 +148,16 @@
           kid = noveId("klienti");
           ulozDo("klienti", Object.assign(kd, { id: kid, kontakt: p.jmeno, pausal: false, vytvoreno: DNES, objekty: [], ulice: kd.ulice || p.adresa || "" }));
         }
-        var zid = noveId("zakazky");
-        ulozDo("zakazky", { id: zid, klient: kid, nazev: P.poptavkaNazevZakazky(p), druh: P.poptavkaKategorie(p.segment) === "jine" ? "jednorazova" : "pausal", stav: "poptavka", hodnota: 0, od: "", zadani: P.poptavkaZadani(p) });
+        // Klient už má rozpracovanou poptávkovou zakázku → doplní se do ní, nevzniká duplicita.
+        var stavajici = sada("zakazky").filter(function (z) { return String(z.klient) === String(kid) && z.stav === "poptavka"; })[0];
+        if (stavajici) ulozDo("zakazky", Object.assign({}, stavajici, { zadani: P.poptavkaZadani(p) }));
+        else ulozDo("zakazky", { id: noveId("zakazky"), klient: kid, nazev: P.poptavkaNazevZakazky(p), druh: P.poptavkaKategorie(p.segment) === "jine" ? "jednorazova" : "pausal", stav: "poptavka", hodnota: 0, od: "", zadani: P.poptavkaZadani(p) });
         ulozDo("denik", { id: "d" + Date.now(), klient: kid, datum: DNES + " " + c.TED.slice(11), kdo: c.uzivatel().jmeno, typ: "poptavka", text: "Založeno z poptávky " + p.id + "." }, "id");
         var upr = Object.assign({}, p, { stav: "prevedena" });
         if ((S().poptavkyWeb || []).some(function (x) { return x.id === p.id; })) { S().poptavkyWeb = S().poptavkyWeb.map(function (x) { return x.id === p.id ? upr : x; }); c.uloz(); }
         else ulozDo("poptavky", upr);
         dlg.close();
-        toast("Hotovo: klient a zakázka „" + P.poptavkaNazevZakazky(p) + "“ založeny.");
+        toast(stavajici ? "Poptávka přiřazena ke klientovi a jeho rozpracované zakázce." : shoda !== null ? "Zakázka založena u stávajícího klienta." : "Hotovo: klient a zakázka „" + P.poptavkaNazevZakazky(p) + "“ založeny.");
         location.hash = "klienti";
         c.vykresli();
         setTimeout(function () { otevriKlienta(kid); }, 50);
@@ -181,12 +185,12 @@
       var denik = sada("denik").filter(function (x) { return String(x.klient) === String(k.id); }).sort(function (a, b) { return a.datum < b.datum ? 1 : -1; });
       var zak = sada("zakazky").filter(function (z) { return String(z.klient) === String(k.id); });
       var dk = doklady().filter(function (d) { return String(d.klientId) === String(k.id); }).sort(function (a, b) { return a.vystaveno < b.vystaveno ? 1 : -1; });
-      var IKONY = { telefon: "telefon", email: "obalka", schuzka: "parta", poznamka: "dokument", poptavka: "plus" };
+      var TYPY_DENIKU = { telefon: "telefon", email: "e-mail", schuzka: "schůzka", poznamka: "poznámka", poptavka: "poptávka" };
       otevri(esc(k.nazev), (k.stav === "aktivni" ? "Klient" : "Potenciální klient") + (k.ico ? " · IČO " + esc(k.ico) : ""),
         '<div class="pasport"><div><span>Kontakt</span><strong>' + esc(k.kontakt || "—") + "</strong></div><div><span>E-mail</span><strong>" + esc(k.email || "—") + "</strong></div><div><span>Telefon</span><strong>" + esc(k.telefon || "—") + "</strong></div><div><span>Adresa</span><strong>" + esc([k.ulice, [k.psc, k.mesto].filter(Boolean).join(" ")].filter(Boolean).join(", ") || "—") + "</strong></div>" +
         (k.dic ? "<div><span>DIČ</span><strong>" + esc(k.dic) + (BV.ico && !BV.ico.platneDic(k.dic) ? " ⚠" : "") + "</strong></div>" : "") + "</div>" +
         '<div><span class="stitek">Deník</span>' + (c.muze("klienti.psat") ? '<form class="akce-radek" data-denik="' + k.id + '" style="margin:8px 0" onsubmit="return false"><select name="typ" class="vstup" style="width:auto;min-height:40px"><option value="poznamka">Poznámka</option><option value="telefon">Telefon</option><option value="email">E-mail</option><option value="schuzka">Schůzka</option></select><input name="text" class="vstup" style="flex:1;min-width:200px;min-height:40px" placeholder="Co se stalo…"><button class="tl tl--maly" type="submit">Zapsat</button></form>' : "") +
-        '<ul class="historie" style="margin-top:8px">' + (denik.length ? denik.map(function (d) { return "<li><div>" + esc(d.text) + "<br><small>" + esc(d.datum) + " · " + esc(d.kdo) + " · " + esc(d.typ) + "</small></div></li>"; }).join("") : '<li><div class="tlumene">Zatím nic.</div></li>') + "</ul></div>" +
+        '<ul class="historie" style="margin-top:8px">' + (denik.length ? denik.map(function (d) { return "<li><div>" + esc(d.text) + "<br><small>" + esc(d.datum) + " · " + esc(d.kdo) + " · " + esc(TYPY_DENIKU[d.typ] || d.typ) + "</small></div></li>"; }).join("") : '<li><div class="tlumene">Zatím nic.</div></li>') + "</ul></div>" +
         '<div><span class="stitek">Zakázky</span>' + tabulka(["Zakázka", "Stav", ">Hodnota"], zak.map(function (z) { return "<tr><td>" + esc(z.nazev) + "</td><td>" + stavZakazky(z) + '</td><td class="cislo">' + hodnotaZakazky(z) + "</td></tr>"; }), "Žádné zakázky.") + "</div>" +
         '<div><span class="stitek">Doklady</span>' + tabulka(["Číslo", "Vystaveno", ">Celkem", "Stav"], dk.slice(0, 8).map(function (d) { return '<tr data-doklad="' + esc(d.cislo) + '" style="cursor:pointer"><td>' + esc(d.cislo) + "<small>" + DRUHY[d.druh] + "</small></td><td>" + datum(d.vystaveno) + '</td><td class="cislo">' + kc(d.celkem) + "</td><td>" + stavDokladu(d) + "</td></tr>"; }), "Žádné doklady.") + "</div>");
     }
@@ -247,6 +251,9 @@
 
     /* =================== VZORY SMLUV =================== */
     var vzorStav = { vzor: null, klient: null, udaje: {} };
+    var POPISKY_ZNACEK = { cislo_smlouvy: "Číslo smlouvy", klient_zastoupeni: "Za klienta podepisuje", zacatek: "Začátek", doba: "Doba trvání", misto: "Místo podpisu",
+      predmet: "Předmět objednávky", cislo_nabidky: "Číslo nabídky", cena_celkem: "Cena celkem (Kč)", termin: "Termín provedení", objekt_adresa: "Adresa objektu",
+      cena_mesicne: "Cena měsíčně (Kč)", klient_ico: "IČO klienta", klient_adresa: "Adresa klienta", klient_nazev: "Název klienta", splatnost: "Splatnost (dní)" };
     function viewVzory() {
       var V = sada("vzory");
       if (!vzorStav.vzor) vzorStav.vzor = V[0].id;
@@ -281,7 +288,7 @@
       var znacky = BV.vzory.znackyVeVzoru(vzor.text);
       var rucni = znacky.filter(function (z) { return chybi.indexOf(z) >= 0 || vzorStav.udaje[z] !== undefined; });
       var fokus = document.activeElement && document.activeElement.name;
-      pole.innerHTML = rucni.map(function (z) { return '<div class="pole"><label>' + esc(z.replace(/_/g, " ")) + '</label><input type="text" name="' + z + '" value="' + esc(vzorStav.udaje[z] || "") + '" placeholder="doplňte"></div>'; }).join("");
+      pole.innerHTML = rucni.map(function (z) { return '<div class="pole"><label>' + esc(POPISKY_ZNACEK[z] || z.replace(/_/g, " ")) + '</label><input type="text" name="' + z + '" value="' + esc(vzorStav.udaje[z] || "") + '" placeholder="doplňte"></div>'; }).join("");
       if (fokus && pole[fokus]) { pole[fokus].focus(); var v = pole[fokus].value; pole[fokus].setSelectionRange(v.length, v.length); }
       var text = BV.vzory.vyplnVzor(vzor.text, udaje);
       $("[data-vzory-nahled]").innerHTML = esc(text).replace(/……/g, "<mark>……</mark>");
@@ -300,9 +307,9 @@
         return '<button type="button" class="tl tl--maly ' + (druhDokladu === x[0] ? "tl--tmavy" : "tl--obrys") + '" data-druh-dokladu="' + x[0] + '">' + x[1] + "</button>";
       }).join("") + "</div>";
       return hlava("Peníze", "Doklady", c.muze("doklady.psat") ? '<button type="button" class="tl tl--maly" data-novy-doklad>' + ik("plus") + " Nový doklad</button>" : "") +
-        '<div class="kpi">' + kpi(kcK(kUhr.reduce(function (s, d) { return s + d.celkem; }, 0)), kUhr.length + " faktur k úhradě", "dokument") +
-        kpi(kcK(poSpl.reduce(function (s, d) { return s + d.celkem; }, 0)), poSpl.length + " po splatnosti", "vystraha", poSpl.length ? "kpi__dlazdice--chyba" : "") +
-        kpi(prace.length, "prací k přefakturaci", "kalkulacka", prace.length ? "kpi__dlazdice--pozor" : "") + kpi(esc(nastaveni().platceDph ? "plátce" : "neplátce"), "DPH", "stit") + "</div>" +
+        '<div class="kpi">' + kpi(kcK(kUhr.reduce(function (s, d) { return s + d.celkem; }, 0)), kUhr.length + tvar(kUhr.length, " faktura k úhradě", " faktury k úhradě", " faktur k úhradě"), "dokument") +
+        kpi(kcK(poSpl.reduce(function (s, d) { return s + d.celkem; }, 0)), poSpl.length + tvar(poSpl.length, " faktura po splatnosti", " faktury po splatnosti", " faktur po splatnosti"), "vystraha", poSpl.length ? "kpi__dlazdice--chyba" : "") +
+        kpi(prace.length, tvar(prace.length, "práce k přefakturaci", "práce k přefakturaci", "prací k přefakturaci"), "kalkulacka", prace.length ? "kpi__dlazdice--pozor" : "") + kpi(esc(nastaveni().platceDph ? "plátce" : "neplátce"), "DPH", "stit") + "</div>" +
         (prace.length ? panel("Práce k vyfakturování (závady převzaté klientem)", tabulka(["Zakázka", "Objekt", ">K úhradě", ""], prace.map(function (z) {
           var f = BV.fakturace.prefakturuj(z.naklady, D.marze);
           return "<tr><td><strong>" + esc(z.nazev) + "</strong><small>" + esc(z.id) + "</small></td><td>" + esc((c.objekt(z.objekt) || {}).kratce || "") + '</td><td class="cislo">' + kc(f.kUhrade * 100) + '</td><td><button type="button" class="tl tl--maly" data-fakturovat-praci="' + esc(z.id) + '">Vystavit fakturu</button></td></tr>';
@@ -411,9 +418,9 @@
       var max = Math.max.apply(null, st.mesice.map(function (m) { return Math.max(m.vystaveno, m.uhrazeno); }).concat([1]));
       var chips = '<div class="akce-radek">' + Object.keys(OBDOBI).map(function (k) { return '<button type="button" class="tl tl--maly ' + (obdobi === k ? "tl--tmavy" : "tl--obrys") + '" data-obdobi-obchod="' + k + '">' + OBDOBI[k][0] + "</button>"; }).join("") + "</div>";
       return hlava("Obchod · " + datum(o[1]) + " – " + datum(o[2]), "Statistiky", chips) +
-        '<div class="kpi">' + kpi(kcK(st.vystaveno.castka), st.vystaveno.pocet + " faktur vystaveno", "dokument") + kpi(kcK(st.uhrazeno.castka), st.uhrazeno.pocet + " faktur uhrazeno", "fajfka") +
-        kpi(kcK(st.poSplatnosti.castka), st.poSplatnosti.pocet + " po splatnosti (celkem)", "vystraha", st.poSplatnosti.pocet ? "kpi__dlazdice--chyba" : "") + kpi(kcK(st.nabidky.castka), st.nabidky.pocet + " nabídek odesláno", "obalka") + "</div>" +
-        '<div class="kpi">' + kpi(st.stali, "stálých klientů (paušál)", "parta") + kpi(st.novi, "nových klientů v období", "plus") + kpi(kcK(st.kUhrade.castka), st.kUhrade.pocet + " faktur k úhradě", "kalkulacka") + kpi(st.mesice.length, "měsíců v období", "kalendar") + "</div>" +
+        '<div class="kpi">' + kpi(kcK(st.vystaveno.castka), st.vystaveno.pocet + tvar(st.vystaveno.pocet, " faktura vystavena", " faktury vystaveny", " faktur vystaveno"), "dokument") + kpi(kcK(st.uhrazeno.castka), st.uhrazeno.pocet + tvar(st.uhrazeno.pocet, " faktura uhrazena", " faktury uhrazeny", " faktur uhrazeno"), "fajfka") +
+        kpi(kcK(st.poSplatnosti.castka), st.poSplatnosti.pocet + tvar(st.poSplatnosti.pocet, " faktura po splatnosti", " faktury po splatnosti", " faktur po splatnosti") + " (celkem)", "vystraha", st.poSplatnosti.pocet ? "kpi__dlazdice--chyba" : "") + kpi(kcK(st.nabidky.castka), st.nabidky.pocet + tvar(st.nabidky.pocet, " nabídka odeslána", " nabídky odeslány", " nabídek odesláno"), "obalka") + "</div>" +
+        '<div class="kpi">' + kpi(st.stali, tvar(st.stali, "stálý klient (paušál)", "stálí klienti (paušál)", "stálých klientů (paušál)"), "parta") + kpi(st.novi, tvar(st.novi, "nový klient v období", "noví klienti v období", "nových klientů v období"), "plus") + kpi(kcK(st.kUhrade.castka), st.kUhrade.pocet + tvar(st.kUhrade.pocet, " faktura k úhradě", " faktury k úhradě", " faktur k úhradě"), "kalkulacka") + kpi(st.mesice.length, tvar(st.mesice.length, "měsíc v období", "měsíce v období", "měsíců v období"), "kalendar") + "</div>" +
         '<div class="apl-mrizka"><div class="s-8">' + panel("Vystaveno a uhrazeno po měsících", '<div class="dvojgraf">' + st.mesice.map(function (m, i) {
           return '<div class="dvojgraf__mesic" title="' + m.mesic + ": vystaveno " + kc(m.vystaveno) + ", uhrazeno " + kc(m.uhrazeno) + '"><div class="dvojgraf__sloupce"><i style="--i:' + i + ";height:" + (m.vystaveno / max * 100) + '%"></i><b style="--i:' + i + ";height:" + (m.uhrazeno / max * 100) + '%"></b></div><span>' + Number(m.mesic.slice(5)) + "/" + m.mesic.slice(2, 4) + "</span></div>";
         }).join("") + '</div><div class="akce-radek" style="margin-top:10px"><span class="legenda-bod" style="--b:var(--akcent)">vystaveno</span><span class="legenda-bod" style="--b:var(--inkoust)">uhrazeno</span></div>') + "</div>" +
