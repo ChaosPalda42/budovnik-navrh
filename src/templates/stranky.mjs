@@ -61,7 +61,7 @@ ${duvera(f)}
 
 <section class="sekce">
   <div class="obal">
-    ${hlavickaSekce("D", "Jak to funguje", "Vy máte jeden kontakt. My koordinujeme desítky řemesel.", "Hledání řemeslníků, kontrola oprávnění, smlouvy, termíny a faktury jsou naše starost. Vy vidíte výsledek.")}
+    ${hlavickaSekce("D", "Jak to funguje", "Vy máte jeden kontakt. My zajistíme všechno ostatní.", "Technika, úklid, revize, termíny, smlouvy i faktury jsou naše starost. Vy vidíte výsledek.")}
     <div class="model odhal">
       <div class="model__uzel">
         <span class="stitek">Vy</span>
@@ -81,7 +81,7 @@ ${duvera(f)}
       </div>
       <div class="model__spoj model__spoj--zpet" aria-hidden="true"></div>
       <div class="model__uzel">
-        <span class="stitek">Ověření dodavatelé</span>
+        <span class="stitek">Technici a specialisté</span>
         <div class="model__dodavatele" style="margin-top:10px">
           <span>${ikona("blesk", { velikost: 16 })} Elektro a revize<b>✓ oprávnění</b></span>
           <span>${ikona("kapka", { velikost: 16 })} Instalatéři<b>✓ pojištění</b></span>
@@ -98,7 +98,7 @@ ${duvera(f)}
     <div class="odhal">
       ${osa("E", "Systém Budovník")}
       <h2 style="margin-top:14px">Dům, který vidíte online.</h2>
-      <p class="lead">Klientský portál pro výbor, vlastníky i nájemníky. Pod ním interní systém, který hlídá revize, doklady dodavatelů, smlouvy a termíny, a sám připomene, co je potřeba udělat.</p>
+      <p class="lead">Klientský portál pro výbor, vlastníky i nájemníky. Pod ním interní systém, který hlídá revize, oprávnění techniků, smlouvy a termíny, a sám připomene, co je potřeba udělat.</p>
       <ul class="vyhody">
         <li>${ikona("fajfka")}<span>Nahlášení závady z mobilu i s fotkou, se sledováním stavu</span></li>
         <li>${ikona("fajfka")}<span>Kalendář revizí a kontrol každého domu, s protokoly</span></li>
@@ -290,16 +290,16 @@ export function system(ctx) {
   const moduly = [
     ["dum", "Pasport objektu", "Technologie, dokumentace, výkresy a historie všech zásahů ke každé budově. Zůstává klientovi, i kdyby od nás odešel."],
     ["kalendar", "Kalendář revizí", "Ke každému zařízení lhůty podle předpisů. 30 dní před termínem systém sám osloví revizního technika a klientovi pošle protokol."],
-    ["vystraha", "Hlášení závad a dispečink", "Závada z portálu, telefonu nebo e-mailu dostane prioritu a lhůtu (SLA). Systém doporučí dodavatele a hlídá, aby se stihla."],
-    ["parta", "Registr dodavatelů", "Oprávnění, pojištění a osvědčení každého řemeslníka s datem platnosti. Kdo nemá platné doklady, zakázku nedostane."],
-    ["smlouva", "Smlouvy ze šablon", "Smlouvy s klienty i dodavateli se skládají ze šablon a dat. Systém hlídá výročí, prodloužení a výpovědní lhůty."],
+    ["vystraha", "Hlášení závad a dispečink", "Závada z portálu, telefonu nebo e-mailu dostane prioritu a lhůtu (SLA). Systém vybere technika s oprávněním a hlídá, aby se stihla."],
+    ["parta", "Kvalifikace techniků", "Oprávnění, pojištění a osvědčení každého technika s datem platnosti. Kdo nemá platné doklady, k zakázce se nedostane."],
+    ["smlouva", "Smlouvy ze šablon", "Smlouvy se skládají ze šablon a dat. Systém hlídá výročí, prodloužení a výpovědní lhůty."],
     ["kalkulacka", "Fakturace a vyúčtování", "Přefakturace prací s marží a rekapitulací DPH, roční vyúčtování služeb rozúčtované na haléř."],
-    ["automat", "Automatizace", "Pravidla typu „když se blíží revize, poptej dodavatele“. Úkoly se tvoří samy, lidé jen schvalují."],
+    ["automat", "Automatizace", "Pravidla typu „když se blíží revize, objednej technika“. Úkoly se tvoří samy, lidé jen schvalují."],
     ["zamek", "Klientský portál", "Výbor, vlastníci i nájemníci vidí, co se v domě děje. Bez telefonování a bez e-mailového ping-pongu."],
   ];
   return `${uvodStranky({
     drobky: [[null, "Systém Budovník"]], stitek: "Technologie pod správou", nadpis: "Systém, který hlídá dům, i&nbsp;když nikdo nevolá.",
-    lead: "Obor správy budov dnes běží na telefonech, e-mailech a tabulkách. Náš systém propojuje klienty, dispečink a dodavatele: termíny, doklady, smlouvy i peníze hlídá stroj, lidé rozhodují.",
+    lead: "Obor správy budov dnes běží na telefonech, e-mailech a tabulkách. Náš systém propojuje klienty, dispečink a techniky v terénu: termíny, doklady, smlouvy i peníze hlídá stroj, lidé rozhodují.",
     akce: `<a class="tl" href="${odkaz("portal")}">${ikona("zamek")} Klientský portál (demo)</a><a class="tl tl--obrys" href="${odkaz("dispecink")}">${ikona("mriz")} Interní systém (demo)</a>`,
   })}
   <section class="sekce"><div class="obal">
@@ -308,11 +308,11 @@ export function system(ctx) {
   </div></section>
   <section class="sekce sekce--tmava"><div class="obal portal-ukazka">
     <div class="odhal">${osa("B", "Automatizace")}<h2 style="margin-top:14px">Úkoly, které se zadají samy.</h2>
-      <p class="lead">Pravidla běží nad daty všech domů. Když se blíží revize, systém připraví poptávku. Když dodavateli vyprší pojištění, vyřadí ho z výběru a požádá o nový doklad. Když hrozí porušení lhůty u závady, eskaluje ji dispečerovi.</p>
+      <p class="lead">Pravidla běží nad daty všech domů. Když se blíží revize, systém ji naplánuje a objedná. Když technikovi končí platnost oprávnění, upozorní na obnovu dřív, než by vypršelo. Když hrozí porušení lhůty u závady, eskaluje ji dispečerovi.</p>
       <div class="hero__akce"><a class="tl" href="${odkaz("dispecink")}#automatizace">Ukázka pravidel ${ikona("sipka", { trida: "ik--posun" })}</a></div></div>
     <div class="panel odhal" style="--d:1">
-      <div class="pravidlo"><div><strong>Revize do 30 dní → poptat dodavatele</strong><br><code>kdyz revize.dnu ≤ 30 · akce poptávka</code></div><span class="stav stav--ok">zapnuto</span></div>
-      <div class="pravidlo"><div><strong>Doklad dodavatele vyprší → vyžádat nový</strong><br><code>kdyz doklad.stav ∈ {vyprší, neplatný}</code></div><span class="stav stav--ok">zapnuto</span></div>
+      <div class="pravidlo"><div><strong>Revize do 30 dní → naplánovat technika</strong><br><code>kdyz revize.dnu ≤ 30 · akce poptávka</code></div><span class="stav stav--ok">zapnuto</span></div>
+      <div class="pravidlo"><div><strong>Oprávnění technika vyprší → zajistit obnovu</strong><br><code>kdyz doklad.stav ∈ {vyprší, neplatný}</code></div><span class="stav stav--ok">zapnuto</span></div>
       <div class="pravidlo"><div><strong>Lhůta závady ohrožena → eskalovat</strong><br><code>kdyz sla.reakce = ohroženo</code></div><span class="stav stav--ok">zapnuto</span></div>
       <div class="pravidlo" style="border:0"><div><strong>Výpovědní lhůta smlouvy do 60 dní</strong><br><code>kdyz smlouva.dnuDoVypovedi ≤ 60</code></div><span class="stav stav--ok">zapnuto</span></div>
     </div>
@@ -320,7 +320,7 @@ export function system(ctx) {
   <section class="sekce"><div class="obal">
     ${hlavickaSekce("C", "Data", "Vaše data zůstávají vaše.", "Pasport, dokumenty a historie domu patří klientovi. Při ukončení spolupráce je předáme v otevřených formátech.")}
     <div class="mrizka mrizka--3">
-      ${[["stit", "Bezpečnost", "Šifrovaný přenos, přístupová práva podle rolí, záznam o tom, kdo co změnil."], ["stahnout", "Export kdykoli", "Dokumenty v PDF, data v CSV a XLSX. Žádné uzamčení u dodavatele."], ["ozubeni", "Napojení", "Účetnictví, odečty měřidel, datové schránky a bankovní výpisy."]]
+      ${[["stit", "Bezpečnost", "Šifrovaný přenos, přístupová práva podle rolí, záznam o tom, kdo co změnil."], ["stahnout", "Export kdykoli", "Dokumenty v PDF, data v CSV a XLSX. Žádné uzamčení u nás."], ["ozubeni", "Napojení", "Účetnictví, odečty měřidel, datové schránky a bankovní výpisy."]]
         .map(([ik, n, t], i) => `<div class="karta odhal" style="--d:${i}"><span class="karta__ikona">${ikona(ik, { velikost: 22 })}</span><h3>${esc(n)}</h3><p>${esc(t)}</p></div>`).join("")}
     </div>
   </div></section>
@@ -340,7 +340,7 @@ export function revize(ctx) {
       <p class="lead odhal">Při škodní události se pojišťovna jako první ptá na revizní zprávy. Statutární orgán SVJ nebo majitel odpovídá za bezpečný provoz domu. A hasiči nebo inspekce při kontrole chtějí doklady hned.</p>
     </div>
     <aside class="bok">
-      ${[["Hlídáme termíny", "Každé zařízení má v systému svou lhůtu. Upozornění jde 30 dní předem."], ["Objednáme technika", "Z registru ověřených revizních techniků s platným oprávněním."], ["Archivujeme protokoly", "Revizní zprávy jsou v pasportu domu a v portálu, kdykoli k předložení."], ["Řešíme závady z revizí", "Co revize najde, to opravíme. Až pak je dům opravdu v libele."]]
+      ${[["Hlídáme termíny", "Každé zařízení má v systému svou lhůtu. Upozornění jde 30 dní předem."], ["Objednáme technika", "Revizního technika s platným oprávněním pro dané zařízení."], ["Archivujeme protokoly", "Revizní zprávy jsou v pasportu domu a v portálu, kdykoli k předložení."], ["Řešíme závady z revizí", "Co revize najde, to opravíme. Až pak je dům opravdu v libele."]]
         .map(([n, t], i) => `<div class="bolest odhal" style="--d:${i}"><strong style="font-style:normal">${esc(n)}</strong><span>${esc(t)}</span></div>`).join("")}
     </aside>
   </div></section>
@@ -391,40 +391,39 @@ export function kalkulacka(ctx) {
 export function dodavatele(ctx) {
   const obory = ["Elektro a revize", "Instalatéři a topenáři", "Plyn", "Výtahy", "Požární ochrana", "Úklid", "Zeleň a zimní údržba", "Stavební a řemeslné práce", "Malíři a natěrači", "Zámečníci", "Ostraha", "Revizní technici"];
   return `${uvodStranky({
-    drobky: [[null, "Pro dodavatele"]], stitek: "Partnerská síť", nadpis: "Řemeslníci a firmy: pracujte s námi.",
-    lead: "Hledáme spolehlivé řemeslníky a specializované firmy pro pravidelnou údržbu, revize i havarijní výjezdy. Práce na stálých objektech, jasné zadání, férová a včasná platba.",
-    akce: `<a class="tl" href="#registrace">Chci se zaregistrovat ${ikona("sipka", { trida: "ik--posun" })}</a>`,
+    drobky: [[null, "Kariéra"]], stitek: "Kariéra a spolupráce", nadpis: "Hledáme techniky a řemeslníky.",
+    lead: "Rozšiřujeme tým pro pravidelnou údržbu, revize i havarijní výjezdy. Stálá práce na stálých objektech, jasné zadání a férové peníze. V zaměstnaneckém poměru i na IČO.",
+    akce: `<a class="tl" href="#registrace">Chci se ozvat ${ikona("sipka", { trida: "ik--posun" })}</a>`,
   })}
   <section class="sekce"><div class="obal">
-    ${hlavickaSekce("A", "Proč s námi", "Co od nás dostanete")}
-    <div class="mrizka mrizka--4">${[["kalendar", "Plánovaná práce", "Pravidelné zakázky na stálých objektech, ne jednorázové výjezdy."], ["dokument", "Jasné zadání", "Popis, fotky, přístup do objektu a kontakt na místě v aplikaci."], ["kalkulacka", "Platba do 14 dnů", "Po převzetí práce. Bez honění faktur."], ["graf", "Hodnocení, které se vyplatí", "Spolehliví partneři dostávají zakázky přednostně."]]
+    ${hlavickaSekce("A", "Proč u nás", "Co nabízíme")}
+    <div class="mrizka mrizka--4">${[["kalendar", "Plánovaná práce", "Pravidelné zakázky na stálých objektech, ne jednorázové výjezdy."], ["dokument", "Jasné zadání", "Popis, fotky, přístup do objektu a kontakt na místě v aplikaci."], ["kalkulacka", "Peníze včas", "Mzda nebo faktura vždy v termínu. Bez honění."], ["graf", "Růst", "Školení, nová oprávnění a odpovědnější práce pro ty, kdo chtějí."]]
       .map(([ik, n, t], i) => `<div class="karta odhal" style="--d:${i}"><span class="karta__ikona">${ikona(ik, { velikost: 22 })}</span><h3 style="font-size:1.1rem">${esc(n)}</h3><p>${esc(t)}</p></div>`).join("")}</div>
   </div></section>
   <section class="sekce sekce--plocha"><div class="obal dve-kolony">
     <div>
-      ${hlavickaSekce("B", "Podmínky", "Co od vás potřebujeme")}
+      ${hlavickaSekce("B", "Koho hledáme", "Co byste měli mít")}
       <ul class="seznam-sluzeb odhal">
-        <li><strong>Živnostenské oprávnění</strong><span>Výpis ze živnostenského nebo obchodního rejstříku.</span></li>
-        <li><strong>Pojištění odpovědnosti</strong><span>Platná pojistka s dostatečným limitem plnění.</span></li>
+        <li><strong>Praxi v oboru</strong><span>Vyučení nebo zkušenost v profesi, kterou chcete dělat.</span></li>
         <li><strong>Odborná oprávnění</strong><span>Podle oboru: elektro (vyhl. 50/1978 Sb. a navazující předpisy), plyn, výtahy, požární ochrana, revizní technik.</span></li>
-        <li><strong>Reakční doba</strong><span>U havárií příjezd do 2 hodin v regionu, kde chcete pracovat.</span></li>
+        <li><strong>Řidičský průkaz sk. B</strong><span>Jezdíme po objektech v regionu, auto zajistíme.</span></li>
       </ul>
-      <p class="tlumene odhal" style="margin-top:16px">Platnost dokladů hlídá systém. Měsíc před koncem platnosti vás sám upozorní, abyste nepřišli o zakázky.</p>
+      <p class="tlumene odhal" style="margin-top:16px">Platnost oprávnění a školení hlídá systém a obnovu zajistíme s předstihem.</p>
     </div>
     <form class="panel formular" id="registrace" data-formular="dodavatel" novalidate>
-      <h3 style="margin:0">Registrace partnera</h3>
+      <h3 style="margin:0">Ozvěte se nám</h3>
       <div class="dvojice">
         <div class="pole"><label for="d-firma">Firma / jméno</label><input type="text" id="d-firma" name="firma" autocomplete="organization"></div>
-        <div class="pole"><label for="d-ico">IČO</label><input type="text" id="d-ico" name="ico" inputmode="numeric"></div>
+        <div class="pole"><label for="d-ico">IČO (pokud pracujete na živnost)</label><input type="text" id="d-ico" name="ico" inputmode="numeric"></div>
       </div>
       <div class="dvojice">
         <div class="pole"><label for="d-email">E-mail</label><input type="email" id="d-email" name="email" autocomplete="email"></div>
         <div class="pole"><label for="d-tel">Telefon</label><input type="tel" id="d-tel" name="telefon" autocomplete="tel"></div>
       </div>
-      <div class="pole"><span class="pole__nazev">Obory</span><div class="volby">${obory.map((o) => `<label class="volba"><input type="checkbox" name="obory" value="${esc(o)}"><span>${esc(o)}</span></label>`).join("")}</div></div>
+      <div class="pole"><span class="pole__nazev">Profese</span><div class="volby">${obory.map((o) => `<label class="volba"><input type="checkbox" name="obory" value="${esc(o)}"><span>${esc(o)}</span></label>`).join("")}</div></div>
       <div class="pole"><label for="d-region">Region působnosti</label><input type="text" id="d-region" name="region" placeholder="např. Praha, Středočeský kraj"></div>
-      <label class="souhlas"><input type="checkbox" name="souhlas"> Souhlasím se zpracováním údajů pro účely spolupráce.</label>
-      <button class="tl" type="submit">Odeslat registraci</button>
+      <label class="souhlas"><input type="checkbox" name="souhlas"> Souhlasím se zpracováním údajů pro účely výběrového řízení.</label>
+      <button class="tl" type="submit">Odeslat</button>
       <div data-formular-vysledek></div>
     </form>
   </div></section>`;
@@ -435,11 +434,11 @@ export function oNas(ctx) {
   const f = ctx.firma;
   return `${uvodStranky({
     drobky: [[null, "O nás"]], stitek: "Budovník", nadpis: "Správce, který stojí na straně domu.",
-    lead: "Budovník vznikl z jednoduchého pozorování: domy nepotřebují dalšího řemeslníka, ale někoho, kdo řemesla zkoordinuje, ohlídá a zaručí výsledek. Technika, peníze i papíry pod jednou střechou a s jasnou odpovědností.",
+    lead: "Budovník vznikl z jednoduchého pozorování: správa domu se dnes drobí mezi desítky firem a nikdo neručí za celek. My přebíráme techniku, provoz, peníze i papíry pod jednou střechou a s jasnou odpovědností.",
   })}
   <section class="sekce"><div class="obal">
     ${hlavickaSekce("A", "Na čem stavíme", "Tři pravidla, která držíme")}
-    <div class="mrizka mrizka--3">${[["vodovaha", "V libele", "Revize, doklady a smlouvy v pořádku. Ne „nějak to dopadne“, ale ověřené a zdokumentované."], ["oko", "Průhledně", "Klient vidí stav domu, nabídky, faktury i to, kdo a kdy co udělal."], ["klic", "Odpovědně", "Za dodavatele ručíme my. Když něco nefunguje, řešíte to s jedním člověkem."]]
+    <div class="mrizka mrizka--3">${[["vodovaha", "V libele", "Revize, doklady a smlouvy v pořádku. Ne „nějak to dopadne“, ale ověřené a zdokumentované."], ["oko", "Průhledně", "Klient vidí stav domu, nabídky, faktury i to, kdo a kdy co udělal."], ["klic", "Odpovědně", "Za výsledek ručíme my. Když něco nefunguje, řešíte to s jedním člověkem."]]
       .map(([ik, n, t], i) => `<div class="karta odhal" style="--d:${i}"><span class="karta__ikona">${ikona(ik, { velikost: 22 })}</span><h3>${esc(n)}</h3><p>${esc(t)}</p></div>`).join("")}</div>
   </div></section>
   <section class="sekce sekce--plocha"><div class="obal dve-kolony">
@@ -450,7 +449,7 @@ export function oNas(ctx) {
         <div><dt>Certifikace</dt><dd>${esc(f.certifikaty.join(", "))}<span class="vzor">vzor</span></dd></div>
         <div><dt>Havarijní reakce</dt><dd>technik na místě do 2 hodin</dd></div>
         <div><dt>Dispečink</dt><dd>nonstop, 365 dní v roce</dd></div>
-        <div><dt>Ověření dodavatelů</dt><dd>oprávnění a pojištění hlídané systémem</dd></div>
+        <div><dt>Kvalifikace techniků</dt><dd>oprávnění a osvědčení hlídané systémem</dd></div>
       </dl>
     </div>
     <aside class="bok">

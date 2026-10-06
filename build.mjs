@@ -89,17 +89,26 @@ async function main() {
   await uloz("system.html", { titulek: "Systém Budovník", aktivni: "system", obsah: S.system(ctx) });
   await uloz("revize.html", { titulek: "Průvodce revizemi", aktivni: "revize", obsah: S.revize(ctx), popis: "Jaké revize a kontroly potřebuje bytový dům nebo budova a jak často." });
   await uloz("kalkulacka.html", { titulek: "Kalkulačka ceny správy", aktivni: "kalkulacka", obsah: S.kalkulacka(ctx) });
-  await uloz("pro-dodavatele.html", { titulek: "Pro dodavatele", aktivni: "dodavatele", obsah: S.dodavatele(ctx) });
+  await uloz("kariera.html", { titulek: "Kariéra a spolupráce", aktivni: "dodavatele", obsah: S.dodavatele(ctx) });
   await uloz("o-nas.html", { titulek: "O nás", aktivni: "onas", obsah: S.oNas(ctx) });
   await uloz("kontakt.html", { titulek: "Kontakt a poptávka", aktivni: "kontakt", obsah: S.kontakt(ctx) });
   await uloz("o-ukazce.html", { titulek: "O ukázce", aktivni: "ukazka", obsah: S.oUkazce(ctx) });
   await uloz("ochrana-udaju.html", { titulek: "Ochrana osobních údajů", aktivni: "soukromi", obsah: S.soukromi(ctx) });
   await uloz("404.html", { titulek: "Stránka nenalezena", aktivni: "404", obsah: S.chyba404(ctx) });
 
-  const demoData = `<script type="application/json" id="demo-data">${JSON.stringify(demo).replace(/</g, "\\u003c")}</script>`;
-  const demoSkript = `${demoData}\n<script src="${ctx.asset("demo.js")}" defer></script>`;
-  await uloz("portal.html", { titulek: "Klientský portál (demo)", aktivni: "portal", aplikace: true, obsah: aplikace("portal"), skripty: demoSkript });
-  await uloz("dispecink.html", { titulek: "Interní systém (demo)", aktivni: "dispecink", aplikace: true, obsah: aplikace("dispecink"), skripty: demoSkript });
+  const demoSkript = (data) => `<script type="application/json" id="demo-data">${JSON.stringify(data).replace(/</g, "\\u003c")}</script>\n<script src="${ctx.asset("demo.js")}" defer></script>`;
+  // Portál vidí klient: jména a údaje dodavatelů se do jeho stránky vůbec nedostanou.
+  const jmenaDodavatelu = new Set(demo.dodavatele.map((d) => d.nazev));
+  const anonym = "technik Budovníku";
+  const demoPortal = {
+    ...demo,
+    dodavatele: demo.dodavatele.map((d) => ({ id: d.id, nazev: anonym, obory: d.obory, kraje: [], aktivni: d.aktivni, odezvaHodin: 0, vytizeni: 0, hodnoceni: [], dokumenty: [] })),
+    smlouvy: demo.smlouvy.filter((s) => s.strana === "klient"),
+    zavady: demo.zavady.map((z) => ({ ...z, historie: (z.historie || []).map((h) => (jmenaDodavatelu.has(h.kdo) ? { ...h, kdo: anonym } : h)) })),
+    pravidla: [], uzivatele: { portal: demo.uzivatele.portal, dispecink: [] },
+  };
+  await uloz("portal.html", { titulek: "Klientský portál (demo)", aktivni: "portal", aplikace: true, obsah: aplikace("portal"), skripty: demoSkript(demoPortal) });
+  await uloz("dispecink.html", { titulek: "Interní systém (demo)", aktivni: "dispecink", aplikace: true, obsah: aplikace("dispecink"), skripty: demoSkript(demo) });
 
   console.log(`hotovo: ${pocet} stránek v out/`);
 }

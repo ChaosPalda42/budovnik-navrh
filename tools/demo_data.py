@@ -189,6 +189,9 @@ Celková měsíční cena činí {{cena.celkem}} Kč bez DPH, splatnost {{cena.s
 3. Doba trvání
 Smlouva se uzavírá od {{smlouva.zacatek}} na dobu {{smlouva.doba}}. Výpovědní lhůta je {{smlouva.lhuta}} měsíce a počíná prvním dnem měsíce následujícího po doručení výpovědi.
 
+4. Plnění prostřednictvím třetích osob
+Správce je oprávněn k plnění této smlouvy využít třetí osoby. Za jejich plnění odpovídá Objednateli, jako by plnil sám.
+
 V {{misto}} dne {{datum}}"""
 
 PRAVIDLA = [

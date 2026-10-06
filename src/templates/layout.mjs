@@ -12,7 +12,7 @@ export const STRANKY = {
   system: "system.html",
   revize: "revize.html",
   kalkulacka: "kalkulacka.html",
-  dodavatele: "pro-dodavatele.html",
+  dodavatele: "kariera.html",
   onas: "o-nas.html",
   kontakt: "kontakt.html",
   portal: "portal.html",
@@ -50,11 +50,10 @@ function navigace(ctx, aktivni) {
     panelOdkaz("system", "automat", "Systém Budovník", "Portál, dispečink a automatizace"),
     panelOdkaz("revize", "kalendar", "Průvodce revizemi", "Jaké revize váš dům potřebuje"),
     panelOdkaz("kalkulacka", "kalkulacka", "Kalkulačka ceny", "Orientační cena správy za minutu"),
-    panelOdkaz("dodavatele", "parta", "Pro dodavatele", "Staňte se naším partnerem"),
   ].join("");
   const jeSluzba = aktivni === "sluzby" || SLUZBY.some((s) => s.id === aktivni);
   const jeObjekt = aktivni === "prokoho" || OBJEKTY.some((o) => o.id === aktivni);
-  const jeNastroj = ["system", "revize", "kalkulacka", "dodavatele"].includes(aktivni);
+  const jeNastroj = ["system", "revize", "kalkulacka"].includes(aktivni);
   return `<nav class="navigace" id="navigace" data-stavba aria-label="Hlavní navigace">
     ${rozbal("Služby", sluzby, jeSluzba)}
     ${rozbal("Pro koho", objekty, jeObjekt)}
@@ -77,7 +76,7 @@ function patka(ctx) {
         <a class="patka__havarie" href="tel:${esc(f.havarijniOdkaz)}">${ikona("sirena")} Havárie 24/7: ${esc(f.havarijni)}</a>
       </div>
       ${sloupec("Služby", [["technicka", "Technická správa"], ["provozni", "Provozní správa"], ["ekonomicka", "Ekonomická správa"], ["energetika", "Energetický management"], ["revize", "Průvodce revizemi"]])}
-      ${sloupec("Budovník", [["prokoho", "Pro koho pracujeme"], ["reference", "Reference"], ["system", "Systém Budovník"], ["kalkulacka", "Kalkulačka ceny"], ["dodavatele", "Pro dodavatele"], ["onas", "O nás"]])}
+      ${sloupec("Budovník", [["prokoho", "Pro koho pracujeme"], ["reference", "Reference"], ["system", "Systém Budovník"], ["kalkulacka", "Kalkulačka ceny"], ["onas", "O nás"], ["dodavatele", "Kariéra"]])}
       <div>
         <h3>Kontakt</h3>
         <ul>
@@ -125,7 +124,7 @@ export function stranka(ctx, { titulek, popis, aktivni, obsah, aplikace = false,
       <span class="havarijni__text"><span>Havárie? Nonstop dispečink</span>
         <a class="havarijni__tel" href="tel:${esc(f.havarijniOdkaz)}">${ikona("telefon", { velikost: 15 })}${esc(f.havarijni)}</a></span>
       <span class="havarijni__dalsi">
-        <a href="${odkaz("dodavatele")}">Pro dodavatele</a>
+        <a href="${odkaz("dodavatele")}">Kariéra</a>
         <a href="${odkaz("dispecink")}">Interní systém</a>
         <a href="mailto:${esc(f.email)}">${esc(f.email)}</a>
       </span>

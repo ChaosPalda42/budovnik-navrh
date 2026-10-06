@@ -100,7 +100,7 @@ export function duvera(firma) {
     ["hodiny", "Technik u havárie do 2 hodin", "SLA"],
     ["sirena", "Dispečink 24/7, 365 dní v roce", ""],
     ["kalendar", "Revize hlídané systémem, ne sešitem", ""],
-    ["parta", "Ověření řemeslníci s oprávněním a pojištěním", ""],
+    ["parta", "Technici s oprávněním a pojištěním", ""],
     ["smlouva", "Jedna smlouva, jedna faktura", ""],
   ];
   const kus = polozky.map(([ik, t, s]) => `<span class="duvera__polozka">${ikona(ik)}${esc(t)}${s ? `<small>${esc(s)}</small>` : ""}</span>`).join("");

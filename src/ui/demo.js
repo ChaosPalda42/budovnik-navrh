@@ -184,7 +184,7 @@
     return '<button type="button" class="tiket' + (z.novaVDemu ? " je-novy" : "") + '" data-tiket="' + esc(z.id) + '">' +
       '<div class="tiket__radek"><span class="priorita priorita--' + z.priorita + '">' + PRIORITA[z.priorita] + "</span><small>" + esc(z.id) + "</small></div>" +
       "<strong>" + esc(z.nazev) + "</strong>" +
-      '<div class="tiket__radek"><small>' + ik("dum") + " " + esc(o ? o.kratce : "") + "</small>" + (z.dodavatel ? "<small>" + esc((dodavatel(z.dodavatel) || {}).nazev || "") + "</small>" : "") + "</div>" +
+      '<div class="tiket__radek"><small>' + ik("dum") + " " + esc(o ? o.kratce : "") + "</small>" + (z.dodavatel ? "<small>" + esc(DRUH === "portal" ? "technik Budovníku" : (dodavatel(z.dodavatel) || {}).nazev || "") + "</small>" : "") + "</div>" +
       (hodiny ? '<div class="tiket__radek">' + hodiny + "</div>" : "") + "</button>";
   }
 
@@ -199,6 +199,11 @@
     var a = e.target.closest("[data-prechod]");
     if (a) akceZavady(dialog.dataset.id, a.getAttribute("data-prechod"));
   });
+  // Klient v portálu nevidí, kdo zakázku fyzicky dělá – jen „technik Budovníku“.
+  function kdoText(kdo) {
+    if (DRUH === "portal" && D.dodavatele.some(function (d) { return d.nazev === kdo; })) return "technik Budovníku";
+    return kdo;
+  }
   var POPIS_PRECHODU = { prirazena: "Přiřadit", "v-reseni": "Technik na místě", "ceka-na-dil": "Čeká na díl", hotova: "Hotovo", prevzata: "Klient převzal", vyfakturovana: "Vyfakturovat", nova: "Vrátit mezi nové", zrusena: "Zrušit" };
   function akceZavady(id, akce, dodId) {
     var z = zavady().filter(function (x) { return x.id === id; })[0];
@@ -245,10 +250,10 @@
       '<div class="pasport"><div><span>Objekt</span><strong>' + esc(o.kratce) + "</strong></div><div><span>Místo</span><strong>" + esc(z.misto || "—") + "</strong></div><div><span>Nahlásil</span><strong>" + esc(z.nahlasil) + "</strong></div><div><span>Stav</span><strong>" + stav(ZAV_TRIDA[z.stav], ZAV_STAV[z.stav]) + "</strong></div></div>" +
       (z.popis ? "<p style=\"margin:0\">" + esc(z.popis) + "</p>" : "") +
       '<div class="pasport"><div><span>Reakce do</span><strong>' + cas(t.reakce) + "</strong>" + stav(SLA_STAV[z.sla.reakce][0], SLA_STAV[z.sla.reakce][1]) + "</div><div><span>Vyřešení do</span><strong>" + cas(t.vyreseni) + "</strong>" + stav(SLA_STAV[z.sla.vyreseni][0], SLA_STAV[z.sla.vyreseni][1]) + "</div>" +
-      (z.dodavatel ? "<div><span>Dodavatel</span><strong>" + esc(dodavatel(z.dodavatel).nazev) + "</strong></div>" : "") + "</div>" +
+      (z.dodavatel ? (DRUH === "portal" ? "<div><span>Řeší</span><strong>technik Budovníku</strong></div>" : "<div><span>Dodavatel</span><strong>" + esc(dodavatel(z.dodavatel).nazev) + "</strong></div>") : "") + "</div>" +
       akce + naklady +
       '<div><span class="stitek">Historie</span><ul class="historie" style="margin-top:10px"><li><div>Nahlášeno<br><small>' + cas(z.nahlaseno) + " · " + esc(z.nahlasil) + "</small></div></li>" +
-      (z.historie || []).map(function (h) { return "<li><div>" + esc(ZAV_STAV[h.na]) + "<br><small>" + cas(h.cas) + " · " + esc(h.kdo) + "</small></div></li>"; }).join("") + "</ul></div>" +
+      (z.historie || []).map(function (h) { return "<li><div>" + esc(ZAV_STAV[h.na]) + "<br><small>" + cas(h.cas) + " · " + esc(kdoText(h.kdo)) + "</small></div></li>"; }).join("") + "</ul></div>" +
       "</div>";
     if (!dialog.open) dialog.showModal();
   }
@@ -343,7 +348,7 @@
         var dokl = d.dokumenty.map(function (x) { var s = BV.dodavatele.stavDokumentu(x, DNES); return '<span title="' + esc((D.dokumenty[x.typ] || x.typ) + " · " + (x.platnostDo ? "do " + datum(x.platnostDo) : "bez omezení")) + '" class="stav stav--' + { platny: "ok", "bez-omezeni": "ok", vyprsi: "pozor", neplatny: "chyba" }[s] + '">' + esc((D.dokumenty[x.typ] || x.typ).split(" ")[0]) + "</span>"; }).join(" ");
         return "<tr><td><strong>" + esc(d.nazev) + "</strong><small>" + esc(d.kontakt) + " · " + d.kraje.join(", ") + "</small></td><td>" + d.obory.map(function (o) { return esc(D.obory[o] || o); }).join(", ") + "</td><td>" + dokl + "</td><td class=\"cislo\">" + (prum ? "★ " + String(prum).replace(".", ",") : "—") + '</td><td class="cislo">' + d.odezvaHodin + " h</td><td class=\"cislo\">" + Math.round(d.vytizeni * 100) + " %</td><td>" + stavHtml + "</td></tr>";
       });
-      return hlava("Registr subdodavatelů", "Dodavatelé (" + D.dodavatele.length + ")", '<a class="tl tl--maly tl--obrys" href="pro-dodavatele.html">Registrační formulář</a>') +
+      return hlava("Registr subdodavatelů", "Dodavatelé (" + D.dodavatele.length + ")", '<a class="tl tl--maly tl--obrys" href="kariera.html">Registrační formulář</a>') +
         (dk.length ? panel("Hlídání platnosti dokladů", '<div class="ukoly">' + dk.map(function (x) { return '<div class="ukol ukol--' + (x.stav === "neplatny" ? "eskalace" : "upozorneni") + '"><span class="ukol__ikona">' + ik("stit") + "</span><div>" + esc(x.nazev) + ": " + esc(x.typText) + "<small>platnost " + datum(x.platnostDo) + " · " + x.stavText + '</small></div><button type="button" class="tl tl--maly tl--obrys" data-vyzadat="' + esc(x.nazev) + '">Vyžádat nový</button></div>'; }).join("") + "</div>", "", "") + '<div style="height:16px"></div>' : "") +
         panel("Všichni dodavatelé", tabulka(["Dodavatel", "Obory", "Doklady", ">Hodnocení", ">Odezva", ">Vytížení", "Stav"], radky)) +
         '<p class="tlumene" style="font-size:.85rem;margin-top:12px">Dodavatel s propadlým povinným dokladem nedostane zakázku: systém ho při doporučení k závadě vynechá. Skóre doporučení = kvalita 40 % + rychlost 30 % + volná kapacita 20 % + region 10 %.</p>';
@@ -527,7 +532,7 @@
         '<div class="pole"><label for="n-popis">Popis (nepovinné)</label><textarea id="n-popis" name="popis"></textarea></div>' +
         '<div class="pole"><label for="n-foto">Fotka (nepovinné)</label><input type="file" id="n-foto" name="foto" accept="image/*" capture="environment"><small>V ukázce se fotka nikam nenahrává.</small></div>' +
         '<button class="tl" type="submit">' + ik("sipka") + " Odeslat hlášení</button></form></div>" +
-        '<div class="s-5">' + panel("Co se stane potom", '<ol class="casova-osa" style="margin-top:6px"><li><div><h3>Dispečink převezme hlášení</h3><p>Hned uvidí prioritu a lhůtu.</p></div></li><li><div><h3>Systém doporučí řemeslníka</h3><p>Jen ověřeného, s platným oprávněním a pojištěním.</p></div></li><li><div><h3>Sledujete stav</h3><p>Kdo přijede, kdy, a co udělal. I s fotkou.</p></div></li><li><div><h3>Potvrdíte převzetí</h3><p>Až pak jde práce do fakturace.</p></div></li></ol>') + "</div></div>";
+        '<div class="s-5">' + panel("Co se stane potom", '<ol class="casova-osa" style="margin-top:6px"><li><div><h3>Dispečink převezme hlášení</h3><p>Hned uvidí prioritu a lhůtu.</p></div></li><li><div><h3>Přidělíme technika</h3><p>S oprávněním pro danou profesi a znalostí vašeho domu.</p></div></li><li><div><h3>Sledujete stav</h3><p>Kdo přijede, kdy, a co udělal. I s fotkou.</p></div></li><li><div><h3>Potvrdíte převzetí</h3><p>Až pak jde práce do fakturace.</p></div></li></ol>') + "</div></div>";
     },
     revize: function () {
       var o = mojeObjekty()[0];

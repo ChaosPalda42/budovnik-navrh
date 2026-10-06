@@ -13,7 +13,7 @@ export const SLUZBY = [
       ["Pravidelná údržba a servis technologií", "Výtahy, vzduchotechnika, kotelny, čerpadla, rozvody. Plán servisu podle výrobce a stavu zařízení."],
       ["Zákonné revize a kontroly", "Elektro, plyn, hromosvody, spalinové cesty, požární systémy, výtahy. Termíny hlídáme za vás, protokoly ukládáme do pasportu domu."],
       ["Havarijní služba 24/7", "Nonstop dispečink, výjezd technika k havárii do 2 hodin. Uzavřít vodu, zajistit elektřinu, zabránit škodám."],
-      ["Stavební a řemeslné práce", "Instalatéři, elektrikáři, malíři, zedníci, zámečníci, pokrývači. Ověření řemeslníci s pojištěním a oprávněním."],
+      ["Stavební a řemeslné práce", "Instalatéři, elektrikáři, malíři, zedníci, zámečníci, pokrývači. Technici s oprávněním a pojištěním pro každou profesi."],
       ["Energetický management", "Měření a regulace, optimalizace spotřeby, kontrola smluv s dodavateli energií, podklady pro dotace."],
     ],
     proc: [
@@ -39,7 +39,7 @@ export const SLUZBY = [
     ],
     proc: [
       ["Kontrola kvality, ne jen faktura", "Úklid i zeleň mají kontrolní list. Kontrolor fotí, systém vyhodnocuje plnění smlouvy."],
-      ["Výměna dodavatele bez starostí", "Když dodavatel neplní, nahradíme ho. Pro vás se nic nemění: stejný kontakt, stejná smlouva."],
+      ["Kvalita, za kterou ručíme", "Když něco nesplní standard, sjednáme nápravu na naše náklady. Pro vás se nic nemění: stejný kontakt, stejná smlouva."],
       ["Sezónní plán dopředu", "Zimní pohotovost, jarní úklid, sečení: kalendář na celý rok vidíte v portálu."],
     ],
   },
@@ -56,7 +56,7 @@ export const SLUZBY = [
       ["Předpisy nájemného a záloh", "Evidence jednotek, vlastníků a nájemníků, předpisy plateb, párování a upomínky."],
       ["Roční vyúčtování služeb", "Teplo, voda, výtah, úklid. Rozúčtujeme podle platných klíčů, výsledek sedí na haléř."],
       ["Komunikace s dodavateli energií a úřady", "Smlouvy na energie, hlášení, povolení, stavební úřad, katastr."],
-      ["Právní podpora přes partnerskou advokátní kancelář", "Vymáhání dlužných plateb, revize smluv, stanovy a shromáždění vlastníků."],
+      ["Právní podpora ve spolupráci s advokátní kanceláří", "Vymáhání dlužných plateb, revize smluv, stanovy a shromáždění vlastníků."],
     ],
     proc: [
       ["Vyúčtování bez dohadů", "Každý vlastník vidí v portálu své náklady, zálohy a výsledek, i s rozpisem podle klíčů."],
@@ -115,7 +115,7 @@ export const OBJEKTY = [
       ["Nájemníci volají majiteli", "Jeden helpdesk pro všechny nájemníky, se SLA podle priority a reportem plnění."],
       ["Provozní náklady rostou", "Měsíční reporting nákladů a spotřeby po objektech, srovnání s rozpočtem."],
       ["Technický stav při prodeji", "Pasport budovy s historií všech zásahů a revizí, připravený pro due diligence."],
-      ["Desítky dodavatelů", "Jedna smlouva a jedna faktura. Dodavatele vybíráme, kontrolujeme a měníme my."],
+      ["Desítky smluv na služby", "Jedna smlouva a jedna faktura za celý provoz budovy. Všechno ostatní zajistíme my."],
     ],
     cta: "Sjednat schůzku",
   },
@@ -129,7 +129,7 @@ export const OBJEKTY = [
     typy: ["Mateřské a základní školy", "Univerzitní kampusy", "Nemocnice a polikliniky", "Úřady, sportovní a kulturní zařízení"],
     bolesti: [
       ["Kontrola z hasičů nebo hygieny", "Doklady o revizích a kontrolách na jednom místě, kdykoli k předložení."],
-      ["Údržba o prázdninách", "Plán prací na léto připravíme na jaře, dodavatele zajistíme dopředu."],
+      ["Údržba o prázdninách", "Plán prací na léto připravíme na jaře, kapacity rezervujeme dopředu."],
       ["Rozpočet na celý rok", "Plán údržby a revizí s náklady na rok dopředu, podklad pro zastupitelstvo."],
       ["Zakázky podle zákona", "Rozsah služeb připravíme tak, aby šel soutěžit podle zákona o zadávání veřejných zakázek."],
     ],
@@ -164,7 +164,7 @@ export const REFERENCE = [
     cisla: [["9 200", "m² ploch"], ["11 → 1", "smluv"], ["98 %", "SLA splněno"], ["1,6 h", "průměrná reakce"]],
     pribeh: [
       ["Výchozí stav", "Jedenáct dodavatelů, nájemníci hlásili závady e-mailem majiteli a nikdo nevěděl, co je vyřešené."],
-      ["Co jsme udělali", "Převzali jsme dodavatelské smlouvy, zavedli helpdesk s prioritami a lhůtami a sjednotili fakturaci."],
+      ["Co jsme udělali", "Převzali jsme provoz všech profesí, zavedli helpdesk s prioritami a lhůtami a sjednotili fakturaci."],
       ["Jak to běží dnes", "Nájemníci hlásí přes portál, majitel dostává měsíční report a jednu fakturu s rozpisem."],
     ],
   },
@@ -203,15 +203,15 @@ export const REFERENCE = [
 export const KROKY = [
   ["Prohlídka a pasport", "Projdeme budovu od sklepa po střechu, sepíšeme technologie, doklady a lhůty. Výsledkem je pasport domu, který zůstane vám."],
   ["Návrh rozsahu a ceny", "Navrhneme, co převezmeme a co ne, s cenou za měsíc. Bez skrytých položek."],
-  ["Převzetí", "Převezmeme dodavatelské smlouvy, doplníme chybějící revize a založíme portál pro výbor, vlastníky nebo nájemníky."],
+  ["Převzetí", "Převezmeme provoz, doplníme chybějící revize a založíme portál pro výbor, vlastníky nebo nájemníky."],
   ["Provoz", "Dispečink, údržba, revize a účetnictví běží. Vy vidíte stav v portálu a jednou za měsíc dostanete report."],
 ];
 
 export const DOTAZY = [
   ["Jak rychle jste u havárie?", "Havarijní dispečink funguje nonstop. U havárie (voda, plyn, elektřina, uvíznutí ve výtahu) garantujeme příjezd technika do 2 hodin v rámci smluvních regionů. Konkrétní lhůty jsou ve smlouvě."],
-  ["Děláte práce sami, nebo přes subdodavatele?", "Koordinujeme síť ověřených řemeslníků a specializovaných firem. Každý má platné oprávnění a pojištění, a to hlídáme v systému. Vy máte jednu smlouvu, jednu fakturu a jeden kontakt; odpovědnost za výsledek nesete vůči nám, my za ni ručíme vám."],
+  ["Kdo k nám přijede?", "Technik Budovníku s oprávněním pro danou profesi. Každý zásah je zapsaný v systému: kdo přijel, kdy, co udělal a kolik to stálo. Vidíte to v portálu."],
   ["Můžeme převzít jen část služeb?", "Ano. Někdo chce jen technickou správu a revize, jiný kompletní správu včetně účetnictví. Rozsah se dá kdykoli rozšířit."],
-  ["Co když nejsme spokojení s dodavatelem úklidu?", "Řeknete to nám a my to řešíme: nápravou, nebo výměnou dodavatele. Vaše smlouva se nemění."],
+  ["Co když nebudeme spokojení třeba s úklidem?", "Řeknete to nám a my to vyřešíme. Kontrolujeme kvalitu sami, ale vaše slovo platí nejvíc."],
   ["Jak funguje klientský portál?", "Výbor, vlastníci nebo nájemníci se přihlásí a vidí stav revizí, nahlášené závady, dokumenty, smlouvy a vyúčtování. Závadu nahlásí z mobilu i s fotkou. Vyzkoušejte si ukázku."],
   ["Kolik správa stojí?", "Záleží na typu a velikosti objektu a rozsahu služeb. Orientační cenu spočítá kalkulačka za minutu, přesnou nabídku připravíme po prohlídce domu, a ta je zdarma."],
   ["Převezmete dům i s neúplnou dokumentací?", "Ano, to je běžné. Při převzetí zmapujeme, co chybí, a doplníme to: revize, pasport, výkresy, smlouvy."],

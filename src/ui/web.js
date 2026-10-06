@@ -340,7 +340,7 @@
   /* ---------- Formuláře (ukázka: nic se neodesílá) ---------- */
   var PRAVIDLA = {
     poptavka: { jmeno: ["required"], email: ["required", "email"], telefon: ["telefon"], adresa: ["required"], souhlas: ["souhlas"] },
-    dodavatel: { firma: ["required"], ico: ["required", "ico"], email: ["required", "email"], telefon: ["required", "telefon"], obory: [{ typ: "min", hodnota: 1 }], souhlas: ["souhlas"] },
+    dodavatel: { firma: ["required"], ico: ["ico"], email: ["required", "email"], telefon: ["required", "telefon"], obory: [{ typ: "min", hodnota: 1 }], souhlas: ["souhlas"] },
   };
   var HLASKY = { required: "Vyplňte prosím.", email: "Zkontrolujte e-mail.", telefon: "Zkontrolujte telefon.", ico: "IČO nesedí (8 číslic s kontrolním součtem).", souhlas: "Bez souhlasu to nepůjde.", min: "Vyberte aspoň jednu možnost." };
   $$("[data-formular]").forEach(function (f) {
@@ -372,7 +372,7 @@
         if (!prvni) prvni = el;
       });
       if (prvni) { prvni.focus(); return; }
-      $("[data-formular-vysledek]", f).innerHTML = '<div class="hlaseni"><svg class="ik" width="20" height="20" viewBox="0 0 20 20"><path d="m4 10.4 4 4L16 5.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><div><strong>Děkujeme, máme to.</strong><br>V ukázce se nic neodesílá. Ve skutečném provozu se ozveme do jednoho pracovního dne' + (druh === "poptavka" ? " a domluvíme prohlídku objektu." : " a pošleme odkaz pro nahrání dokladů.") + "</div></div>";
+      $("[data-formular-vysledek]", f).innerHTML = '<div class="hlaseni"><svg class="ik" width="20" height="20" viewBox="0 0 20 20"><path d="m4 10.4 4 4L16 5.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><div><strong>Děkujeme, máme to.</strong><br>V ukázce se nic neodesílá. Ve skutečném provozu se ozveme do jednoho pracovního dne' + (druh === "poptavka" ? " a domluvíme prohlídku objektu." : " a domluvíme si schůzku.") + "</div></div>";
       f.reset();
     });
   });
