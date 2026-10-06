@@ -450,7 +450,7 @@ p { margin: 0 0 1em; text-wrap: pretty; }
 .rez-bod:hover .rez-bod__cislo, .rez-bod:focus-visible .rez-bod__cislo, .rez-bod.je-vybrany .rez-bod__cislo { fill: var(--akcent-text); }
 .rez-info {
   display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 14px; align-items: start;
-  padding: 14px 16px 16px; border-top: 1px solid var(--cara); min-height: 132px; background: var(--plocha);
+  padding: 14px 16px 16px; border-top: 1px solid var(--cara); align-content: start; background: var(--plocha);
 }
 .rez-info__cislo { width: 30px; height: 30px; border-radius: 50%; background: var(--akcent); color: var(--akcent-text); display: grid; place-items: center; font-family: var(--mono); font-weight: 600; font-size: .85rem; grid-row: span 3; }
 .rez-info h3 { margin: 2px 0 0; font-size: 1.12rem; }
@@ -458,7 +458,7 @@ p { margin: 0 0 1em; text-wrap: pretty; }
 .rez-info__revize { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
 .rez-info__revize span { font-family: var(--mono); font-size: .72rem; padding: 3px 8px; border-radius: 8px; background: var(--pozadi-2); color: var(--text); }
 .rez-info__revize span b { color: var(--akcent-cara); font-weight: 600; }
-.rez-legenda { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 16px 14px; background: var(--plocha); }
+.rez-legenda { display: flex; flex-wrap: wrap; align-content: flex-start; gap: 6px; padding: 0 16px 14px; background: var(--plocha); }
 .rez-legenda button { display: inline-flex; gap: 6px; align-items: center; font-size: .78rem; border: 1px solid var(--cara); background: var(--plocha); padding: 4px 9px 4px 4px; border-radius: 99px; cursor: pointer; color: var(--text); transition: border-color .2s, background-color .2s; }
 .rez-legenda button i { width: 18px; height: 18px; border-radius: 50%; background: var(--inkoust); color: var(--pozadi); font-style: normal; font-family: var(--mono); font-size: .66rem; display: grid; place-items: center; }
 .rez-legenda button:hover, .rez-legenda button[aria-pressed="true"] { border-color: var(--inkoust); }

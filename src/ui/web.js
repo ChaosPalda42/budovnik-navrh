@@ -170,15 +170,35 @@
       $$(".rez-bod", svg).forEach(function (b) { b.classList.toggle("je-vybrany", b === bod); });
       svg.setAttribute("data-vyber", tech);
       $$(".rez-sit", svg).forEach(function (s) { s.classList.toggle("je-vybrana", s.getAttribute("data-sit") === tech); });
-      var d = data[tech] || { nazev: tech, text: "" };
-      info.innerHTML = '<span class="rez-info__cislo">' + (bod ? $("text", bod).textContent : "•") + "</span><h3>" + d.nazev + "</h3><p>" + d.text + '</p><div class="rez-info__revize">' + revizeText(tech) + "</div>";
+      info.innerHTML = infoHtml(tech, bod ? $("text", bod).textContent : "•");
       $$("button", legenda).forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-tech") === tech)); });
     }
-    function kresliLegendu() {
-      var poradi = (aktivni.getAttribute("data-legenda") || "").split(",").filter(Boolean);
-      legenda.innerHTML = poradi.map(function (t, i) {
-        return '<button type="button" data-tech="' + t + '" aria-pressed="false"><i>' + (i + 1) + "</i>" + ((data[t] || {}).nazev || t) + "</button>";
+    function infoHtml(tech, cislo) {
+      var d = data[tech] || { nazev: tech, text: "" };
+      return '<span class="rez-info__cislo">' + cislo + "</span><h3>" + d.nazev + "</h3><p>" + d.text + '</p><div class="rez-info__revize">' + revizeText(tech) + "</div>";
+    }
+    function legendaHtml(scena) {
+      var poradi = (scena.getAttribute("data-legenda") || "").split(",").filter(Boolean);
+      return poradi.map(function (t, i) {
+        return '<button type="button" data-tech="' + t + '" aria-pressed="' + (t === vybrana) + '"><i>' + (i + 1) + "</i>" + ((data[t] || {}).nazev || t) + "</button>";
       }).join("");
+    }
+    function kresliLegendu() { legenda.innerHTML = legendaHtml(aktivni); }
+    // Panel nesmí skákat: výška popisu a legendy se zarovná na nejdelší variantu ze všech scén.
+    function zarovnejVysky() {
+      var puvodniInfo = info.innerHTML, puvodniLegenda = legenda.innerHTML;
+      info.style.minHeight = ""; legenda.style.minHeight = "";
+      var maxInfo = 0, maxLegenda = 0;
+      $$(".rez-scena", panel).forEach(function (sc) {
+        legenda.innerHTML = legendaHtml(sc);
+        maxLegenda = Math.max(maxLegenda, Math.ceil(legenda.getBoundingClientRect().height));
+        (sc.getAttribute("data-legenda") || "").split(",").filter(Boolean).forEach(function (t) {
+          info.innerHTML = infoHtml(t, "10");
+          maxInfo = Math.max(maxInfo, Math.ceil(info.getBoundingClientRect().height));
+        });
+      });
+      info.innerHTML = puvodniInfo; legenda.innerHTML = puvodniLegenda;
+      info.style.minHeight = maxInfo + "px"; legenda.style.minHeight = maxLegenda + "px";
     }
     function prepniScenu(id) {
       var nova = $('.rez-scena[data-scena="' + id + '"]', panel);
@@ -217,6 +237,13 @@
       b.addEventListener("click", function () { interakce = true; zastavProhlidku(); prepniScenu(b.getAttribute("data-scena-prepni")); });
     });
     kresliLegendu();
+    zarovnejVysky();
+    var sirkaPanelu = panel.offsetWidth, casovac = null;
+    window.addEventListener("resize", function () {
+      clearTimeout(casovac);
+      casovac = setTimeout(function () { if (panel.offsetWidth !== sirkaPanelu) { sirkaPanelu = panel.offsetWidth; zarovnejVysky(); } }, 150);
+    });
+    if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(zarovnejVysky);
     if ("IntersectionObserver" in window) {
       new IntersectionObserver(function (z) {
         z.forEach(function (x) { if (x.isIntersecting) spustProhlidku(); else zastavProhlidku(); });
