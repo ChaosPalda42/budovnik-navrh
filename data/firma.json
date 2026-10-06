@@ -1,0 +1,18 @@
+{
+  "nazev": "Budovník s.r.o.",
+  "znacka": "Budovník",
+  "podtitul": "správa budov",
+  "ico": "000 00 000",
+  "dic": "CZ00000000",
+  "spisovaZnacka": "C 000000 vedená u Městského soudu v Praze",
+  "adresa": { "ulice": "Ulice 000/00", "psc": "000 00", "mesto": "Město" },
+  "telefon": "+420 XXX XXX XXX",
+  "havarijni": "+420 XXX XXX XXX",
+  "havarijniOdkaz": "+420000000000",
+  "email": "info@budovnik.cz",
+  "dispecink": "dispecink@budovnik.cz",
+  "banka": "000000000/0000",
+  "pojisteni": "XX mil. Kč",
+  "certifikaty": ["ISO 9001", "ISO 14001", "ISO 45001"],
+  "web": "budovnik.cz"
+}

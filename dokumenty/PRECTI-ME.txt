@@ -1,0 +1,24 @@
+BUDOVNÍK – návrh webu a klikací ukázka systému
+==============================================
+
+Otevřete index.html v prohlížeči (nejlépe přes jednoduchý server, viz níže).
+
+Co v ukázce je
+- Web: 22 stránek – služby (technická, provozní, ekonomická správa, energetika),
+  typy objektů (bytové domy, komerční, veřejné), reference, systém, průvodce revizemi,
+  kalkulačka ceny, stránka pro dodavatele, o nás, kontakt.
+- Klientský portál (portal.html): přihlášení jako výbor SVJ, vlastník bytu nebo ředitelka školy.
+- Interní systém (dispecink.html): závady s lhůtami SLA, kalendář revizí, objekty,
+  registr dodavatelů s hlídáním dokladů, smlouvy s generátorem, fakturace, vyúčtování,
+  automatizační pravidla.
+- Světlý i tmavý režim, úvodní animace „web se postaví“ (jednou za návštěvu).
+
+Co je smyšlené
+- Všechny firemní údaje (IČO, adresa, telefony, účet, pojištění, ISO) jsou vzorové.
+- Reference, loga klientů a čísla v nich jsou vymyšlené.
+- Ceny v kalkulačce jsou ilustrativní.
+- Data v portálu a interním systému jsou vymyšlená; demo běží jen v prohlížeči
+  a nic nikam neodesílá. Formuláře nic neodesílají.
+
+Spuštění lokálně
+  python3 -m http.server 8000   (ve složce s index.html), pak http://localhost:8000

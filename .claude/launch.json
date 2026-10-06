@@ -1,0 +1,6 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "budovnik", "runtimeExecutable": "python3", "runtimeArgs": ["-m", "http.server", "4390", "--directory", "out"], "port": 4390 }
+  ]
+}

@@ -1,0 +1,218 @@
+/** Obsah webu. Texty jsou tady, šablony jen skládají. */
+
+export const SLUZBY = [
+  {
+    id: "technicka",
+    soubor: "technicka-sprava.html",
+    kod: "Hard FM",
+    nazev: "Technická správa",
+    kratce: "Technologie, revize, údržba a havárie. Aby dům fungoval a splňoval předpisy.",
+    perex: "Postaráme se o technologie domu od kotelny po střechu: pravidelný servis, zákonné revize a havarijní službu ve dne i v noci. Termíny hlídá systém, ne paměť správce.",
+    ikona: "klic",
+    polozky: [
+      ["Pravidelná údržba a servis technologií", "Výtahy, vzduchotechnika, kotelny, čerpadla, rozvody. Plán servisu podle výrobce a stavu zařízení."],
+      ["Zákonné revize a kontroly", "Elektro, plyn, hromosvody, spalinové cesty, požární systémy, výtahy. Termíny hlídáme za vás, protokoly ukládáme do pasportu domu."],
+      ["Havarijní služba 24/7", "Nonstop dispečink, výjezd technika k havárii do 2 hodin. Uzavřít vodu, zajistit elektřinu, zabránit škodám."],
+      ["Stavební a řemeslné práce", "Instalatéři, elektrikáři, malíři, zedníci, zámečníci, pokrývači. Ověření řemeslníci s pojištěním a oprávněním."],
+      ["Energetický management", "Měření a regulace, optimalizace spotřeby, kontrola smluv s dodavateli energií, podklady pro dotace."],
+    ],
+    proc: [
+      ["Termíny revizí hlídá systém", "Každé zařízení má v pasportu svůj kalendář. 30 dní před termínem systém sám osloví revizního technika."],
+      ["Jeden dispečink pro všechno", "Žádné hledání instalatéra v telefonu. Zavoláte jedno číslo, my pošleme toho správného."],
+      ["Fotky a protokol z každého zásahu", "Technik zakázku uzavře v aplikaci: co našel, co udělal, kolik to stálo. Vidíte to v portálu."],
+    ],
+  },
+  {
+    id: "provozni",
+    soubor: "provozni-sprava.html",
+    kod: "Soft FM",
+    nazev: "Provozní správa",
+    kratce: "Úklid, zeleň, zima, ostraha a odpady. Aby se v domě dobře žilo i pracovalo.",
+    perex: "Infrastrukturní služby, které nejsou vidět, dokud nechybí: čisté chodby, posekaný trávník, odklizený chodník v šest ráno a vyvezený odpad.",
+    ikona: "koste",
+    polozky: [
+      ["Úklid společných i vyhrazených prostor", "Pravidelný i jednorázový: schodiště, výtahy, sklepy, kanceláře, mytí oken, úklid po řemeslnících."],
+      ["Péče o zeleň a okolí budovy", "Sečení, stříhání keřů, výsadba, údržba dětských hřišť a parkovišť."],
+      ["Zimní údržba", "Odklízení sněhu a posyp chodníků i parkovišť. Pohotovost podle předpovědi, ne podle stížností."],
+      ["Fyzická ostraha a recepce", "Recepční služby, pochůzky, kontrola vstupů, správa klíčů a čipů."],
+      ["Odpadové hospodářství", "Svoz směsného i tříděného odpadu, velkoobjemové kontejnery, evidence pro úřady."],
+    ],
+    proc: [
+      ["Kontrola kvality, ne jen faktura", "Úklid i zeleň mají kontrolní list. Kontrolor fotí, systém vyhodnocuje plnění smlouvy."],
+      ["Výměna dodavatele bez starostí", "Když dodavatel neplní, nahradíme ho. Pro vás se nic nemění: stejný kontakt, stejná smlouva."],
+      ["Sezónní plán dopředu", "Zimní pohotovost, jarní úklid, sečení: kalendář na celý rok vidíte v portálu."],
+    ],
+  },
+  {
+    id: "ekonomicka",
+    soubor: "ekonomicka-sprava.html",
+    kod: "Admin",
+    nazev: "Ekonomická a administrativní správa",
+    kratce: "Účetnictví, předpisy, vyúčtování a jednání s úřady. Čísla, která sedí na haléř.",
+    perex: "Vedeme účetnictví SVJ a majitelů objektů, předepisujeme zálohy, každý rok vyúčtujeme služby a za vás jednáme s dodavateli energií i s úřady.",
+    ikona: "kalkulacka",
+    polozky: [
+      ["Vedení účetnictví", "Pro společenství vlastníků, bytová družstva i majitele komerčních objektů, včetně účetní závěrky a daňového přiznání."],
+      ["Předpisy nájemného a záloh", "Evidence jednotek, vlastníků a nájemníků, předpisy plateb, párování a upomínky."],
+      ["Roční vyúčtování služeb", "Teplo, voda, výtah, úklid. Rozúčtujeme podle platných klíčů, výsledek sedí na haléř."],
+      ["Komunikace s dodavateli energií a úřady", "Smlouvy na energie, hlášení, povolení, stavební úřad, katastr."],
+      ["Právní podpora přes partnerskou advokátní kancelář", "Vymáhání dlužných plateb, revize smluv, stanovy a shromáždění vlastníků."],
+    ],
+    proc: [
+      ["Vyúčtování bez dohadů", "Každý vlastník vidí v portálu své náklady, zálohy a výsledek, i s rozpisem podle klíčů."],
+      ["Shromáždění připravíme", "Pozvánku, podklady, prezenční listinu i zápis. Hlasovat se dá i korespondenčně."],
+      ["Smlouvy hlídá systém", "Výpovědní lhůty a automatická prodloužení ohlídáme dřív, než propadnou."],
+    ],
+  },
+  {
+    id: "energetika",
+    soubor: "energeticky-management.html",
+    kod: "Energie",
+    nazev: "Energetický management",
+    kratce: "Měření, regulace a nákup energií. Platit méně za stejné teplo.",
+    perex: "Energie jsou největší položka provozu domu. Měříme, kde utíkají, nastavíme regulaci a hlídáme smlouvy s dodavateli.",
+    ikona: "blesk",
+    polozky: [
+      ["Měření a odečty", "Dálkové odečty vody a tepla, podružná měření, přehled spotřeby po měsících."],
+      ["Regulace otopné soustavy", "Hydraulické vyvážení, ekvitermní regulace, noční útlum. Nejlevnější úspora je ta, za kterou se nic nestaví."],
+      ["Nákup energií", "Porovnání nabídek, hlídání fixací a konců smluv, sdružený nákup pro více domů."],
+      ["Podklady pro úspory a dotace", "PENB, energetický audit a příprava žádostí ve spolupráci s autorizovanými specialisty."],
+    ],
+    proc: [
+      ["Spotřeba po měsících, ne jednou za rok", "Odchylky poznáme hned. Únik vody nečeká do vyúčtování."],
+      ["Fixace pod kontrolou", "Systém upozorní na konec fixace s předstihem, takže stihnete vybrat novou nabídku."],
+      ["Úspora vyčíslená v korunách", "Každé opatření má vyhodnocení: kolik stálo a kolik ušetřilo."],
+    ],
+  },
+];
+
+export const OBJEKTY = [
+  {
+    id: "rezidencni",
+    soubor: "bytove-domy.html",
+    nazev: "Bytové domy",
+    pro: "Pro SVJ a bytová družstva",
+    kratce: "Panelové domy, novostavby, činžovní domy. Kompletní správa pro výbory SVJ i družstva.",
+    perex: "Předsedové SVJ dělají správu domu po večerech a zadarmo. My ji děláme každý den: technika, účetnictví, vyúčtování i shromáždění. Výbor rozhoduje, my zajišťujeme.",
+    typy: ["Panelové domy", "Novostavby", "Historické činžovní domy", "Bytová družstva"],
+    bolesti: [
+      ["„Kdo zase zapomněl na revizi plynu?“", "Kalendář revizí každého domu hlídá systém a revizního technika objedná sám."],
+      ["„Ve sklepě teče voda a je neděle.“", "Havarijní linka 24/7, technik na místě do 2 hodin."],
+      ["„Vyúčtování nikdo nechápe.“", "Každý vlastník vidí v portálu svůj rozpis podle klíčů, s náklady i zálohami."],
+      ["„Výbor nestíhá.“", "Připravíme shromáždění, hlasování, smlouvy i podklady pro rozhodnutí."],
+    ],
+    cta: "Poptat správu SVJ",
+  },
+  {
+    id: "komercni",
+    soubor: "komercni-objekty.html",
+    nazev: "Komerční objekty",
+    pro: "Pro majitele a investory",
+    kratce: "Kanceláře, logistické parky, výrobní haly, obchodní centra a retailové parky.",
+    perex: "Pro majitele a investory je budova aktivum. Držíme provozní náklady pod kontrolou, nájemníky spokojené a technologie v kondici, se kterou se dá budova kdykoli prodat.",
+    typy: ["Kancelářské budovy", "Logistické parky", "Výrobní haly", "Obchodní centra a retail parky"],
+    bolesti: [
+      ["Nájemníci volají majiteli", "Jeden helpdesk pro všechny nájemníky, se SLA podle priority a reportem plnění."],
+      ["Provozní náklady rostou", "Měsíční reporting nákladů a spotřeby po objektech, srovnání s rozpočtem."],
+      ["Technický stav při prodeji", "Pasport budovy s historií všech zásahů a revizí, připravený pro due diligence."],
+      ["Desítky dodavatelů", "Jedna smlouva a jedna faktura. Dodavatele vybíráme, kontrolujeme a měníme my."],
+    ],
+    cta: "Sjednat schůzku",
+  },
+  {
+    id: "verejne",
+    soubor: "verejne-budovy.html",
+    nazev: "Veřejné budovy",
+    pro: "Pro obce, školy a nemocnice",
+    kratce: "Školy a školky, kampusy, nemocnice, úřady, sportovní haly a kulturní zařízení.",
+    perex: "Ředitel školy má učit, starosta řídit obec. Správu budov, revize a údržbu převezmeme v rozsahu, který odpovídá rozpočtu, a s dokumentací, která obstojí při kontrole.",
+    typy: ["Mateřské a základní školy", "Univerzitní kampusy", "Nemocnice a polikliniky", "Úřady, sportovní a kulturní zařízení"],
+    bolesti: [
+      ["Kontrola z hasičů nebo hygieny", "Doklady o revizích a kontrolách na jednom místě, kdykoli k předložení."],
+      ["Údržba o prázdninách", "Plán prací na léto připravíme na jaře, dodavatele zajistíme dopředu."],
+      ["Rozpočet na celý rok", "Plán údržby a revizí s náklady na rok dopředu, podklad pro zastupitelstvo."],
+      ["Zakázky podle zákona", "Rozsah služeb připravíme tak, aby šel soutěžit podle zákona o zadávání veřejných zakázek."],
+    ],
+    cta: "Získat nabídku pro obec",
+  },
+];
+
+export const REFERENCE = [
+  {
+    id: "panelak-kladno",
+    soubor: "reference-panelovy-dum.html",
+    nazev: "Panelový dům, 64 jednotek",
+    typ: "rezidencni",
+    misto: "Středočeský kraj",
+    rozsah: ["Technická správa", "Účetnictví a vyúčtování", "Úklid", "Havarijní služba"],
+    perex: "SVJ převzalo dům po stavebním bytovém družstvu i s neúplnou dokumentací. Za tři měsíce měl dům kompletní pasport a žádnou propadlou revizi.",
+    cisla: [["64", "jednotek"], ["3", "výtahy"], ["0", "propadlých revizí"], ["−14 %", "spotřeba tepla"]],
+    pribeh: [
+      ["Výchozí stav", "Chybějící revizní zprávy na hromosvod a plyn, výtahy po termínu odborné zkoušky a vyúčtování, kterému nerozuměl ani výbor."],
+      ["Co jsme udělali", "Prošli jsme dům od sklepa po střechu, založili pasport, doplnili revize a převedli účetnictví. Hydraulické vyvážení topení snížilo spotřebu tepla."],
+      ["Jak to běží dnes", "Výbor vidí v portálu stav revizí, závady i náklady. Vlastníci hlásí závady z mobilu a sledují, kdo je řeší."],
+    ],
+  },
+  {
+    id: "kancelare-praha",
+    soubor: "reference-administrativni-budova.html",
+    nazev: "Administrativní budova, 9 200 m²",
+    typ: "komercni",
+    misto: "Praha",
+    rozsah: ["Technická správa", "Helpdesk pro nájemníky", "Úklid a recepce", "Energetický management"],
+    perex: "Majitel měl na budovu jedenáct samostatných dodavatelských smluv. Teď má jednu, s měsíčním reportem plnění SLA.",
+    cisla: [["9 200", "m² ploch"], ["11 → 1", "smluv"], ["98 %", "SLA splněno"], ["1,6 h", "průměrná reakce"]],
+    pribeh: [
+      ["Výchozí stav", "Jedenáct dodavatelů, nájemníci hlásili závady e-mailem majiteli a nikdo nevěděl, co je vyřešené."],
+      ["Co jsme udělali", "Převzali jsme dodavatelské smlouvy, zavedli helpdesk s prioritami a lhůtami a sjednotili fakturaci."],
+      ["Jak to běží dnes", "Nájemníci hlásí přes portál, majitel dostává měsíční report a jednu fakturu s rozpisem."],
+    ],
+  },
+  {
+    id: "skola",
+    soubor: "reference-zakladni-skola.html",
+    nazev: "Základní škola a tělocvična",
+    typ: "verejne",
+    misto: "Středočeský kraj",
+    rozsah: ["Revize a kontroly", "Údržba o prázdninách", "Zeleň a zimní údržba"],
+    perex: "Obec jako zřizovatel chtěla mít jistotu, že škola projde každou kontrolou. Dnes má všechny revize v jednom kalendáři a plán údržby na celý rok.",
+    cisla: [["2", "budovy"], ["38", "hlídaných termínů"], ["100 %", "revizí včas"], ["6 týdnů", "letní údržba"]],
+    pribeh: [
+      ["Výchozí stav", "Revize zajišťoval školník podle sešitu, část protokolů chyběla, letní opravy se objednávaly v červnu."],
+      ["Co jsme udělali", "Zmapovali jsme všechna zařízení a jejich lhůty, doplnili chybějící kontroly a naplánovali letní údržbu už v březnu."],
+      ["Jak to běží dnes", "Ředitelka vidí stav revizí v portálu. Zřizovatel dostává jednou za čtvrtletí přehled nákladů."],
+    ],
+  },
+  {
+    id: "hala",
+    soubor: "reference-logisticky-areal.html",
+    nazev: "Logistický areál, 3 haly",
+    typ: "komercni",
+    misto: "Plzeňský kraj",
+    rozsah: ["Technická správa", "Ostraha", "Zimní údržba", "Odpadové hospodářství"],
+    perex: "Provoz 24/7 nesnese výpadky. Zavedli jsme preventivní údržbu vrat, sprinklerů a osvětlení a nonstop pohotovost.",
+    cisla: [["38 000", "m² hal"], ["24/7", "provoz"], ["−62 %", "havarijních výjezdů"], ["4", "nájemci"]],
+    pribeh: [
+      ["Výchozí stav", "Opravy až po poruše, sekční vrata stála v nejhorší chvíli a sníh na manipulačních plochách se odklízel pozdě."],
+      ["Co jsme udělali", "Plán preventivní údržby podle výrobců, náhradní díly skladem a zimní pohotovost podle předpovědi."],
+      ["Jak to běží dnes", "Počet havarijních výjezdů klesl o téměř dvě třetiny, nájemci mají jeden kontakt pro všechno."],
+    ],
+  },
+];
+
+export const KROKY = [
+  ["Prohlídka a pasport", "Projdeme budovu od sklepa po střechu, sepíšeme technologie, doklady a lhůty. Výsledkem je pasport domu, který zůstane vám."],
+  ["Návrh rozsahu a ceny", "Navrhneme, co převezmeme a co ne, s cenou za měsíc. Bez skrytých položek."],
+  ["Převzetí", "Převezmeme dodavatelské smlouvy, doplníme chybějící revize a založíme portál pro výbor, vlastníky nebo nájemníky."],
+  ["Provoz", "Dispečink, údržba, revize a účetnictví běží. Vy vidíte stav v portálu a jednou za měsíc dostanete report."],
+];
+
+export const DOTAZY = [
+  ["Jak rychle jste u havárie?", "Havarijní dispečink funguje nonstop. U havárie (voda, plyn, elektřina, uvíznutí ve výtahu) garantujeme příjezd technika do 2 hodin v rámci smluvních regionů. Konkrétní lhůty jsou ve smlouvě."],
+  ["Děláte práce sami, nebo přes subdodavatele?", "Koordinujeme síť ověřených řemeslníků a specializovaných firem. Každý má platné oprávnění a pojištění, a to hlídáme v systému. Vy máte jednu smlouvu, jednu fakturu a jeden kontakt; odpovědnost za výsledek nesete vůči nám, my za ni ručíme vám."],
+  ["Můžeme převzít jen část služeb?", "Ano. Někdo chce jen technickou správu a revize, jiný kompletní správu včetně účetnictví. Rozsah se dá kdykoli rozšířit."],
+  ["Co když nejsme spokojení s dodavatelem úklidu?", "Řeknete to nám a my to řešíme: nápravou, nebo výměnou dodavatele. Vaše smlouva se nemění."],
+  ["Jak funguje klientský portál?", "Výbor, vlastníci nebo nájemníci se přihlásí a vidí stav revizí, nahlášené závady, dokumenty, smlouvy a vyúčtování. Závadu nahlásí z mobilu i s fotkou. Vyzkoušejte si ukázku."],
+  ["Kolik správa stojí?", "Záleží na typu a velikosti objektu a rozsahu služeb. Orientační cenu spočítá kalkulačka za minutu, přesnou nabídku připravíme po prohlídce domu, a ta je zdarma."],
+  ["Převezmete dům i s neúplnou dokumentací?", "Ano, to je běžné. Při převzetí zmapujeme, co chybí, a doplníme to: revize, pasport, výkresy, smlouvy."],
+];

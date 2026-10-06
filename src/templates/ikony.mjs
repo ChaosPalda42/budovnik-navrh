@@ -1,0 +1,65 @@
+/** Jednotná sada ikon 20×20, tažená čárou. */
+const tah = 'fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"';
+
+const KRESBY = {
+  sipka: `<path d="M4 10h12m-5-5 5 5-5 5" ${tah}/>`,
+  sipkaDolu: `<path d="M5 8l5 5 5-5" ${tah}/>`,
+  sipkaVlevo: `<path d="M16 10H4m5-5-5 5 5 5" ${tah}/>`,
+  telefon: `<path d="M6.5 3h-2A1.5 1.5 0 0 0 3 4.6c0 6.8 5.6 12.4 12.4 12.4A1.5 1.5 0 0 0 17 15.5v-2l-3.4-1.2-1.5 1.8a11 11 0 0 1-5.2-5.2l1.8-1.5z" ${tah}/>`,
+  obalka: `<rect x="2.5" y="4.5" width="15" height="11" rx="1.2" ${tah}/><path d="m3 6 7 4.6L17 6" ${tah}/>`,
+  pin: `<path d="M10 17s6-5.2 6-9.4A6 6 0 0 0 4 7.6C4 11.8 10 17 10 17z" ${tah}/><circle cx="10" cy="7.6" r="2.1" ${tah}/>`,
+  fajfka: `<path d="m4 10.4 4 4L16 5.6" ${tah}/>`,
+  krizek: `<path d="m5 5 10 10M15 5 5 15" ${tah}/>`,
+  plus: `<path d="M10 4v12M4 10h12" ${tah}/>`,
+  hodiny: `<circle cx="10" cy="10" r="7" ${tah}/><path d="M10 6v4.4l2.8 1.8" ${tah}/>`,
+  kalendar: `<rect x="3" y="4.5" width="14" height="12" rx="1.2" ${tah}/><path d="M3 8h14M7 3v3m6-3v3" ${tah}/>`,
+  lupa: `<circle cx="9" cy="9" r="5.2" ${tah}/><path d="m13 13 4 4" ${tah}/>`,
+  stahnout: `<path d="M10 3v9m-4-3.4L10 12l4-3.4M4 15.5h12" ${tah}/>`,
+  dokument: `<path d="M5 2.8h6.5L15 6.3v10.9H5z" ${tah}/><path d="M11.3 2.8v3.6H15M7.5 10h5m-5 3h5" ${tah}/>`,
+  smlouva: `<path d="M5 2.8h10v14.4H5z" ${tah}/><path d="M7.5 6.5h5m-5 3h5m-5 4.2c1-.9 1.6.9 2.6 0s1.4-.6 2.4.2" ${tah}/>`,
+  stit: `<path d="M10 3 4.5 5.2v4.3c0 3.4 2.3 6.5 5.5 7.5 3.2-1 5.5-4.1 5.5-7.5V5.2z" ${tah}/><path d="m7.6 9.8 1.8 1.8 3.2-3.4" ${tah}/>`,
+  klic: `<path d="M12.6 3.2a4 4 0 0 0-3.9 5.5L3.2 14.2V17h2.6v-1.6h1.6v-1.6H9l1.6-1.6a4 4 0 1 0 2-9z" ${tah}/><circle cx="13.4" cy="6.6" r="1" fill="currentColor"/>`,
+  koste: `<path d="M13.5 2.5 9.7 9.3M7 9l5 2.8-1.6 2.8c-.8 1.4-2.7 2.8-6.6 2.4 1-1.6.8-3.8 1.6-5.2z" ${tah}/><path d="m6.2 14.4 1.4-2.2m1.2 3.3 1-1.8" ${tah}/>`,
+  kalkulacka: `<rect x="4" y="2.8" width="12" height="14.4" rx="1.4" ${tah}/><path d="M6.6 5.6h6.8v2.6H6.6zM7 11h.01M10 11h.01M13 11h.01M7 14h.01M10 14h.01M13 14h.01" ${tah}/>`,
+  blesk: `<path d="M11 2.5 4.5 11h5L9 17.5l6.5-8.5h-5z" ${tah}/>`,
+  dum: `<path d="M3 9.5 10 4l7 5.5V17H3z" ${tah}/><path d="M8 17v-4.6h4V17" ${tah}/>`,
+  budova: `<path d="M4 17V3.5h8V17M12 7.5h4V17M2.5 17h15" ${tah}/><path d="M6.5 6.5h1m2 0h1m-4 3h1m2 0h1m-4 3h1m2 0h1" ${tah}/>`,
+  skola: `<path d="M2.5 8 10 4l7.5 4M4 8.8V17h12V8.8" ${tah}/><path d="M8.3 17v-3.6h3.4V17M10 7.6v2" ${tah}/>`,
+  parta: `<circle cx="7.4" cy="7.6" r="2.6" ${tah}/><path d="M3 16.5c0-2.4 2-4 4.4-4s4.4 1.6 4.4 4" ${tah}/><path d="M13.2 6.2a2.4 2.4 0 0 1 0 4.6m.6 1.9c2 .4 3.2 1.8 3.2 3.8" ${tah}/>`,
+  osoba: `<circle cx="10" cy="6.8" r="3" ${tah}/><path d="M4 17c0-3.2 2.7-5.2 6-5.2s6 2 6 5.2" ${tah}/>`,
+  zamek: `<rect x="4.5" y="8.5" width="11" height="8.5" rx="1.2" ${tah}/><path d="M7 8.5V6.2a3 3 0 0 1 6 0v2.3" ${tah}/>`,
+  vystraha: `<path d="M10 3.2 2.8 16h14.4z" ${tah}/><path d="M10 8.2v3.6m0 2.3h.01" ${tah}/>`,
+  sirena: `<path d="M5 15.5V10a5 5 0 0 1 10 0v5.5M3.5 15.5h13M10 7.5v3" ${tah}/><path d="M10 2.5v1.3M3.6 4.8l1 .9m11.8-.9-1 .9" ${tah}/>`,
+  vodovaha: `<rect x="2" y="7" width="16" height="6" rx="1.2" ${tah}/><rect x="7.6" y="8.6" width="4.8" height="2.8" rx="1.4" ${tah}/><path d="M10 8.6v2.8" ${tah}/>`,
+  metr: `<path d="M3 13.5V6.5h14v7z" ${tah}/><path d="M5.5 6.5v2.4M8 6.5v1.4m2.5-1.4v2.4M13 6.5v1.4m2.5-1.4v2.4" ${tah}/>`,
+  graf: `<path d="M3 16.5h14M5.5 13.5v-3m3.5 3v-6m3.5 6V9m3.5 4.5V5.5" ${tah}/>`,
+  ozubeni: `<circle cx="10" cy="10" r="2.6" ${tah}/><path d="M10 2.8v2m0 10.4v2M2.8 10h2m10.4 0h2M4.9 4.9l1.4 1.4m7.4 7.4 1.4 1.4m0-10.2-1.4 1.4m-7.4 7.4-1.4 1.4" ${tah}/>`,
+  automat: `<path d="M3 6h5m4 0h5M3 14h9m4 0h1" ${tah}/><circle cx="10" cy="6" r="2" ${tah}/><circle cx="14" cy="14" r="2" ${tah}/>`,
+  seznam: `<path d="M7.5 5.5h9m-9 4.5h9m-9 4.5h9" ${tah}/><path d="M3.5 5.5h.01M3.5 10h.01M3.5 14.5h.01" ${tah}/>`,
+  mriz: `<rect x="3" y="3" width="5.5" height="5.5" rx="1" ${tah}/><rect x="11.5" y="3" width="5.5" height="5.5" rx="1" ${tah}/><rect x="3" y="11.5" width="5.5" height="5.5" rx="1" ${tah}/><rect x="11.5" y="11.5" width="5.5" height="5.5" rx="1" ${tah}/>`,
+  odchod: `<path d="M8 4H4.5v12H8m3.5-9.5L15 10l-3.5 3.5M15 10H7.5" ${tah}/>`,
+  slunce: `<circle cx="10" cy="10" r="3.4" ${tah}/><path d="M10 2.2v1.8m0 12v1.8M2.2 10h1.8m12 0h1.8M4.5 4.5l1.3 1.3m8.4 8.4 1.3 1.3m0-11-1.3 1.3m-8.4 8.4-1.3 1.3" ${tah}/>`,
+  mesic: `<path d="M16 12.2A6.6 6.6 0 0 1 7.8 4a6.6 6.6 0 1 0 8.2 8.2z" ${tah}/>`,
+  fotak: `<path d="M3 6.5h3l1.4-2h5.2l1.4 2h3v9.5H3z" ${tah}/><circle cx="10" cy="11" r="2.8" ${tah}/>`,
+  kapka: `<path d="M10 2.8S4.8 8.6 4.8 12a5.2 5.2 0 0 0 10.4 0C15.2 8.6 10 2.8 10 2.8z" ${tah}/>`,
+  plamen: `<path d="M10 17c2.8 0 5-2 5-5 0-3.6-3.4-5-3-9-2.6 1.4-4.4 4-4.2 6.4C6.6 8.6 6.4 7.4 6.8 6 5.6 7.4 5 9.2 5 12c0 3 2.2 5 5 5z" ${tah}/>`,
+  vitr: `<path d="M3 7h8.5A2.2 2.2 0 1 0 9.3 4.8M3 11h11a2.2 2.2 0 1 1-2.2 2.2M3 9h5" ${tah}/>`,
+  vytah: `<rect x="4" y="2.8" width="12" height="14.4" rx="1" ${tah}/><path d="M10 2.8v14.4M6.6 8l1.4-1.6L9.4 8m1.2 4 1.4 1.6 1.4-1.6" ${tah}/>`,
+  strom: `<path d="M10 17v-4.5M10 3c-3 0-4.8 2.4-4.8 4.8 0 2.6 2 4.7 4.8 4.7s4.8-2.1 4.8-4.7C14.8 5.4 13 3 10 3z" ${tah}/>`,
+  vlocka: `<path d="M10 2.5v15M3.5 6.2l13 7.6m0-7.6-13 7.6M8 4l2 1.6L12 4m-4 12 2-1.6 2 1.6" ${tah}/>`,
+  kos: `<path d="M4 6h12M8 6V4h4v2m-6 0 .7 10h6.6L14 6" ${tah}/>`,
+  hvezda: `<path d="m10 2.8 2.3 4.7 5.2.8-3.8 3.6.9 5.1-4.6-2.4-4.6 2.4.9-5.1L2.5 8.3l5.2-.8z" fill="currentColor"/>`,
+  oko: `<path d="M2.5 10S5.5 5 10 5s7.5 5 7.5 5-3 5-7.5 5-7.5-5-7.5-5z" ${tah}/><circle cx="10" cy="10" r="2.2" ${tah}/>`,
+  odkaz: `<path d="M8.5 11.5a3 3 0 0 0 4.2 0l2.6-2.6a3 3 0 0 0-4.2-4.2l-1 1m.4 3.8a3 3 0 0 0-4.2 0l-2.6 2.6a3 3 0 0 0 4.2 4.2l1-1" ${tah}/>`,
+  chat: `<path d="M3.5 4.5h13v9h-7l-3.5 3v-3H3.5z" ${tah}/>`,
+  filtr: `<path d="M3 5h14l-5.4 6v4.6L8.4 17v-6z" ${tah}/>`,
+  hamburger: `<path d="M3 6h14M3 10h14M3 14h14" ${tah}/>`,
+  certifikat: `<circle cx="10" cy="8" r="4.6" ${tah}/><path d="m7.2 11.6-1 5.4 3.8-2 3.8 2-1-5.4M8.2 8l1.3 1.3L12 6.8" ${tah}/>`,
+};
+
+export function ikona(jmeno, { velikost = 20, trida = "" } = {}) {
+  const kresba = KRESBY[jmeno] || KRESBY.plus;
+  return `<svg class="ik${trida ? ` ${trida}` : ""}" width="${velikost}" height="${velikost}" viewBox="0 0 20 20" aria-hidden="true" focusable="false">${kresba}</svg>`;
+}
+
+export const IKONY = Object.keys(KRESBY);
