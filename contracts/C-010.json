@@ -1,0 +1,13 @@
+{
+  "id": "C-010",
+  "file": "src/lib/automatizace.mjs",
+  "role": "coder",
+  "title": "Automatizační pravidla – podmínky nad daty, úkoly, šablony textu",
+  "interface": "Jednoduchý motor automatizačních pravidel: z aktuálních dat (revize, doklady, závady, smlouvy) vyrobí úkoly.\n\nPravidlo = { id, nazev, zdroj, kdyz: [{ pole, op, hodnota }], akce: { typ, text } }.\nZdroje = objekt { [nazevZdroje]: položky[] }; každá položka má `id`.\n\nexport const OPERATORY = [\"==\", \"!=\", \"<\", \"<=\", \">\", \">=\", \"in\", \"obsahuje\"]\n\nexport function hodnota(polozka, pole) -> any   (tečková cesta \"objekt.nazev\"; chybí -> undefined)\n\nexport function splnuje(polozka, podminka) -> boolean\n  v = hodnota(polozka, podminka.pole), h = podminka.hodnota.\n  \"==\" -> v === h; \"!=\" -> v !== h; \"<\", \"<=\", \">\", \">=\" -> false když v je null nebo undefined, jinak běžné porovnání v ? h;\n  \"in\" -> Array.isArray(h) && h.includes(v); \"obsahuje\" -> Array.isArray(v) ? v.includes(h) : (typeof v === \"string\" && v.includes(h)).\n  Neznámý operátor -> throw new Error(\"operator\").\n\nexport function vyplnText(text, polozka) -> string\n  Nahradí každé {{pole}} (tečková cesta, mezery uvnitř závorek se ořezávají) hodnotou String(hodnota(polozka, pole)); chybějící (undefined/null) -> \"?\".\n\nexport function vyhodnot(pravidla, zdroje, hotove = []) -> ukoly\n  Pro každé pravidlo v pořadí a pro každou položku zdroje zdroje[pravidlo.zdroj] (chybějící zdroj = []) v pořadí: když splňuje VŠECHNY podmínky v `kdyz` (prázdné kdyz = vždy), vytvoř úkol\n  { klic: pravidlo.id + \":\" + polozka.id, pravidlo: pravidlo.id, nazev: pravidlo.nazev, typ: pravidlo.akce.typ, polozka: polozka.id, text: vyplnText(pravidlo.akce.text, polozka) }.\n  Úkoly, jejichž klic je v poli `hotove`, vynech. Výsledek je v pořadí vzniku, bez duplicit klíče (první vyhrává).\n\nexport function seskup(ukoly) -> [{ typ, pocet, ukoly }]\n  Seskupí podle typ v pořadí prvního výskytu.",
+  "uses": {},
+  "acceptance": "tests/test_automatizace.py",
+  "notes": "ESM modul BEZ jakýchkoli importů. Musí běžet v Node 24 i v prohlížeči: žádné require, Node API ani DOM API. Vstupy se nemutují.",
+  "budget": {
+    "iterations": 10
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "id": "C-009",
+  "file": "src/lib/fakturace.mjs",
+  "role": "coder",
+  "title": "Přefakturace prací subdodavatelů s marží, rekapitulace DPH, zaokrouhlení",
+  "interface": "Uvnitř počítej v haléřích (celá čísla); ven vracej Kč jako haléře / 100.\n\nexport const SAZBY_DPH = [0, 12, 21]\n\nexport function prefakturuj(polozky, marzeProcent) -> faktura\n  polozky = [{ popis, castkaBezDph (Kč, nákupní cena od subdodavatele), sazbaDph }].\n  Sazba mimo SAZBY_DPH -> throw new Error(\"sazba\").\n  Pro každou položku: nakupH = Math.round(castkaBezDph * 100); prodejH = Math.round(castkaBezDph * (100 + marzeProcent)) (přesně tento výraz).\n  radky = [{ popis, sazbaDph, nakup: nakupH / 100, prodej: prodejH / 100 }] v pořadí vstupu.\n  rekapitulace = pro každou použitou sazbu VZESTUPNĚ: zakladH = součet prodejH řádků s touto sazbou; dphH = Math.round(zakladH * sazba / 100); { sazba, zaklad: zakladH / 100, dph: dphH / 100, celkem: (zakladH + dphH) / 100 }.\n  zakladH = součet všech prodejH; dphH = součet dphH z rekapitulace; celkemH = zakladH + dphH; nakupCelkemH = součet nakupH.\n  kUhrade = Math.round(celkemH / 100) (celé koruny); zaokrouhleni = (kUhrade * 100 − celkemH) / 100.\n  zisk = (zakladH − nakupCelkemH) / 100; marzeSkutecna = zakladH === 0 ? 0 : Math.round((zakladH − nakupCelkemH) / zakladH * 1000) / 10.\n  Vrať { radky, rekapitulace, zaklad, dph, celkemSDph, kUhrade, zaokrouhleni, nakup, zisk, marzeSkutecna } (zaklad = zakladH / 100, dph = dphH / 100, celkemSDph = celkemH / 100, nakup = nakupCelkemH / 100).\n\nexport function cisloFaktury(rok, poradi) -> string\n  `${rok}` + poradi doplněné nulami zleva na 4 číslice: cisloFaktury(2026, 42) === \"20260042\". Pořadí nad 9999 se nezkracuje.\n\nexport function splatnost(datumVystaveni, dni) -> \"YYYY-MM-DD\"\n  Datum vystavení + dni kalendářních dnů (počítej v UTC přes Date.UTC).",
+  "uses": {},
+  "acceptance": "tests/test_fakturace.py",
+  "notes": "ESM modul BEZ jakýchkoli importů. Musí běžet v Node 24 i v prohlížeči: žádné require, Node API ani DOM API. Vstupy se nemutují.",
+  "budget": {
+    "iterations": 10
+  }
+}

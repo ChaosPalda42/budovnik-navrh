@@ -1,0 +1,13 @@
+{
+  "id": "C-008",
+  "file": "src/lib/rozuctovani.mjs",
+  "role": "coder",
+  "title": "Vyúčtování služeb – rozúčtování nákladů na jednotky na haléř",
+  "interface": "Peníze se uvnitř počítají v haléřích (celá čísla), aby součty seděly na haléř.\n\nexport const KLICE = { plocha: \"podle plochy (m²)\", osoby: \"podle počtu osob\", podil: \"podle spoluvlastnického podílu\", jednotka: \"rovným dílem na jednotku\" }\n\nexport function rozdel(celkemHalere, vahy) -> [{ id, halere }]\n  vahy = [{ id, vaha }] (vaha může být desetinná, i 0). suma = součet vah sčítaný zleva doprava v pořadí vstupu. suma <= 0 -> throw new Error(\"nulove-vahy\").\n  Metoda největšího zbytku: pro každou položku presne = celkemHalere * vaha / suma (přesně v tomto pořadí operací), zaklad = Math.floor(presne), zbytek = presne − zaklad.\n  zbyva = celkemHalere − součet zakladů; po jednom haléři přidej `zbyva` položkám s největším zbytkem (při shodě zbytku dostane přednost položka s nižším indexem).\n  Výstup ve stejném pořadí jako vstup; součet halere === celkemHalere.\n\nexport function vyuctuj(naklady, jednotky) -> { jednotky, souhrn }\n  naklady = [{ sluzba, castka (Kč, může mít haléře), klic }], jednotky = [{ id, plocha, osoby, podil, zalohy (Kč) }].\n  Pro každý náklad v pořadí: klic není v KLICE -> throw new Error(\"klic\"). halere = Math.round(castka * 100). Váhy: klic \"jednotka\" -> 1 pro každou jednotku; jinak jednotka[klic] (chybějící = 0). Rozděl přes rozdel(halere, vahy).\n  Pro každou jednotku (v pořadí vstupu) vrať { id, polozky: [{ sluzba, castka }], naklady, zalohy, vysledek }:\n   polozky v pořadí nákladů, castka = halere / 100; naklady = (součet haléřů jednotky) / 100; zalohy = Math.round(zalohy * 100) / 100; vysledek = (zalohyHalere − nakladyHalere) / 100 (kladné = přeplatek, záporné = nedoplatek).\n  souhrn = { naklady, zalohy, vysledek, preplatky, nedoplatky } v Kč (haléře / 100): naklady = součet haléřů všech nákladů, zalohy = součet haléřů záloh, vysledek = zalohy − naklady, preplatky = součet kladných výsledků jednotek, nedoplatky = součet absolutních hodnot záporných výsledků.",
+  "uses": {},
+  "acceptance": "tests/test_rozuctovani.py",
+  "notes": "ESM modul BEZ jakýchkoli importů. Musí běžet v Node 24 i v prohlížeči: žádné require, Node API ani DOM API. Vstupy se nemutují.",
+  "budget": {
+    "iterations": 10
+  }
+}

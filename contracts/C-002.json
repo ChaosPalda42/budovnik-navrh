@@ -1,0 +1,11 @@
+{
+  "id": "C-002",
+  "file": "src/lib/pracovnidny.mjs",
+  "role": "coder",
+  "title": "Pracovní dny v ČR – Velikonoce, státní svátky, posun o pracovní dny",
+  "interface": "Všechna data jsou řetězce \"YYYY-MM-DD\". Počítej v UTC (Date.UTC / getUTCDay / setUTCDate), nikdy v lokálním čase, aby výsledek nezávisel na časovém pásmu a letním čase.\n\nexport function velikonocniNedele(rok) -> string\n  Datum Velikonoční neděle v gregoriánském kalendáři (anonymní gregoriánský algoritmus Meeus/Jones/Butcher). 2026 -> \"2026-04-05\", 2024 -> \"2024-03-31\".\n\nexport function svatky(rok) -> string[]\n  Seznam 13 dnů pracovního klidu v ČR pro daný rok, vzestupně seřazený: 1. 1., Velký pátek (Velikonoční neděle − 2 dny), Velikonoční pondělí (+1 den), 1. 5., 8. 5., 5. 7., 6. 7., 28. 9., 28. 10., 17. 11., 24. 12., 25. 12., 26. 12.\n\nexport function jePracovniDen(datum) -> boolean\n  false pro sobotu, neděli a každý den ze svatky(rok toho data); jinak true.\n\nexport function pridejPracovniDny(datum, n) -> string\n  n je celé číslo >= 0. Pro n = 0 vrať datum beze změny (i když to není pracovní den). Jinak se posouvej po jednom kalendářním dni dopředu a počítej jen pracovní dny; vrať datum n-tého pracovního dne PO zadaném datu. Příklad: pridejPracovniDny(\"2026-12-23\", 1) === \"2026-12-28\".\n\nexport function pracovniDnyMezi(od, do_) -> number\n  Počet pracovních dnů d takových, že od < d <= do_ (od se nepočítá, do_ ano). Je-li do_ <= od, vrať 0.\n\nexport function dnuMezi(od, do_) -> number\n  Rozdíl v kalendářních dnech (do_ − od), může být záporný. dnuMezi(\"2026-10-06\", \"2026-10-09\") === 3.\n\nexport function pridejDny(datum, n) -> string\n  Posun o n kalendářních dnů (n může být záporné).",
+  "uses": {},
+  "acceptance": "tests/test_pracovnidny.py",
+  "notes": "ESM modul BEZ jakýchkoli importů. Musí běžet v Node 24 i v prohlížeči: žádné `require`, žádné Node API, žádné DOM API. Jen čistý JavaScript. Svátky se počítají, ne natvrdo pro jeden rok.",
+  "budget": {"iterations": 10}
+}

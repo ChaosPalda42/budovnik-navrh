@@ -1,0 +1,13 @@
+{
+  "id": "C-011",
+  "file": "src/lib/stavba.mjs",
+  "role": "coder",
+  "title": "Časová osa úvodní animace – vytyčení, usazení bloků, bublina vodováhy",
+  "interface": "Časová osa úvodní animace „web se postaví“: nejdřív se vytyčí obrysy bloků stránky (jako šňůry na stavbě), pak se bloky usadí. Čas v milisekundách.\n\nexport const VYCHOZI = { rozestup: 60, vytyceni: 520, pauza: 120, usazeni: 480, max: 24, minW: 24, minH: 12, radek: 40 }\n\nexport function casovaOsa(prvky, moznosti) -> { plan, mimo, celkem }\n  prvky = [{ id, x, y, w, h }] (souřadnice vůči začátku stránky); moznosti = { vyska (výška okna, povinná), ...přepisy VYCHOZI }.\n  1. Kandidát = prvek, který je vidět v prvním okně (y < vyska && y + h > 0) a má w >= minW && h >= minH.\n  2. Kandidáty seřaď podle Math.floor(y / radek) vzestupně, pak podle x vzestupně, pak podle pořadí ve vstupu. Do plánu jde prvních `max`.\n  3. mimo = id všech prvků, které NEjsou v plánu, v pořadí vstupu.\n  4. Pro i-tý prvek plánu (od 0), n = počet prvků v plánu:\n     obrys = { od: i * rozestup, do: i * rozestup + vytyceni }\n     konecVytyceni = n > 0 ? (n − 1) * rozestup + vytyceni : 0\n     usazeni = { od: konecVytyceni + pauza + i * rozestup, do: konecVytyceni + pauza + i * rozestup + usazeni }\n     kota = String(Math.round(w))\n     položka plánu = { id, poradi: i, obrys, usazeni, kota }\n  5. celkem = n > 0 ? usazeni.do posledního prvku plánu : 0.\n\nexport function prubeh(interval, t) -> number\n  Lineární průběh 0..1: t <= od -> 0, t >= do -> 1, jinak (t − od) / (do − od).\n\nexport function zpomal(p) -> number\n  Easing out-cubic: 1 − (1 − p)^3, s p oříznutým do 0..1.\n\nexport function stavV(plan, t) -> [{ id, obrys, usazeni }]\n  Pro každou položku plánu průběhy prubeh(obrys, t) a zpomal(prubeh(usazeni, t)).\n\nexport function bublina(t, { amplituda = 14, tlumeni = 0.0045, frekvence = 0.011 } = {}) -> number\n  Výchylka bubliny vodováhy při ustalování: amplituda * Math.exp(−tlumeni * t) * Math.cos(frekvence * t). Pro t < 0 vrať amplituda.",
+  "uses": {},
+  "acceptance": "tests/test_stavba.py",
+  "notes": "ESM modul BEZ jakýchkoli importů. Musí běžet v Node 24 i v prohlížeči: žádné require, Node API ani DOM API. Žádná práce s DOM – jen výpočet. Vstupy se nemutují.",
+  "budget": {
+    "iterations": 10
+  }
+}
