@@ -17,7 +17,9 @@ def test_formaty_a_posuny():
     porovnej("datum.mjs", "datum.php", v)
 
 def test_lhuty_proti_dnesku():
-    dnes = dt.date.today()
+    from tests.phpref import php as _php
+    # „dnes“ musí být stejný den, jaký vidí PHP (pražský čas) – CI běží v UTC.
+    dnes = dt.date.fromisoformat(_php("datum.php", [["dnes", []]])[0])
     cile = [(dnes + dt.timedelta(n)).isoformat() for n in (0, 1, 2, 4, 5, 30, -1, -2, -4, -5, -40)]
     from tests.phpref import php
     ocek = php("datum.php", [["zbyvaDni", [c]] for c in cile] + [["lhutaText", [c]] for c in cile] + [["zbyvaDni", [""]], ["lhutaText", [""]]])
