@@ -137,7 +137,7 @@ export function stranka(ctx, { titulek, popis, aktivni, obsah, aplikace = false,
       <div class="lista__akce" data-stavba>
         <a class="tl tl--obrys tl--maly tl--portal" href="${odkaz("portal")}">${ikona("zamek", { velikost: 16 })}<span>Portál</span></a>
         <a class="tl tl--maly tl--nabidka" href="${odkaz("kontakt")}#poptavka">Nabídka</a>
-        <button class="tema" type="button" data-tema aria-label="Přepnout světlý a tmavý režim" title="Světlý / tmavý režim">
+        <button class="tema" type="button" data-prepni-tema aria-label="Přepnout světlý a tmavý režim" title="Světlý / tmavý režim">
           <span class="slunce">${ikona("slunce", { velikost: 18 })}</span><span class="mesic">${ikona("mesic", { velikost: 18 })}</span>
         </button>
         <button class="hamburger" type="button" aria-label="Menu" aria-controls="navigace" aria-expanded="false"><span class="hamburger__otevrit">${ikona("hamburger")}</span><span class="hamburger__zavrit">${ikona("krizek")}</span></button>

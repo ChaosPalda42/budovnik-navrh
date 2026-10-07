@@ -12,7 +12,7 @@
   var cislo = function (n) { return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, " "); };
 
   /* ---------- Téma ---------- */
-  $$("[data-tema]").forEach(function (b) {
+  $$("[data-prepni-tema]").forEach(function (b) {
     b.addEventListener("click", function () {
       var tmavy = root.dataset.tema ? root.dataset.tema === "tmavy" : window.matchMedia("(prefers-color-scheme: dark)").matches;
       var nove = tmavy ? "svetly" : "tmavy";
