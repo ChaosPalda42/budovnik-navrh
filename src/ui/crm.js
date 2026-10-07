@@ -330,7 +330,7 @@
         var text = BV.qrplatba.qrPlatbaText({ ucet: n.ucet, castka: s.celkem, vs: d.cislo.replace(/\D+/g, ""), splatnost: d.splatnost, zprava: DRUHY[d.druh] + " " + d.cislo });
         qr = '<div class="qr-platba">' + BV.qrkod.qrSvg(text, { velikost: 150, barva: "#15171a" }) + "<div><strong>QR platba</strong><small>účet " + esc(n.ucet) + "<br>IBAN " + esc(BV.qrplatba.iban(n.ucet)) + "<br>VS " + esc(d.cislo.replace(/\D+/g, "")) + "</small></div></div>";
       }
-      var sazby = Object.keys(s.sazby || {}).map(function (sz) { return "<tr><td>DPH " + sz + ' %</td><td class="cislo">' + kc(s.sazby[sz].zaklad) + '</td><td class="cislo">' + kc(s.sazby[sz].dph) + "</td></tr>"; }).join("");
+      var sazby = Object.keys(s.sazby || {}).map(function (sz) { return "<tr><td>DPH\u00a0" + sz + '\u00a0%</td><td class="cislo" data-popis="základ">' + kc(s.sazby[sz].zaklad) + '</td><td class="cislo" data-popis="DPH">' + kc(s.sazby[sz].dph) + "</td></tr>"; }).join("");
       var akce = "";
       if (c.muze("doklady.psat")) {
         if (d.druh !== "nabidka" && !d.uhrazeno) akce += '<button type="button" class="tl tl--maly" data-uhrazeno="' + esc(d.cislo) + '">' + ik("fajfka") + " Označit jako uhrazené</button>";
@@ -345,7 +345,7 @@
         tabulka(["Položka", ">Množství", ">Cena/j.", ">DPH", ">Celkem bez DPH"], d.polozky.map(function (p) {
           return "<tr><td>" + esc(p.popis) + '</td><td class="cislo">' + String(p.mnozstvi).replace(".", ",") + '</td><td class="cislo">' + kc(p.cena) + '</td><td class="cislo">' + (n.platceDph ? (p.dph || 0) + " %" : "—") + '</td><td class="cislo">' + kc(BV.doklady.soucetPolozky(p)) + "</td></tr>";
         })) +
-        '<div class="doklad__soucty">' + qr + '<table class="tab" style="max-width:340px;margin-left:auto">' + sazby + '<tr><td><strong>Celkem k úhradě</strong></td><td></td><td class="cislo"><strong style="font-size:1.2rem">' + kc(s.celkem) + "</strong></td></tr></table></div>" +
+        '<div class="doklad__soucty">' + qr + '<table class="tab" style="max-width:340px;margin-left:auto">' + sazby + '<tr><td><strong>' + (d.druh === "nabidka" ? "Celkem s DPH" : "Celkem k úhradě") + '</strong></td><td></td><td class="cislo"><strong style="font-size:1.2rem">' + kc(s.celkem) + "</strong></td></tr></table></div>" +
         "</div>" + '<div class="akce-radek">' + akce + "</div>");
     }
     function vystavDoklad(druh, klientId, polozky, zakazka) {

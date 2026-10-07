@@ -674,7 +674,7 @@ a.karta:hover .pohled__okno { fill: var(--akcent); }
 .kalk__pozn { font-size: .8rem; color: color-mix(in srgb, var(--pozadi) 60%, transparent); margin: 14px 0 0; }
 
 /* ---------- Formuláře ---------- */
-.formular { display: grid; gap: 18px; }
+.formular { display: grid; gap: 18px; grid-template-columns: minmax(0, 1fr); }
 .pole { display: grid; gap: 6px; }
 .pole > label, .pole > .pole__nazev { font-weight: 600; font-size: .93rem; color: var(--inkoust); }
 .pole small { color: var(--tlumene); font-size: .82rem; }
@@ -696,7 +696,7 @@ input[type="range"] { width: 100%; accent-color: var(--akcent); height: 28px; }
 .souhlas input { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--akcent); flex: none; }
 .hlaseni { padding: 18px 20px; border-radius: var(--radius); border: 1px solid var(--ok); background: color-mix(in srgb, var(--ok) 10%, var(--plocha)); color: var(--inkoust); display: flex; gap: 12px; align-items: flex-start; }
 .hlaseni .ik { color: var(--ok); margin-top: 3px; }
-.segment { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; }
+.segment { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(120px, 100%), 1fr)); gap: 8px; }
 .segment label { position: relative; }
 .segment input { position: absolute; opacity: 0; }
 .segment span { display: flex; flex-direction: column; gap: 6px; padding: 14px; border: 1.5px solid var(--cara-silna); border-radius: var(--radius); background: var(--plocha); cursor: pointer; font-weight: 600; transition: border-color .2s, background-color .2s; height: 100%; }
@@ -1047,4 +1047,26 @@ pre.dokument-nahled { margin: 0; }
   .qr-platba svg { width: 150px; height: 150px; }
   .doklad__soucty .tab td { white-space: normal; }
 }
-.doklad__soucty .tab td:first-child { white-space: nowrap; }
+@media (max-width: 600px) {
+  .doklad__soucty .tab td { padding: 8px 4px; font-size: .8rem; }
+  .doklad__soucty .tab td strong { font-size: 1rem !important; }
+}
+@media (max-width: 600px) {
+  .doklad__soucty .tab, .doklad__soucty .tab tbody { display: block; width: 100%; }
+  .doklad__soucty .tab tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; border-bottom: 1px solid var(--cara); }
+  .doklad__soucty .tab td { border: 0; }
+  .doklad__soucty .tab td:first-child { grid-column: 1 / -1; padding-bottom: 0; }
+  .doklad__soucty .tab td:empty { display: none; }
+}
+@media (max-width: 800px) { .loga { grid-template-columns: repeat(3, minmax(0, 1fr)); } .loga div { font-size: .6rem; text-align: center; padding: 0 4px; } }
+@media (max-width: 420px) {
+  .udaje div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .udaje dd { overflow-wrap: anywhere; }
+  .ukol { grid-template-columns: auto minmax(0, 1fr); }
+  .ukol > :last-child:not(:nth-child(2)) { grid-column: 1 / -1; justify-self: start; }
+}
+.pole input[type="file"] { width: 100%; max-width: 100%; min-width: 0; font-size: .85rem; }
+@media (max-width: 600px) {
+  .doklad__soucty .tab td[data-popis]::before { content: attr(data-popis) " "; font-family: var(--pismo); font-size: .72rem; color: var(--tlumene); }
+  .doklad__soucty .tab td[data-popis="základ"] { text-align: left; }
+}
