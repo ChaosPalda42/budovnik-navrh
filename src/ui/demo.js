@@ -453,6 +453,10 @@
     return '<div class="ukol ukol--' + u.typ + (hotovo ? " je-hotovo" : "") + '"><span class="ukol__ikona">' + ik(ikona) + '</span><div><span class="ukol__text">' + esc(u.text) + "</span><small>" + esc(u.nazev) + '</small></div><button type="button" class="tl tl--maly ' + (hotovo ? "tl--obrys" : "tl--tmavy") + '" data-ukol="' + esc(u.klic) + '">' + (hotovo ? "Vrátit" : "Hotovo") + "</button></div>";
   }
 
+  // Popisky sloupců jsou samostatný řádek pod grafem, ne uvnitř sloupců (čistší struktura i pro čtečky).
+  function popiskyGrafu(texty) {
+    return '<div class="sloupcovy__popisky" aria-hidden="true">' + texty.map(function (t) { return "<span>" + esc(t) + "</span>"; }).join("") + "</div>";
+  }
   function vyuctovaniHtml(jednotkaId) {
     if (!BV.rozuctovani) return '<div class="prazdne">Modul vyúčtování se nenačetl.</div>';
     var v = D.vyuctovani, o = objekt(v.objekt);
@@ -476,8 +480,8 @@
       }))) + "</div>" +
       '<div class="s-5">' + panel("Přeplatky a nedoplatky", '<div class="sloupcovy" style="height:180px;align-items:center">' + r.jednotky.map(function (j, i) {
         var h = Math.max(3, Math.abs(j.vysledek) / max * 80);
-        return '<div title="Byt ' + j.id + ": " + kc(j.vysledek, 1) + '" style="--i:' + i + ";height:" + h + "px;" + (j.vysledek < 0 ? "background:var(--havarie);transform-origin:top;align-self:flex-start;margin-top:90px" : "align-self:flex-end;margin-bottom:90px") + '"><span>' + j.id + "</span></div>";
-      }).join("") + "</div>") + '<div style="height:16px"></div>' + panel("Náklady a klíče", tabulka(["Služba", "Klíč", ">Částka"], v.naklady.map(function (n) { return "<tr><td>" + esc(n.sluzba) + "</td><td>" + esc(BV.rozuctovani.KLICE[n.klic]) + '</td><td class="cislo">' + kc(n.castka, 1) + "</td></tr>"; }))) + "</div></div>";
+        return '<div title="Byt ' + j.id + ": " + kc(j.vysledek, 1) + '" style="--i:' + i + ";height:" + h + "px;" + (j.vysledek < 0 ? "background:var(--havarie);transform-origin:top;align-self:flex-start;margin-top:90px" : "align-self:flex-end;margin-bottom:90px") + '"></div>';
+      }).join("") + "</div>" + popiskyGrafu(r.jednotky.map(function (j) { return j.id; })) + '<div class="akce-radek" style="margin-top:8px"><span class="legenda-bod" style="--b:var(--akcent)">přeplatek</span><span class="legenda-bod" style="--b:var(--havarie)">nedoplatek</span></div>') + '<div style="height:16px"></div>' + panel("Náklady a klíče", tabulka(["Služba", "Klíč", ">Částka"], v.naklady.map(function (n) { return "<tr><td>" + esc(n.sluzba) + "</td><td>" + esc(BV.rozuctovani.KLICE[n.klic]) + '</td><td class="cislo">' + kc(n.castka, 1) + "</td></tr>"; }))) + "</div></div>";
   }
 
   /* Interakce dispečinku */
@@ -552,7 +556,7 @@
       var pl = BV.revize.planObjektu(o, DNES), su = BV.revize.souhrn(pl);
       var mz = zavadySla().filter(function (z) { return z.objekt === o.id; });
       var otevrene = mz.filter(function (z) { return ["nova", "prirazena", "v-reseni", "ceka-na-dil"].indexOf(z.stav) >= 0; });
-      var spotreba = o.id === "O1" ? panel("Spotřeba tepla (MWh) za 12 měsíců", '<div class="sloupcovy" style="margin-bottom:22px">' + D.spotreba.map(function (s, i) { return '<div style="--i:' + i + ";height:" + Math.max(3, s.teplo / 34 * 100) + '%" title="' + s.mesic + ": " + String(s.teplo).replace(".", ",") + ' MWh"><span>' + s.mesic.slice(0, 2) + "</span></div>"; }).join("") + "</div>") : "";
+      var spotreba = o.id === "O1" ? panel("Spotřeba tepla (MWh) za 12 měsíců", '<div class="sloupcovy">' + D.spotreba.map(function (s, i) { return '<div style="--i:' + i + ";height:" + Math.max(3, s.teplo / 34 * 100) + '%" title="' + s.mesic + ": " + String(s.teplo).replace(".", ",") + ' MWh"></div>'; }).join("") + "</div>" + popiskyGrafu(D.spotreba.map(function (s) { return s.mesic.slice(0, 2); }))) : "";
       return hlava(esc(uzivatel.role), esc(o.nazev), '<a class="tl tl--maly" href="#nahlasit">' + ik("plus") + " Nahlásit závadu</a>") +
         '<div class="kpi">' + kpi(su.vPoradku, tvar(su.vPoradku, "revize v pořádku", "revize v pořádku", "revizí v pořádku"), "fajfka") + kpi(su.bliziSe, tvar(su.bliziSe, "revize do 30 dní", "revize do 30 dní", "revizí do 30 dní"), "kalendar", su.bliziSe ? "kpi__dlazdice--pozor" : "") + kpi(otevrene.length, tvar(otevrene.length, "závada v řešení", "závady v řešení", "závad v řešení"), "vystraha") + kpi(o.jednotek ? o.jednotek : o.plocha.toLocaleString("cs-CZ"), o.jednotek ? "bytových jednotek" : "m² ploch", "dum") + "</div>" +
         '<div class="apl-mrizka"><div class="s-7">' + panel("Pasport domu", '<div class="pasport"><div><span>Adresa</span><strong>' + esc(o.adresa) + "</strong></div><div><span>Rok výstavby</span><strong>" + o.rok + "</strong></div><div><span>Podlaží</span><strong>" + o.podlazi + "</strong></div><div><span>Výtahy</span><strong>" + o.vytahu + "</strong></div><div><span>Technologie</span><strong>" + o.technologie.length + "</strong></div><div><span>Správce</span><strong>Eva Nováková</strong></div></div>") + '<div style="height:16px"></div>' +

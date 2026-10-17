@@ -466,7 +466,7 @@ p { margin: 0 0 1em; text-wrap: pretty; }
 .rez-info p { margin: 0; color: var(--tlumene); font-size: .93rem; }
 .rez-info__revize { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
 .rez-info__revize span { font-family: var(--mono); font-size: .72rem; padding: 3px 8px; border-radius: 8px; background: var(--pozadi-2); color: var(--text); }
-.rez-info__revize span b { color: var(--akcent-cara); font-weight: 600; }
+.rez-info__revize span b { color: var(--inkoust); font-weight: 650; }
 .rez-legenda { display: flex; flex-wrap: wrap; align-content: flex-start; gap: 6px; padding: 0 16px 14px; background: var(--plocha); }
 .rez-legenda button { display: inline-flex; gap: 6px; align-items: center; font-size: .78rem; border: 1px solid var(--cara); background: var(--plocha); padding: 4px 9px 4px 4px; border-radius: 99px; cursor: pointer; color: var(--text); transition: border-color .2s, background-color .2s; }
 .rez-legenda button i { width: 18px; height: 18px; border-radius: 50%; background: var(--inkoust); color: var(--pozadi); font-style: normal; font-family: var(--mono); font-size: .66rem; display: grid; place-items: center; }
@@ -942,7 +942,7 @@ html.stavi-se body { overflow: hidden; }
 .udalost--blizi-se { background: color-mix(in srgb, var(--varovani) 20%, transparent); }
 @media (max-width: 700px) { .kalendar-mesic__den { min-height: 54px; } .udalost { font-size: 0; height: 6px; padding: 0; } }
 .dokument-nahled { background: var(--plocha-2); border: 1px solid var(--cara); border-radius: 10px; padding: 22px 24px; font-family: var(--pismo); font-size: .9rem; white-space: pre-wrap; line-height: 1.65; max-height: 460px; overflow: auto; color: var(--inkoust); }
-.dokument-nahled mark { background: color-mix(in srgb, var(--havarie) 18%, transparent); color: var(--havarie); padding: 0 3px; border-radius: 3px; font-family: var(--mono); font-size: .8em; }
+.dokument-nahled mark { background: color-mix(in srgb, var(--havarie) 22%, transparent); color: var(--inkoust); padding: 0 3px; border-radius: 3px; font-family: var(--mono); font-size: .8em; }
 .dokument-nahled mark.ok { background: color-mix(in srgb, var(--akcent) 30%, transparent); color: var(--inkoust); font-family: inherit; font-size: 1em; }
 .prepinac-pravidla { position: relative; width: 42px; height: 24px; flex: none; }
 .prepinac-pravidla input { opacity: 0; position: absolute; inset: 0; cursor: pointer; z-index: 1; margin: 0; }
@@ -1089,3 +1089,5 @@ pre.dokument-nahled { margin: 0; }
 .kalk__cena { color: #f2b300; }
 .kalk__radky .je-sleva span:last-child { color: #b9e04a; }
 @media (max-width: 960px) { .kalk__lista { background: #15171a; color: #f2f1ec; } .kalk__lista strong { color: #f2b300; } }
+.sloupcovy__popisky { display: flex; gap: 6px; margin-top: 6px; }
+.sloupcovy__popisky span { flex: 1; min-width: 0; text-align: center; font-family: var(--mono); font-size: .62rem; color: var(--tlumene); }
