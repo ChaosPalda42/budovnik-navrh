@@ -376,7 +376,7 @@ export function kalkulacka(ctx) {
         <label class="volba"><input type="checkbox" name="havarijni" value="1" checked><span>Havarijní služba 24/7</span></label></div></div>
     </form>
     <aside class="kalk__vysledek" id="kalk-vysledek" aria-live="polite">
-      <span class="stitek" style="color:var(--akcent)">Orientační cena / měsíc bez DPH</span>
+      <span class="stitek" style="color:#f2b300">Orientační cena / měsíc bez DPH</span>
       <div class="kalk__cena" data-k="celkem">—</div>
       <div class="kalk__pod" data-k="pod">—</div>
       <div class="kalk__radky" data-k="radky"></div>
@@ -500,7 +500,7 @@ export function kontakt(ctx) {
     </form>
     <aside class="bok">
       <div class="havarie-blok">
-        <span class="stitek" style="color:rgba(255,255,255,.8)">Havarijní dispečink · nonstop</span>
+        <span class="stitek" style="color:#fff">Havarijní dispečink · nonstop</span>
         <h3>Teče voda, nejde proud, uvízl výtah?</h3>
         <a class="cislo" href="tel:${esc(f.havarijniOdkaz)}">${esc(f.havarijni)}</a>
         <p>Do příjezdu technika: uzavřete hlavní uzávěr vody nebo plynu, vypněte jistič a zajistěte místo.</p>
